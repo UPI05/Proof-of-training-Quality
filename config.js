@@ -1,0 +1,5 @@
+const RANDOM_BIAS = 100;
+const ACCURRACY_RANGE = 100;
+const VALID_EPS = 100;
+
+module.exports = {RANDOM_BIAS, ACCURRACY_RANGE};
