@@ -34,8 +34,6 @@ class BlockPool {
 
   blockExistsWithSignature(block, msg) {
     for (let i = 0; i < this.blocks.length; i++) {
-      //let x = this.blocks[i].committeeSignature[0].publicKey || "";
-      //x === "" ? console.info(this.blocks[i]) : console.info("ok");
       if (
         this.blocks[i].hash === block.hash &&
         !this.blocks[i].isSpent &&
@@ -73,8 +71,33 @@ class BlockPool {
     return block;
   }
 
-  isComitteeVerified(block) {
+  isComitteeVerified(block, blockchain) {
+    const composerCategory = blockchain.getCategoryFromPublicKey(block.composer);
+    let committee = [];
+    for (let i = 0; i < blockchain.chain.length; i++) {
+      for (let j = 0; j < blockchain.chain[i].transactions.length; j++) {
+        if (blockchain.chain[i].transactions[j].transactionType == 2) {
+          if (blockchain.chain[i].transactions[j].category === composerCategory) {
+            committee.push(blockchain.chain[i].transactions[j].publicKey);
+          }
+        }
+      }
+    }
     
+    if (committee.length !== block.committeeSignature.length) return false;
+    
+    for (let i = 0; i < committee.length; i++) {
+      let found = false;
+      for (let j = 0; j < block.committeeSignature.length; j++) {
+        if (block.committeeSignature[j].publicKey === committee[i]) {
+          found = true;
+          break;
+        }
+      }
+      if (!found) return false;
+    }
+    
+    return true;
   }
 
   getAll() {

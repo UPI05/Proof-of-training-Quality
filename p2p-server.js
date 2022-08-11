@@ -2,7 +2,7 @@ const WebSocket = require("ws");
 
 const Block = require("./block");
 
-const { RANDOM_BIAS, TRUST_RATIO } = require("./config.js");
+const { RANDOM_BIAS } = require("./config.js");
 
 const Peers = process.env.PEERS ? process.env.PEERS.split(",") : [];
 const P2P_PORT = process.env.P2P_PORT;
@@ -13,7 +13,7 @@ const MSG_TYPE = {
   blockVerifyReq: "BlockVerifyRequest",
   blockVerifyRes: "BlockVerifyResponse",
   blockCommit: "BlockCommit",
-  orgzRegis: "OrganizationRegister",
+  orgzRegis: "OrganizationRegister"
 };
 
 class P2pServer {
@@ -139,7 +139,7 @@ class P2pServer {
               const MAE = Math.random() * RANDOM_BIAS;
 
               // Now create a DataSharingTransaction
-
+              delete tx["isSpent"];
               const dataSharingTx = this.wallet.createDataSharingTransaction({
                 MAE,
                 model: { conten: "empty" },
@@ -265,16 +265,34 @@ class P2pServer {
 
 
         case MSG_TYPE.blockCommit:
-
           if (
             this.blockPool.verifyBlock(block) &&
-            this.blockPool.isComitteeVerified(block) &&
-            block.preHash === this.blockchain.chain[this.blockchain.chain.length - 1].hash &&
-            block.committeeSignature.length === 1
+            this.blockPool.isComitteeVerified(block, this.blockchain) &&
+            block.preHash === this.blockchain.chain[this.blockchain.chain.length - 1].hash
           ) {
+            delete block["isSpent"];
+            delete block["msg"];
+            this.blockchain.chain.push(block);
+            this.broadcastBlockCommit(block);
+
+            // Now mark transactions and blocks in pools as spent
+            for (let i = 0; i < block.transactions.length; i++) {
+              for (let j = 0; j < this.transactionPool.transactions.length; j++) {
+                if (this.transactionPool.transactions[j].hash === block.transactions[i].hash && this.transactionPool.transactions[j].transactionType === block.transactions[i].transactionType) {
+                  this.transactionPool.transactions[j].isSpent = true;
+                }
+              }
+            }
+
+            for (let i = 0; i < this.blockPool.blocks.length; i++) {
+              if (this.blockPool.blocks[i].msg === MSG_TYPE.blockVerifyRes && this.blockPool.blocks[i].hash === block.hash) {
+                this.blockPool.blocks[i].isSpent = true;
+              }
+            }
 
           }
-
+        
+          
           break;
         default:
           console.info("oops");

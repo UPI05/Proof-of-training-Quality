@@ -59,7 +59,6 @@ class Blockchain {
     }
 
     getCategoryFromPublicKey(publicKey) {
-        let res = "";
         for (let i = 0; i < this.chain.length; i++) {
             for (let j = 0; j < this.chain[i].transactions.length; j++) {
                 if (this.chain[i].transactions[j].transactionType == 2) {
@@ -69,6 +68,7 @@ class Blockchain {
                 }
             }
         }
+        return "";
     }
 
     getAll() {

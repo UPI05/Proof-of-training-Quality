@@ -30,6 +30,10 @@ app.get("/transactions", (req, res) => {
     res.json(transactionPool.getAll());
 })
 
+app.get("/blocks", (req, res) => {
+    res.json(blockPool.getAll());
+})
+
 app.get("/blockchain", (req, res) => {
     res.json(blockchain.getAll());
 })
