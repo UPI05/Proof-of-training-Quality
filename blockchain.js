@@ -1,6 +1,4 @@
-const utils = require("./utils");
 const Message = require("./message");
-const Wallet = require("./wallet");
 const {
   GENESIS_HASH,
   MSG_TYPE,
@@ -32,17 +30,13 @@ class Blockchain {
         msgType: MSG_TYPE.dataRetrieval,
       },
     ];
-    return new Message(
+    const genesisBlock = new Message(
       { messages, hash: GENESIS_HASH },
       this.wallet,
       MSG_TYPE.blockVerifyReq
     );
-  }
-
-  show() {
-    this.chain.forEach((block) => {
-      console.info(block);
-    });
+    genesisBlock.msgType = MSG_TYPE.blockCommit;
+    return genesisBlock;
   }
 
   updateLastBLock(block) {
@@ -51,17 +45,34 @@ class Blockchain {
 
   verifyChain(chain) {
     for (let i = 1; i < chain.length; i++) {
+      console.info("f1");
       if (chain[i].preHash !== chain[i - 1].hash) return false;
-      if (!Message.verify(chain[i])) return false;
+      console.info("f2");
+      if (!Message.verify(chain[i], this)) return false;
     }
+    console.info("ok");
     // Check if the default publicKey and category are valid
     return (
       chain[0].other.registerPublicKey === GENESIS_OTHER.registerPublicKey &&
       chain[0].transaction.messages[0].publicKey === GENESIS_PUBLICKEY_NODE1 &&
       chain[0].transaction.messages[0].category === GENESIS_CATEGORY_NODE1 &&
       chain[0].transaction.messages[1].publicKey === GENESIS_PUBLICKEY_NODE2 &&
-      chain[0].transaction.messages[1].category === GENESIS_CATEGORY_NODE2 
+      chain[0].transaction.messages[1].category === GENESIS_CATEGORY_NODE2
     );
+  }
+
+  getCategoryFromPublicKey(publicKey) {
+    for (let i = 0; i < this.chain.length; i++) {
+      for (let j = 0; j < this.chain[i].transaction.messages.length; j++) {
+        if (
+          this.chain[i].transaction.messages[j].msgType ===
+            MSG_TYPE.dataRetrieval &&
+            this.chain[i].transaction.messages[j].publicKey === publicKey
+        )
+          return this.chain[i].transaction.messages[j].category;
+      }
+    }
+    return "";
   }
 
   addBlock(block) {

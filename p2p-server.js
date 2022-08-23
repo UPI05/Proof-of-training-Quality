@@ -103,7 +103,7 @@ class P2pServer {
             // Verify the chain and add to blockchain
             if (
               msg.chain.length > this.blockchain.chain.length &&
-              this.blockchain.verifyChain(msg.chain, blockchain)
+              this.blockchain.verifyChain(msg.chain)
             ) {
               this.blockchain.chain = msg.chain;
             }
@@ -233,20 +233,30 @@ class P2pServer {
                   if (
                     this.messagePool.isProposer(this.wallet, allDataSharingRes)
                   ) {
-                    const blockVerifyReq = new Message(
-                      {
-                        preHash:
-                          this.blockchain.chain[
-                            this.blockchain.chain.length - 1
-                          ].hash,
-                        messages: this.messagePool.getAllRelatedMessages(
-                          msg.dataSharingReq
-                        ),
-                      },
+                    // Get the right chain from network before creating a new block
+                    const getChainReq = new Message(
+                      {},
                       this.wallet,
-                      MSG_TYPE.blockVerifyReq
+                      MSG_TYPE.getChainReq
                     );
-                    this.broadcastMessage(blockVerifyReq);
+                    this.broadcastMessage(getChainReq);
+
+                    setTimeout(() => {
+                      const blockVerifyReq = new Message(
+                        {
+                          preHash:
+                            this.blockchain.chain[
+                              this.blockchain.chain.length - 1
+                            ].hash,
+                          messages: this.messagePool.getAllRelatedMessages(
+                            msg.dataSharingReq
+                          ),
+                        },
+                        this.wallet,
+                        MSG_TYPE.blockVerifyReq
+                      );
+                      this.broadcastMessage(blockVerifyReq);
+                    }, HEARTBEAT_TIMEOUT * 1000);
                   }
                 }
               }, HEARTBEAT_TIMEOUT * 1000);
@@ -256,10 +266,16 @@ class P2pServer {
           break;
 
         case MSG_TYPE.blockVerifyReq:
-          if (
-            this.messagePool.verifyMessage(msg, this.blockchain) &&
-            !this.messagePool.messageExistsWithHash(msg)
-          ) {
+          if (this.messagePool.messageExistsWithHash(msg)) break;
+          // Get the right chain from network before validating a new block
+          const getChainReq = new Message(
+            {},
+            this.wallet,
+            MSG_TYPE.getChainReq
+          );
+          this.broadcastMessage(getChainReq);
+          //
+          if (this.messagePool.verifyMessage(msg, this.blockchain)) {
             msg.isSpent = false;
             this.messagePool.addMessage(msg);
             this.broadcastMessage(msg);
@@ -334,7 +350,7 @@ class P2pServer {
             this.messagePool.addMessage(msg);
             this.broadcastMessage(msg);
 
-            // Now mark transactions and blocks in pools as spent
+            // Now mark all related messages in messagePool as spent
             for (let i = 0; i < this.messagePool.messages.length; i++) {
               if (
                 this.messagePool.messages[i].msgType ===
@@ -344,7 +360,10 @@ class P2pServer {
                 this.messagePool.messages[i].msgType === MSG_TYPE.dataSharingRes
               )
                 for (let j = 0; j < msg.transaction.messages.length; j++) {
-                  if (this.messagePool.messages[i].hash === msg.transaction.messages[j].hash) {
+                  if (
+                    this.messagePool.messages[i].hash ===
+                    msg.transaction.messages[j].hash
+                  ) {
                     this.messagePool.messages[i].isSpent = true;
                   }
                 }

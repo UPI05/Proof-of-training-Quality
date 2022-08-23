@@ -1,5 +1,5 @@
 const Message = require("./message");
-const { RANDOM_BIAS, MSG_TYPE } = require("./config");
+const { MSG_TYPE } = require("./config");
 
 class MessagePool {
   constructor() {
@@ -10,6 +10,10 @@ class MessagePool {
 
   addMessage(msg) {
     this.messages.push(msg);
+  }
+
+  getAll() {
+    return this.messages;
   }
 
   deleteMessage(hash) {
@@ -29,9 +33,13 @@ class MessagePool {
     return false;
   }
 
+  //
+
   getAllRelatedMessages(dataSharingReq) {
     let res = [];
-    for (const msg of this.messages) {
+    for (const mess of this.messages) {
+      const msg = { ...mess };
+      delete msg["isSpent"];
       if (msg.msgType === MSG_TYPE.dataSharingRes) {
         if (msg.dataSharingReq.hash === dataSharingReq.hash && !msg.isSpent) {
           res.push(msg);
@@ -116,6 +124,36 @@ class MessagePool {
     return res;
   }
 
+  enoughDataSharingRes(allHeartBeatRes, allDataSharingRes) {
+    for (const heartBeatRes of allHeartBeatRes) {
+      let found = false;
+      for (const dataSharingRes of allDataSharingRes) {
+        if (heartBeatRes.publicKey === dataSharingRes.publicKey) {
+          found = true;
+          break;
+        }
+      }
+      if (!found) return false;
+    }
+
+    return true;
+  }
+
+  isProposer(wallet, allDataSharingRes) {
+    let minMAE = 1000000009;
+    for (const msg of allDataSharingRes) {
+      minMAE = Math.min(minMAE, msg.MAE);
+    }
+    for (const msg of allDataSharingRes) {
+      if (msg.MAE === minMAE && msg.publicKey === wallet.getPublicKey()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // For blockVerifyRes
+
   getAllBlockVerifyRes(hash) {
     let res = [];
     for (const msg of this.messages) {
@@ -143,21 +181,6 @@ class MessagePool {
     return res;
   }
 
-  enoughDataSharingRes(allHeartBeatRes, allDataSharingRes) {
-    for (const heartBeatRes of allHeartBeatRes) {
-      let found = false;
-      for (const dataSharingRes of allDataSharingRes) {
-        if (heartBeatRes.publicKey === dataSharingRes.publicKey) {
-          found = true;
-          break;
-        }
-      }
-      if (!found) return false;
-    }
-
-    return true;
-  }
-
   enoughBlockVerifyRes(allHeartBeatRes, allBlockVerifyResCommitteeSignatures) {
     for (const heartBeatRes of allHeartBeatRes) {
       let found = false;
@@ -175,19 +198,6 @@ class MessagePool {
     return true;
   }
 
-  isProposer(wallet, allDataSharingRes) {
-    let minMAE = 1000000009;
-    for (const msg of allDataSharingRes) {
-      minMAE = Math.min(minMAE, msg.MAE);
-    }
-    for (const msg of allDataSharingRes) {
-      if (msg.MAE === minMAE && msg.publicKey === wallet.getPublicKey()) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   messageExistsWithHashMsgTypeAndCommitteePublicKey(message) {
     for (const msg of this.messages) {
       if (
@@ -202,6 +212,8 @@ class MessagePool {
     return false;
   }
 
+  // For blockCommit
+
   messageExistsWithHashAndMsgType(message) {
     for (const msg of this.messages) {
       if (
@@ -212,10 +224,6 @@ class MessagePool {
         return true;
     }
     return false;
-  }
-
-  getAll() {
-    return this.messages;
   }
 }
 
