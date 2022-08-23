@@ -288,14 +288,14 @@ class P2pServer {
             msg.isSpent = false;
             this.messagePool.addMessage(msg);
             this.broadcastMessage(msg);
-            
+
             if (msg.proposer === this.wallet.getPublicKey()) {
               const heartBeatReq = new Message(
                 { category: process.env.CATEGORY },
                 this.wallet,
                 MSG_TYPE.heartBeatReq
               );
-              
+
               this.broadcastMessage(heartBeatReq);
 
               setTimeout(() => {
@@ -333,34 +333,22 @@ class P2pServer {
             this.blockchain.addBlock(msg);
             this.messagePool.addMessage(msg);
             this.broadcastMessage(msg);
-/*
-            // Now mark transactions and blocks in pools as spent
-            for (let i = 0; i < block.transactions.length; i++) {
-              for (
-                let j = 0;
-                j < this.transactionPool.transactions.length;
-                j++
-              ) {
-                if (
-                  this.transactionPool.transactions[j].hash ===
-                    block.transactions[i].hash &&
-                  this.transactionPool.transactions[j].transactionType ===
-                    block.transactions[i].transactionType
-                ) {
-                  this.transactionPool.transactions[j].isSpent = true;
-                }
-              }
-            }
 
-            for (let i = 0; i < this.blockPool.blocks.length; i++) {
+            // Now mark transactions and blocks in pools as spent
+            for (let i = 0; i < this.messagePool.messages.length; i++) {
               if (
-                this.blockPool.blocks[i].msg === MSG_TYPE.blockVerifyRes &&
-                this.blockPool.blocks[i].hash === block.hash
-              ) {
-                this.blockPool.blocks[i].isSpent = true;
-              }
+                this.messagePool.messages[i].msgType ===
+                  MSG_TYPE.dataRetrieval ||
+                this.messagePool.messages[i].msgType ===
+                  MSG_TYPE.dataSharingReq ||
+                this.messagePool.messages[i].msgType === MSG_TYPE.dataSharingRes
+              )
+                for (let j = 0; j < msg.transaction.messages.length; j++) {
+                  if (this.messagePool.messages[i].hash === msg.transaction.messages[j].hash) {
+                    this.messagePool.messages[i].isSpent = true;
+                  }
+                }
             }
-*/
           }
           break;
         default:

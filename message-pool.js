@@ -30,7 +30,7 @@ class MessagePool {
   }
 
   getAllRelatedMessages(dataSharingReq) {
-    let res = [dataSharingReq];
+    let res = [];
     for (const msg of this.messages) {
       if (msg.msgType === MSG_TYPE.dataSharingRes) {
         if (msg.dataSharingReq.hash === dataSharingReq.hash && !msg.isSpent) {
@@ -39,6 +39,11 @@ class MessagePool {
       }
       if (msg.msgType === MSG_TYPE.dataRetrieval) {
         if (!msg.isSpent) {
+          res.push(msg);
+        }
+      }
+      if (msg.msgType === MSG_TYPE.dataSharingReq) {
+        if (!msg.isSpent && msg.hash === dataSharingReq.hash) {
           res.push(msg);
         }
       }

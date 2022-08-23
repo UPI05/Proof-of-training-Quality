@@ -46,194 +46,144 @@ Currently, I don't handle longest-chain rule forks.The topology which I'm using 
 ```JSON
 [
     {
-        "timeStamp": 1660248162680,
-        "composer": "Hieu Vo",
-        "transactions": [
-            {
-                "publicKey": "5864f1e7d7e37e95882b398c21ca29b314ebfc6ea1286c8dc1201214cc0d0686",
-                "category": "chicken",
-                "transactionType": 2
-            },
-            {
-                "publicKey": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
-                "category": "tiger",
-                "transactionType": 2
-            },
-            {
-                "publicKey": "57072510e8e9c406943c8ffa69a134f2ce1572290056c57e2fe37ca44044faa9",
-                "category": "lion",
-                "transactionType": 2
-            },
-            {
-                "publicKey": "5e475e334d90c1accb4da890c8a3c4d22d8e9071f0e8e61ece9b07b2e424647c",
-                "category": "lion",
-                "transactionType": 2
-            }
-        ],
-        "committeeSignature": [],
+        "timeStamp": "010101010101",
+        "msgType": "BlockVerifyRequest",
+        "category": "lion",
+        "proposer": "Hieu Vo",
+        "transaction": {
+            "messages": [
+                {
+                    "publicKey": "5864f1e7d7e37e95882b398c21ca29b314ebfc6ea1286c8dc1201214cc0d0686",
+                    "category": "chicken",
+                    "msgType": "DataRetrieval"
+                },
+                {
+                    "publicKey": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
+                    "category": "tiger",
+                    "msgType": "DataRetrieval"
+                }
+            ]
+        },
         "preHash": "",
-        "other": "I love Blockchain.",
+        "other": {
+            "registerPublicKey": "d0233e2fbc91aeb97d462d71b05b6522a01c838249fb93b0ac57bb6965062cb4"
+        },
         "hash": "0xDEADBEEF",
-        "composerSignature": "CEEE223A4F8C9C25A90C59E24DE6BFAD1346AD5315BE6DF5181FADCD40DE7B1B012B7D7A092C38C44BB27AEE62FBE0652B81B04EE350F602B25E634BEDE6AF0E"
+        "signature": "VH"
     },
     {
-        "timeStamp": 1660248179530,
-        "composer": "57072510e8e9c406943c8ffa69a134f2ce1572290056c57e2fe37ca44044faa9",
-        "transactions": [
-            {
-                "timeStamp": 1660248179283,
-                "category": "lion",
-                "publicKey": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
-                "query": 7,
-                "transactionType": 0,
-                "hash": "e5ee68a3a9bf7e4364c82f06a4372e307642b392403bee34b01429b41cc1b4d4",
-                "signature": "D31839E27AFE99A8DA823AB6FFA34F4AF9E3A2B2D38CBD396CEC0DA22BA0A8F247CDE106C94A3993A6443722CA78765A4719F69A9B7E78C932023014214FB108"
-            },
-            {
-                "publicKey": "5e475e334d90c1accb4da890c8a3c4d22d8e9071f0e8e61ece9b07b2e424647c",
-                "timeStamp": 1660248179364,
-                "model": {
-                    "conten": "empty"
-                },
-                "transactionType": 1,
-                "MAE": 89.59235839858725,
-                "retrivalTransaction": {
-                    "timeStamp": 1660248179283,
+        "timeStamp": 1661235210988,
+        "msgType": "BlockCommit",
+        "category": "tiger",
+        "proposer": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
+        "transaction": {
+            "messages": [
+                {
+                    "timeStamp": 1661235102770,
+                    "msgType": "DataRetrieval",
+                    "publicKey": "57072510e8e9c406943c8ffa69a134f2ce1572290056c57e2fe37ca44044faa9",
                     "category": "lion",
+                    "accessSignature": "72D44F1D0117225EBFB324E0CBAE784589E09A84F468A7B601F8E9961237BF40DD270A7F6DDE838644271F8CE594CAC01ADB8A3BFEBC7D0D150C54C762E63C02",
+                    "hash": "232a6a549bc9f258efe40ca17bb01a91c23371c11ccce7ba3a339f9ddaecec82",
+                    "signature": "B6C6F0E81BE9DABCC0FA922FDB60D93E9B6E8AC28D77F357A4B6EABE2D1C23355D3916DF9D93F637679FBCC8B2816ABA8215F69019782643202F519E9EB95506",
+                    "isSpent": false
+                },
+                {
+                    "timeStamp": 1661235205842,
+                    "msgType": "DataSharingRequest",
                     "publicKey": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
-                    "query": 7,
-                    "transactionType": 0,
-                    "hash": "e5ee68a3a9bf7e4364c82f06a4372e307642b392403bee34b01429b41cc1b4d4",
-                    "signature": "D31839E27AFE99A8DA823AB6FFA34F4AF9E3A2B2D38CBD396CEC0DA22BA0A8F247CDE106C94A3993A6443722CA78765A4719F69A9B7E78C932023014214FB108"
+                    "category": "tiger",
+                    "query": 8,
+                    "hash": "1306dcb003a2e2c8ebba3f6d8f9c191073032b3cf710f07e535644b9940d27d5",
+                    "signature": "1866D11BF8428A610449AFF104FE2D2FE4FF610994BB1F19CDF8B5964FCED1BDC63D88F2B1397DD338085249D4F20E92B8D792BAA53D02FCC5EC4D85CD5A9102"
                 },
-                "hash": "3bb8b32d34ce2438077fb4e93c70c97662af209427192d547ac19fdbb5ab038b",
-                "signature": "F79441F8DF92485F352D38A55649D54EE4906A8AB49943DFBA20FCABFA30B3E8AAE0F8603C9A45C1153B55CF04784590E6E4DAD072512D72CE476230B934D909"
-            },
-            {
-                "publicKey": "57072510e8e9c406943c8ffa69a134f2ce1572290056c57e2fe37ca44044faa9",
-                "timeStamp": 1660248179356,
-                "model": {
-                    "conten": "empty"
-                },
-                "transactionType": 1,
-                "MAE": 63.023051184108155,
-                "retrivalTransaction": {
-                    "timeStamp": 1660248179283,
-                    "category": "lion",
+                {
+                    "timeStamp": 1661235205883,
+                    "msgType": "DataSharingResponse",
                     "publicKey": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
-                    "query": 7,
-                    "transactionType": 0,
-                    "hash": "e5ee68a3a9bf7e4364c82f06a4372e307642b392403bee34b01429b41cc1b4d4",
-                    "signature": "D31839E27AFE99A8DA823AB6FFA34F4AF9E3A2B2D38CBD396CEC0DA22BA0A8F247CDE106C94A3993A6443722CA78765A4719F69A9B7E78C932023014214FB108"
-                },
-                "hash": "e4173dfd3baaa42c038dc5e89c7d9bac260b584691905e180e5781708e681624",
-                "signature": "A5E37256986D960F9381D62B7D90FD983AF72DDFCC6D94CCF04745282C2836C3FF87FDA20E370C9AFBCF35CE0F4BE83AC49E133D4CEF15C54F1504F9C51D6909"
-            }
-        ],
-        "committeeSignature": [
-            {
-                "publicKey": "5e475e334d90c1accb4da890c8a3c4d22d8e9071f0e8e61ece9b07b2e424647c",
-                "signature": "0CDFFFC200D1F45FDC4F4D9769FEBBD24C06F9B17699E6408ACB1FF53D4A8F90E63270E11EC8C5AC0CFD8D2EAB0C5192EE59725695DE3DD1E2D074D8BBDC5D05"
-            },
-            {
-                "publicKey": "57072510e8e9c406943c8ffa69a134f2ce1572290056c57e2fe37ca44044faa9",
-                "signature": "D1C195D68CCDC2CE9EE3B9B1F8447096D22B6419A5F285C589387220E58A1A6AF9F555F06F8AF7554D008F116FC40760E0184B70EF3AE241BC1A4F4936FF5A07"
-            }
-        ],
+                    "category": "tiger",
+                    "model": {
+                        "conten": "empty"
+                    },
+                    "MAE": 86.62302204712786,
+                    "dataSharingReq": {
+                        "timeStamp": 1661235205842,
+                        "msgType": "DataSharingRequest",
+                        "publicKey": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
+                        "category": "tiger",
+                        "query": 8,
+                        "hash": "1306dcb003a2e2c8ebba3f6d8f9c191073032b3cf710f07e535644b9940d27d5",
+                        "signature": "1866D11BF8428A610449AFF104FE2D2FE4FF610994BB1F19CDF8B5964FCED1BDC63D88F2B1397DD338085249D4F20E92B8D792BAA53D02FCC5EC4D85CD5A9102"
+                    },
+                    "hash": "189e831b0fb1f2a43283007abfd7aa4789b0f6503e6789aa33b4eda97d05c489",
+                    "signature": "05E0916EBA9934A131337835CE7EF59AC7AE62A337E2494D296121CA1331BC251383BE9BCA14D799C161F16B9BE6A0AA03904364CC4CE58F74C5ED8133D8A90A",
+                    "isSpent": false
+                }
+            ]
+        },
         "preHash": "0xDEADBEEF",
         "other": "",
-        "hash": "1d3eab71def578026e7399b4eeee10fba0d3c51301accade204fdea61f286a4e",
-        "composerSignature": "D1C195D68CCDC2CE9EE3B9B1F8447096D22B6419A5F285C589387220E58A1A6AF9F555F06F8AF7554D008F116FC40760E0184B70EF3AE241BC1A4F4936FF5A07"
+        "hash": "ec6fa0270c566ac88f72c47ce0389336082532b443265f90e7892c7e0aab859c",
+        "signature": "78ED5562A99EF1B69DC6C40F4D1E70BF67FF60EAFCE1BC44D5C3019DDA04363D2AF425347B25CCA7B4BDEE4CF176DFFA330ACE0184E932E2C85A0D79ECECDE09",
+        "isSpent": false,
+        "committeeSignatures": [
+            {
+                "publicKey": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
+                "signature": "78ED5562A99EF1B69DC6C40F4D1E70BF67FF60EAFCE1BC44D5C3019DDA04363D2AF425347B25CCA7B4BDEE4CF176DFFA330ACE0184E932E2C85A0D79ECECDE09"
+            }
+        ]
     },
     {
-        "timeStamp": 1660248191940,
-        "composer": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
-        "transactions": [
-            {
-                "timeStamp": 1660248191862,
-                "category": "tiger",
-                "publicKey": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
-                "query": 5,
-                "transactionType": 0,
-                "hash": "41654ecec76765ae104b6c5511202878ccb498501f00ec944cfd0df4dfbda91b",
-                "signature": "27AC3E8406F6EFAC6352220392C35C164592363C59F613D5860233E790BCC0CE249AC16D0EEA3A4BE6F6F12640997554AF75F846C3BE35993BD2665645FCE00D"
-            },
-            {
-                "publicKey": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
-                "timeStamp": 1660248191886,
-                "model": {
-                    "conten": "empty"
-                },
-                "transactionType": 1,
-                "MAE": 38.8908541938219,
-                "retrivalTransaction": {
-                    "timeStamp": 1660248191862,
+        "timeStamp": 1661235271107,
+        "msgType": "BlockCommit",
+        "category": "tiger",
+        "proposer": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
+        "transaction": {
+            "messages": [
+                {
+                    "timeStamp": 1661235265998,
+                    "msgType": "DataSharingRequest",
+                    "publicKey": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
                     "category": "tiger",
-                    "publicKey": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
-                    "query": 5,
-                    "transactionType": 0,
-                    "hash": "41654ecec76765ae104b6c5511202878ccb498501f00ec944cfd0df4dfbda91b",
-                    "signature": "27AC3E8406F6EFAC6352220392C35C164592363C59F613D5860233E790BCC0CE249AC16D0EEA3A4BE6F6F12640997554AF75F846C3BE35993BD2665645FCE00D"
+                    "query": 8,
+                    "hash": "128c95912492bb2b56cc43c6cae2b24d352410e557297ba61d0f5067b45aa636",
+                    "signature": "5B49DE66CA3A3A2D7FFB72D0390C733CC14F537161A7FB5270201C9C064AAFB044AFFDFD291767281700C535D22CCD6EFA04566707B533B67FDBD59C79A4D105"
                 },
-                "hash": "f94c5e3ca0384be3f2a24359e87f51f34c72477f4f2735d7fe42b45ab96fe8a2",
-                "signature": "FEE7EFFAB1A6AB5BA75E38BCCD0AF5ABD8551892A23ABC7016C2E65C8BF8C06BB5631D97ACB362AB38B3DEA1054ADD8253250E4ECC31FAE3439341BD2D5D2608"
-            }
-        ],
-        "committeeSignature": [
+                {
+                    "timeStamp": 1661235266027,
+                    "msgType": "DataSharingResponse",
+                    "publicKey": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
+                    "category": "tiger",
+                    "model": {
+                        "conten": "empty"
+                    },
+                    "MAE": 96.00629204321474,
+                    "dataSharingReq": {
+                        "timeStamp": 1661235265998,
+                        "msgType": "DataSharingRequest",
+                        "publicKey": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
+                        "category": "tiger",
+                        "query": 8,
+                        "hash": "128c95912492bb2b56cc43c6cae2b24d352410e557297ba61d0f5067b45aa636",
+                        "signature": "5B49DE66CA3A3A2D7FFB72D0390C733CC14F537161A7FB5270201C9C064AAFB044AFFDFD291767281700C535D22CCD6EFA04566707B533B67FDBD59C79A4D105"
+                    },
+                    "hash": "69df64292df09e3911b1a694b8639f17421bb09746db8519999d0280c34afb8f",
+                    "signature": "40967AD01DB07ED40854D8D5A137B0A9F6FC5FD412E5C21621323C78F6F43CA8376583C49A83AACD01F3DBDC6723B42015149EF0E410FB14447E2F9486A2CA06",
+                    "isSpent": false
+                }
+            ]
+        },
+        "preHash": "ec6fa0270c566ac88f72c47ce0389336082532b443265f90e7892c7e0aab859c",
+        "other": "",
+        "hash": "70ba8e35084a6dc4cc431851360022bad9f5a6d07746e741f643e80bc5bd6006",
+        "signature": "5B1BF7F4ABE26F7B55E3E94400E988327B9895CAB1E484C2AEDC1A42EBB66A71935D3657A04464C63124AE87CEECDAA62F2C1638A151B4264D3621AF26062005",
+        "isSpent": false,
+        "committeeSignatures": [
             {
                 "publicKey": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
-                "signature": "E59120F7FAA8E694F1AB040BB5D5D4C94455EE3688B9B4D030985B80E807E4A2921FBB6225399A09815AF5AB81D68ADE14915E449B9BE1E685D366B66FA51E06"
+                "signature": "5B1BF7F4ABE26F7B55E3E94400E988327B9895CAB1E484C2AEDC1A42EBB66A71935D3657A04464C63124AE87CEECDAA62F2C1638A151B4264D3621AF26062005"
             }
-        ],
-        "preHash": "1d3eab71def578026e7399b4eeee10fba0d3c51301accade204fdea61f286a4e",
-        "other": "",
-        "hash": "5cd2e558f5dcc6e7bdd7dd873105d94f89b034f1a2cbd38bd80caebb8e0187c6",
-        "composerSignature": "E59120F7FAA8E694F1AB040BB5D5D4C94455EE3688B9B4D030985B80E807E4A2921FBB6225399A09815AF5AB81D68ADE14915E449B9BE1E685D366B66FA51E06"
-    },
-    {
-        "timeStamp": 1660248202204,
-        "composer": "5864f1e7d7e37e95882b398c21ca29b314ebfc6ea1286c8dc1201214cc0d0686",
-        "transactions": [
-            {
-                "timeStamp": 1660248202141,
-                "category": "chicken",
-                "publicKey": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
-                "query": 6,
-                "transactionType": 0,
-                "hash": "a126e0dbad5ade30bf94c4c524d2de4bc4cf79848f751f0f79c78ea23ee6a3cc",
-                "signature": "764519B22895BE9B487AB53556838301827B0F5E4386653CB636E2980EAE1695C8E906863A48CBF9F9B89FA25B36D8F498A95A3B050374996D47E085821C510A"
-            },
-            {
-                "publicKey": "5864f1e7d7e37e95882b398c21ca29b314ebfc6ea1286c8dc1201214cc0d0686",
-                "timeStamp": 1660248202151,
-                "model": {
-                    "conten": "empty"
-                },
-                "transactionType": 1,
-                "MAE": 82.55497554858844,
-                "retrivalTransaction": {
-                    "timeStamp": 1660248202141,
-                    "category": "chicken",
-                    "publicKey": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
-                    "query": 6,
-                    "transactionType": 0,
-                    "hash": "a126e0dbad5ade30bf94c4c524d2de4bc4cf79848f751f0f79c78ea23ee6a3cc",
-                    "signature": "764519B22895BE9B487AB53556838301827B0F5E4386653CB636E2980EAE1695C8E906863A48CBF9F9B89FA25B36D8F498A95A3B050374996D47E085821C510A"
-                },
-                "hash": "0236e59dad2131a86c5259e8078d17322a1e39c7bfdfba9f0793a1daa953fdad",
-                "signature": "5D23DE1754BA2EE14331D908CADDBF799ABF492C4240F0BB10EE2E9741EEF45BFE33BC109D4DBFA1C21D4C5B1C0CA4CA22FDB09D0C108CAD792E671B14D73B07"
-            }
-        ],
-        "committeeSignature": [
-            {
-                "publicKey": "5864f1e7d7e37e95882b398c21ca29b314ebfc6ea1286c8dc1201214cc0d0686",
-                "signature": "D9B03A0CE54D206CE52B762CE031FEDC9F4BFAD99E6A38B70D3C599C1932B97497B2DD1F9ECA263645E0402B8AAB7587421806ECBA6A8E7656A2253AE66F9301"
-            }
-        ],
-        "preHash": "5cd2e558f5dcc6e7bdd7dd873105d94f89b034f1a2cbd38bd80caebb8e0187c6",
-        "other": "",
-        "hash": "a1ee7ec043506d25e0b7c1dae9f027a95a88ad2b3402346c296f552478e97d1f",
-        "composerSignature": "D9B03A0CE54D206CE52B762CE031FEDC9F4BFAD99E6A38B70D3C599C1932B97497B2DD1F9ECA263645E0402B8AAB7587421806ECBA6A8E7656A2253AE66F9301"
+        ]
     }
 ]
 ```
