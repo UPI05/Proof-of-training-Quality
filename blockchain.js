@@ -1,79 +1,76 @@
-const utils = require("./utils")
-const Block = require("./block");
+const utils = require("./utils");
+const Message = require("./message");
 const Wallet = require("./wallet");
+const {
+  GENESIS_HASH,
+  MSG_TYPE,
+  GENESIS_PUBLICKEY_NODE1,
+  GENESIS_PUBLICKEY_NODE2,
+  GENESIS_CATEGORY_NODE1,
+  GENESIS_CATEGORY_NODE2,
+  GENESIS_OTHER,
+} = require("./config");
 
 const dotenv = require("dotenv").config();
 
 class Blockchain {
-    constructor(wallet) {
-        this.wallet = wallet;
-        this.chain = [this.genesis()];
-    }
+  constructor(wallet) {
+    this.wallet = wallet;
+    this.chain = [this.genesis()];
+  }
 
-    genesis() {
-        const composer = "Hieu Vo";
-        const other = "I love Blockchain.";
-        const transactions = [
-            {
-                publicKey: new Wallet(process.env.NODE1_SECRET).getPublicKey(),
-                category: process.env.NODE1_CATEGORY,
-                transactionType: 2
-            },
-            {
-                publicKey: new Wallet(process.env.NODE2_SECRET).getPublicKey(),
-                category: process.env.NODE2_CATEGORY,
-                transactionType: 2
-            },
-            {
-                publicKey: new Wallet(process.env.NODE3_SECRET).getPublicKey(),
-                category: process.env.NODE3_CATEGORY,
-                transactionType: 2
-            },
-            {
-                publicKey: new Wallet(process.env.NODE4_SECRET).getPublicKey(),
-                category: process.env.NODE4_CATEGORY,
-                transactionType: 2
-            }
-        ];
-        return new Block({ composer, other, transactions, genesis: true }, this.wallet);
-    }
+  genesis() {
+    const messages = [
+      {
+        publicKey: GENESIS_PUBLICKEY_NODE1,
+        category: GENESIS_CATEGORY_NODE1,
+        msgType: MSG_TYPE.dataRetrieval,
+      },
+      {
+        publicKey: GENESIS_PUBLICKEY_NODE2,
+        category: GENESIS_CATEGORY_NODE2,
+        msgType: MSG_TYPE.dataRetrieval,
+      },
+    ];
+    return new Message(
+      { messages, hash: GENESIS_HASH },
+      this.wallet,
+      MSG_TYPE.blockVerifyReq
+    );
+  }
 
-    show() {
-        this.chain.forEach(block => {
-            console.info(block);
-        });
-    }
+  show() {
+    this.chain.forEach((block) => {
+      console.info(block);
+    });
+  }
 
-    updateLastBLock(block) {
-        this.chain[this.chain.length - 1] = block;
-    }
+  updateLastBLock(block) {
+    this.chain[this.chain.length - 1] = block;
+  }
 
-    countCommitteeNodes(category) {
-        let res = 0;
-        for (let i = 0; i < this.chain.length; i++) {
-            for (let j = 0; j < this.chain[i].transactions.length; j++) {
-                if (this.chain[i].transactions[j].transactionType === 2 && this.chain[i].transactions[j].category === category) res++;
-            }
-        }
-        return res;
+  verifyChain(chain) {
+    for (let i = 1; i < chain.length; i++) {
+      if (chain[i].preHash !== chain[i - 1].hash) return false;
+      if (!Message.verify(chain[i])) return false;
     }
+    // Check if the default publicKey and category are valid
+    return (
+      chain[0].other.registerPublicKey === GENESIS_OTHER.registerPublicKey &&
+      chain[0].transaction.messages[0].publicKey === GENESIS_PUBLICKEY_NODE1 &&
+      chain[0].transaction.messages[0].category === GENESIS_CATEGORY_NODE1 &&
+      chain[0].transaction.messages[1].publicKey === GENESIS_PUBLICKEY_NODE2 &&
+      chain[0].transaction.messages[1].category === GENESIS_CATEGORY_NODE2 
+    );
+  }
 
-    getCategoryFromPublicKey(publicKey) {
-        for (let i = 0; i < this.chain.length; i++) {
-            for (let j = 0; j < this.chain[i].transactions.length; j++) {
-                if (this.chain[i].transactions[j].transactionType == 2) {
-                    if (this.chain[i].transactions[j].publicKey === publicKey) {
-                        return this.chain[i].transactions[j].category;
-                    }
-                }
-            }
-        }
-        return "";
-    }
+  addBlock(block) {
+    this.chain.push(block);
+  }
 
-    getAll() {
-        return this.chain;
-    }
+  getAll() {
+    return this.chain;
+  }
 }
 
 module.exports = Blockchain;

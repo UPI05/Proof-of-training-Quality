@@ -1,28 +1,18 @@
 const WebSocket = require("ws");
 
-const Block = require("./block");
+const Message = require("./message");
 
-const { RANDOM_BIAS } = require("./config.js");
+const { RANDOM_BIAS, MSG_TYPE, HEARTBEAT_TIMEOUT } = require("./config.js");
 
 const Peers = process.env.PEERS ? process.env.PEERS.split(",") : [];
 const P2P_PORT = process.env.P2P_PORT;
 
-const MSG_TYPE = {
-  dataRetrival: "DataRetrival",
-  dataSharing: "DataSharing",
-  blockVerifyReq: "BlockVerifyRequest",
-  blockVerifyRes: "BlockVerifyResponse",
-  blockCommit: "BlockCommit",
-  orgzRegis: "OrganizationRegister"
-};
-
 class P2pServer {
-  constructor(blockchain, wallet, transactionPool, blockPool) {
+  constructor(blockchain, wallet, messagePool) {
     this.sockets = [];
     this.blockchain = blockchain;
     this.wallet = wallet;
-    this.transactionPool = transactionPool;
-    this.blockPool = blockPool;
+    this.messagePool = messagePool;
   }
 
   // WebSocket Connection
@@ -34,6 +24,13 @@ class P2pServer {
       this.handleConnection(socket);
     });
     this.connectToPeers();
+
+    // Wait for sockets connection
+    setTimeout(() => {
+      // When a node begins to work, It needs to get a correct chain from network.
+      const getChainReq = new Message({}, this.wallet, MSG_TYPE.getChainReq);
+      this.broadcastMessage(getChainReq);
+    }, 1000);
   }
 
   connectToPeers() {
@@ -49,67 +46,19 @@ class P2pServer {
     this.handleMessage(socket);
   }
 
-  // Send and receive data
+  // Broadcast messages
 
-  broadcastTransaction(transaction) {
+  broadcastMessage(msg) {
     this.sockets.forEach((socket) => {
-      this.sendTransaction(transaction, socket);
+      this.sendMessage(msg, socket);
     });
   }
 
-  sendTransaction(transaction, socket) {
+  sendMessage(msg, socket) {
     socket.send(
       JSON.stringify({
-        type:
-          transaction.transactionType === 0
-            ? MSG_TYPE.dataRetrival
-            : MSG_TYPE.dataSharing,
-        data: transaction,
-      })
-    );
-  }
-
-  broadcastBlockVerifyReq(blockVerifyReq) {
-    this.sockets.forEach((socket) => {
-      this.sendBlockVerifyReq(blockVerifyReq, socket);
-    });
-  }
-
-  sendBlockVerifyReq(blockVerifyReq, socket) {
-    socket.send(
-      JSON.stringify({
-        type: MSG_TYPE.blockVerifyReq,
-        data: blockVerifyReq,
-      })
-    );
-  }
-
-  broadcastBlockVerifyRes(blockVerifyRes) {
-    this.sockets.forEach((socket) => {
-      this.sendBlockVerifyRes(blockVerifyRes, socket);
-    });
-  }
-
-  sendBlockVerifyRes(blockVerifyRes, socket) {
-    socket.send(
-      JSON.stringify({
-        type: MSG_TYPE.blockVerifyRes,
-        data: blockVerifyRes,
-      })
-    );
-  }
-
-  broadcastBlockCommit(block) {
-    this.sockets.forEach((socket) => {
-      this.sendBlockCommit(block, socket);
-    });
-  }
-
-  sendBlockCommit(block, socket) {
-    socket.send(
-      JSON.stringify({
-        type: MSG_TYPE.blockCommit,
-        data: block,
+        type: msg.msgType || "",
+        data: msg,
       })
     );
   }
@@ -118,84 +67,189 @@ class P2pServer {
 
   handleMessage(socket) {
     socket.on("message", (message) => {
-      const msg = JSON.parse(message);
-      const tx = msg.data;
-      const block = msg.data;
+      message = JSON.parse(message);
+      const msg = message.data;
 
-      switch (msg.type) {
-        case MSG_TYPE.dataRetrival:
+      switch (message.type) {
+        // Looking for the right chain
+        case MSG_TYPE.getChainReq:
           if (
-            this.transactionPool.verifyTransaction(tx) &&
-            !this.transactionPool.transactionExists(tx)
+            !this.messagePool.messageExistsWithHash(msg) &&
+            this.messagePool.verifyMessage(msg, this.blockchain)
           ) {
-            tx.isSpent = false;
-            this.transactionPool.addTransaction(tx);
-            this.broadcastTransaction(tx);
+            msg.isSpent = false;
+            this.messagePool.addMessage(msg);
+            this.broadcastMessage(msg);
 
-            // Now train a model, valuate the MAE and broadcast that DataSharingTransaction to all nodes in the committee
+            const getChainRes = new Message(
+              { chain: this.blockchain.chain },
+              this.wallet,
+              MSG_TYPE.getChainRes
+            );
+            this.broadcastMessage(getChainRes);
+          }
+          break;
 
-            if (tx.category === process.env.CATEGORY) {
-              // Because we don't implement a federated learning model, we will randomize the MAE and return an empty model
-              const MAE = Math.random() * RANDOM_BIAS;
+        case MSG_TYPE.getChainRes:
+          if (
+            !this.messagePool.messageExistsWithHash(msg) &&
+            this.messagePool.verifyMessage(msg, this.blockchain)
+            // We don't need to check isMessageGetChainResDuplicated here because the chain will be better without checking.
+          ) {
+            msg.isSpent = false;
+            this.messagePool.addMessage(msg);
+            this.broadcastMessage(msg);
 
-              // Now create a DataSharingTransaction
-              delete tx["isSpent"];
-              const dataSharingTx = this.wallet.createDataSharingTransaction({
-                MAE,
-                model: { conten: "empty" },
-                retrivalTransaction: tx,
-              });
-
-              this.broadcastTransaction(dataSharingTx);
+            // Verify the chain and add to blockchain
+            if (
+              msg.chain.length > this.blockchain.chain.length &&
+              this.blockchain.verifyChain(msg.chain, blockchain)
+            ) {
+              this.blockchain.chain = msg.chain;
             }
           }
 
           break;
 
-        case MSG_TYPE.dataSharing:
+        // Looking for alive nodes
+        case MSG_TYPE.heartBeatReq:
           if (
-            this.transactionPool.verifyTransaction(tx) &&
-            !this.transactionPool.transactionExists(tx) &&
-            !this.transactionPool.transactionType1Exists(tx)
+            !this.messagePool.messageExistsWithHash(msg) &&
+            this.messagePool.verifyMessage(msg, this.blockchain)
           ) {
-            this.transactionPool.addTransaction(tx);
-            this.broadcastTransaction(tx);
+            msg.isSpent = false;
+            this.messagePool.addMessage(msg);
+            this.broadcastMessage(msg);
 
-            if (tx.retrivalTransaction.category === process.env.CATEGORY) {
-              const committeeSize = this.blockchain.countCommitteeNodes(
-                process.env.CATEGORY
+            if (msg.category === process.env.CATEGORY) {
+              const resMsg = new Message(
+                {
+                  heartBeatReq: msg,
+                },
+                this.wallet,
+                MSG_TYPE.heartBeatRes
               );
-              const receivedCommitteeNodes =
-                this.transactionPool.countTransactions(
-                  tx.retrivalTransaction.hash,
-                  tx.transactionType,
-                  process.env.CATEGORY
+              this.broadcastMessage(resMsg);
+            }
+          }
+
+          break;
+
+        case MSG_TYPE.heartBeatRes:
+          if (
+            !this.messagePool.messageExistsWithHash(msg) &&
+            this.messagePool.verifyMessage(msg, this.blockchain) &&
+            !this.messagePool.isMessageHeartBeatResDuplicated(msg)
+          ) {
+            msg.isSpent = false;
+            this.messagePool.addMessage(msg);
+            this.broadcastMessage(msg);
+          }
+
+          break;
+
+        // Main consensus protocol
+        case MSG_TYPE.dataRetrieval:
+          if (
+            this.messagePool.verifyMessage(msg, this.blockchain) &&
+            !this.messagePool.messageExistsWithHash(msg) &&
+            !this.messagePool.messageDataRetrievalExistsWithPublicKey(msg)
+          ) {
+            msg.isSpent = false;
+            this.messagePool.addMessage(msg);
+            this.broadcastMessage(msg);
+          }
+
+          break;
+
+        case MSG_TYPE.dataSharingReq:
+          if (
+            this.messagePool.verifyMessage(msg, this.blockchain) &&
+            !this.messagePool.messageExistsWithHash(msg)
+          ) {
+            msg.isSpent = false;
+            this.messagePool.addMessage(msg);
+            this.broadcastMessage(msg);
+
+            // Now train a model, valuate the MAE and broadcast that dataSharingRes to all nodes in the committee
+
+            if (msg.category === process.env.CATEGORY) {
+              // Because we don't implement a federated learning model, we will randomize the MAE and return an empty model
+              const MAE = Math.random() * RANDOM_BIAS;
+
+              // Now create a DataSharingTransaction
+              delete msg["isSpent"];
+              const dataSharingRes = new Message(
+                {
+                  ...msg,
+                  MAE,
+                  model: { conten: "empty" },
+                  dataSharingReq: msg,
+                },
+                this.wallet,
+                MSG_TYPE.dataSharingRes
+              );
+
+              this.broadcastMessage(dataSharingRes);
+            }
+          }
+
+          break;
+
+        case MSG_TYPE.dataSharingRes:
+          if (
+            this.messagePool.verifyMessage(msg, this.blockchain) &&
+            !this.messagePool.messageExistsWithHash(msg) &&
+            !this.messagePool.isMessageDataSharingResDuplicated(msg) // It means there is a node sent 2 responses for 1 dataSharingReq.
+          ) {
+            msg.isSpent = false;
+            this.messagePool.addMessage(msg);
+            this.broadcastMessage(msg);
+
+            if (msg.dataSharingReq.category === process.env.CATEGORY) {
+              const heartBeatReq = new Message(
+                { category: process.env.CATEGORY },
+                this.wallet,
+                MSG_TYPE.heartBeatReq
+              );
+
+              this.broadcastMessage(heartBeatReq);
+
+              setTimeout(() => {
+                // Get all committee nodes, which is alive.
+                const allHeartBeatRes =
+                  this.messagePool.getAllHeartBeatRes(heartBeatReq);
+                //
+                const allDataSharingRes = this.messagePool.getAllDataSharingRes(
+                  msg.dataSharingReq.hash
                 );
-
-              if (receivedCommitteeNodes >= committeeSize) {
-                const isComposer = this.transactionPool.isComposer(
-                  tx.retrivalTransaction.hash,
-                  this.wallet
-                );
-
-                if (isComposer) {
-                  // Compose a new block with all unspent transactions in the pool
-                  const txs = this.transactionPool.getAllUnspentTransactions();
-
-                  const block = new Block(
-                    {
-                      composer: this.wallet.getPublicKey(),
-                      transactions: txs,
-                      preHash:
-                        this.blockchain.chain[this.blockchain.chain.length - 1]
-                          .hash,
-                    },
-                    this.wallet
-                  );
-
-                  this.broadcastBlockVerifyReq(block);
+                // Now check if all dataSharingRes messages come from heartBeatRes - alive committee nodes.
+                if (
+                  this.messagePool.enoughDataSharingRes(
+                    allHeartBeatRes,
+                    allDataSharingRes
+                  )
+                ) {
+                  if (
+                    this.messagePool.isProposer(this.wallet, allDataSharingRes)
+                  ) {
+                    const blockVerifyReq = new Message(
+                      {
+                        preHash:
+                          this.blockchain.chain[
+                            this.blockchain.chain.length - 1
+                          ].hash,
+                        messages: this.messagePool.getAllRelatedMessages(
+                          msg.dataSharingReq
+                        ),
+                      },
+                      this.wallet,
+                      MSG_TYPE.blockVerifyReq
+                    );
+                    this.broadcastMessage(blockVerifyReq);
+                  }
                 }
-              }
+              }, HEARTBEAT_TIMEOUT * 1000);
             }
           }
 
@@ -203,28 +257,22 @@ class P2pServer {
 
         case MSG_TYPE.blockVerifyReq:
           if (
-            this.blockPool.verifyBlock(block) &&
-            !this.blockPool.blockExists(block, MSG_TYPE.blockVerifyReq) &&
-            block.preHash ===
-              this.blockchain.chain[this.blockchain.chain.length - 1].hash
+            this.messagePool.verifyMessage(msg, this.blockchain) &&
+            !this.messagePool.messageExistsWithHash(msg)
           ) {
-            block.isSpent = false;
-            block.msg = MSG_TYPE.blockVerifyReq;
+            msg.isSpent = false;
+            this.messagePool.addMessage(msg);
+            this.broadcastMessage(msg);
 
-            this.blockPool.addBlock(block);
-
-            this.broadcastBlockVerifyReq(block);
-            
-            if (
-              this.blockchain.getCategoryFromPublicKey(block.composer) ===
-              process.env.CATEGORY
-            ) {
-              block.committeeSignature.push({
+            if (msg.category === process.env.CATEGORY) {
+              const blockVerifyRes = { ...msg };
+              blockVerifyRes.committeeSignature = {
                 publicKey: this.wallet.getPublicKey(),
-                signature: this.wallet.sign(block.hash),
-              });
+                signature: this.wallet.sign(msg.hash),
+              };
 
-              this.broadcastBlockVerifyRes(block);
+              blockVerifyRes.msgType = MSG_TYPE.blockVerifyRes;
+              this.broadcastMessage(blockVerifyRes);
             }
           }
 
@@ -232,67 +280,88 @@ class P2pServer {
 
         case MSG_TYPE.blockVerifyRes:
           if (
-            this.blockPool.verifyBlock(block) &&
-            !this.blockPool.blockExistsWithSignature(block, MSG_TYPE.blockVerifyRes) &&
-            block.preHash === this.blockchain.chain[this.blockchain.chain.length - 1].hash &&
-            block.committeeSignature.length === 1
+            this.messagePool.verifyMessage(msg, this.blockchain) &&
+            !this.messagePool.messageExistsWithHashMsgTypeAndCommitteePublicKey(
+              msg
+            )
           ) {
-            block.isSpent = false;
-            block.msg = MSG_TYPE.blockVerifyRes;
-
-            this.blockPool.addBlock(block);
-
-            this.broadcastBlockVerifyRes(block);
-
-            if (block.composer === this.wallet.getPublicKey()) {
-              const blockResponseCnt = this.blockPool.countBlocks(
-                block,
-                MSG_TYPE.blockVerifyRes
+            msg.isSpent = false;
+            this.messagePool.addMessage(msg);
+            this.broadcastMessage(msg);
+            
+            if (msg.proposer === this.wallet.getPublicKey()) {
+              const heartBeatReq = new Message(
+                { category: process.env.CATEGORY },
+                this.wallet,
+                MSG_TYPE.heartBeatReq
               );
-              if (
-                blockResponseCnt >=
-                this.blockchain.countCommitteeNodes(process.env.CATEGORY)
-              ) {
-                const proposedBlock = this.blockPool.getProposedBlockWithAllRelatedSignature({...block}, MSG_TYPE.blockVerifyRes);
-                
-                this.broadcastBlockCommit(proposedBlock);
+              
+              this.broadcastMessage(heartBeatReq);
 
-              }
+              setTimeout(() => {
+                const allHeartBeatRes =
+                  this.messagePool.getAllHeartBeatRes(heartBeatReq);
+                const allBlockVerifyResCommitteeSignatures =
+                  this.messagePool.getAllCommitteeSignaturesFromBlockVerifyRes(
+                    msg.hash
+                  );
+                if (
+                  this.messagePool.enoughBlockVerifyRes(
+                    allHeartBeatRes,
+                    allBlockVerifyResCommitteeSignatures
+                  )
+                ) {
+                  const blockCommit = { ...msg };
+                  delete blockCommit["committeeSignature"];
+                  blockCommit.committeeSignatures =
+                    allBlockVerifyResCommitteeSignatures;
+                  blockCommit.msgType = MSG_TYPE.blockCommit;
+
+                  this.broadcastMessage(blockCommit);
+                }
+              }, HEARTBEAT_TIMEOUT * 1000);
             }
           }
-          
-          break;
 
+          break;
 
         case MSG_TYPE.blockCommit:
           if (
-            this.blockPool.verifyBlock(block) &&
-            this.blockPool.isComitteeVerified(block, this.blockchain) &&
-            block.preHash === this.blockchain.chain[this.blockchain.chain.length - 1].hash
+            this.messagePool.verifyMessage(msg, this.blockchain) &&
+            !this.messagePool.messageExistsWithHashAndMsgType(msg)
           ) {
-            delete block["isSpent"];
-            delete block["msg"];
-            this.blockchain.chain.push(block);
-            this.broadcastBlockCommit(block);
-
+            this.blockchain.addBlock(msg);
+            this.messagePool.addMessage(msg);
+            this.broadcastMessage(msg);
+/*
             // Now mark transactions and blocks in pools as spent
             for (let i = 0; i < block.transactions.length; i++) {
-              for (let j = 0; j < this.transactionPool.transactions.length; j++) {
-                if (this.transactionPool.transactions[j].hash === block.transactions[i].hash && this.transactionPool.transactions[j].transactionType === block.transactions[i].transactionType) {
+              for (
+                let j = 0;
+                j < this.transactionPool.transactions.length;
+                j++
+              ) {
+                if (
+                  this.transactionPool.transactions[j].hash ===
+                    block.transactions[i].hash &&
+                  this.transactionPool.transactions[j].transactionType ===
+                    block.transactions[i].transactionType
+                ) {
                   this.transactionPool.transactions[j].isSpent = true;
                 }
               }
             }
 
             for (let i = 0; i < this.blockPool.blocks.length; i++) {
-              if (this.blockPool.blocks[i].msg === MSG_TYPE.blockVerifyRes && this.blockPool.blocks[i].hash === block.hash) {
+              if (
+                this.blockPool.blocks[i].msg === MSG_TYPE.blockVerifyRes &&
+                this.blockPool.blocks[i].hash === block.hash
+              ) {
                 this.blockPool.blocks[i].isSpent = true;
               }
             }
-
+*/
           }
-        
-          
           break;
         default:
           console.info("oops");

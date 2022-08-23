@@ -1,31 +1,30 @@
 const utils = require("./utils");
-const { DataRetrivalTransaction, OrgzRegisTransaction, DataSharingTransaction } = require("./transactions");
+const Message = require("./message");
+const { MSG_TYPE } = require("./config");
 
 class Wallet {
-    constructor(secret) {
-        this.keyPair = utils.genKeyPair(secret);
-        this.publicKey = this.keyPair.getPublic("hex");
-    }
+  constructor(secret) {
+    this.keyPair = utils.genKeyPair(secret);
+    this.publicKey = this.keyPair.getPublic("hex");
+  }
 
-    sign(dataHash) {
-        return this.keyPair.sign(dataHash).toHex();
-    }
+  sign(dataHash) {
+    return this.keyPair.sign(dataHash).toHex();
+  }
 
-    getPublicKey() {
-        return this.publicKey;
-    }
+  getPublicKey() {
+    return this.publicKey;
+  }
 
-    createDataRetrivalTransaction(query) {
-        return new DataRetrivalTransaction(query, this);
-    }
+  // Wallet can only handle the dataSharingReq and dataRetrieval
 
-    createDataSharingTransaction(data) {
-        return new DataSharingTransaction(data, this);
-    }
+  createDataSharingReqMsg(query) {
+    return new Message(query, this, MSG_TYPE.dataSharingReq);
+  }
 
-    registerOrgz() {
-        return new OrgzRegisTransaction({}, this);
-    }
+  createDataRetrievalMsg(query) {
+    return new Message({ ...query }, this, MSG_TYPE.dataRetrieval);
+  }
 }
 
 module.exports = Wallet;
