@@ -5,9 +5,10 @@ const P2pServer = require("./p2p-server");
 const Blockchain = require("./blockchain");
 const Wallet = require("./wallet");
 const MessagePool = require("./message-pool");
+const Message = require("./message");
 
 const HTTP_PORT = process.env.HTTP_PORT;
-const { MSG_TYPE } = require("./config");
+const { MSG_TYPE, HEARTBEAT_TIMEOUT } = require("./config");
 
 const app = express();
 
@@ -37,6 +38,11 @@ app.get("/blockchain", (req, res) => {
 app.post("/register", (req, res) => {
     const dataRetrieval = wallet.createDataRetrievalMsg(req.body);
     p2pServer.broadcastMessage(dataRetrieval);
+    setTimeout(() => {
+        // When a node begins to work, It needs to get a correct chain from network.
+        const getChainReq = new Message({}, this.wallet, MSG_TYPE.getChainReq);
+        this.broadcastMessage(getChainReq);
+    }, HEARTBEAT_TIMEOUT * 1000);
     res.json(dataRetrieval);
 })
 

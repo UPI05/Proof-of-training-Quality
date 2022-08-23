@@ -182,7 +182,6 @@ class Message {
       )
     )
       return false;
-
     // Verify that committee publicKey is registered onchain.
     // And the committee category onchain is the same as proposer category.
     // It means the related data, which they 're handling comes from the same committee.
@@ -312,11 +311,11 @@ class Message {
       if (!this.verify(blockVerifyReqOf_msg, blockchain)) return false;
       if (!msg.committeeSignature) return false;
       else
-        return verifyCommitteeSignature(
+        return this.verifyCommitteeSignature(
           msg.committeeSignature,
           msg.hash,
           blockchain,
-          msg.proposer
+          msg.category
         );
     }
 
@@ -332,11 +331,11 @@ class Message {
       if (!msg.committeeSignatures) return false;
       for (const committeeSignature of msg.committeeSignatures) {
         if (
-          !verifyCommitteeSignature(
+          !this.verifyCommitteeSignature(
             committeeSignature,
             msg.hash,
             blockchain,
-            msg.proposer
+            msg.category
           )
         )
           return false;

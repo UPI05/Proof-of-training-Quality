@@ -47,8 +47,8 @@ Currently, I don't handle longest-chain rule forks.The topology which I'm using 
 [
     {
         "timeStamp": "010101010101",
-        "msgType": "BlockVerifyRequest",
-        "category": "lion",
+        "msgType": "BlockCommit",
+        "category": "chicken",
         "proposer": "Hieu Vo",
         "transaction": {
             "messages": [
@@ -72,116 +72,159 @@ Currently, I don't handle longest-chain rule forks.The topology which I'm using 
         "signature": "VH"
     },
     {
-        "timeStamp": 1661235210988,
+        "timeStamp": 1661296229206,
         "msgType": "BlockCommit",
-        "category": "tiger",
-        "proposer": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
+        "category": "chicken",
+        "proposer": "5864f1e7d7e37e95882b398c21ca29b314ebfc6ea1286c8dc1201214cc0d0686",
         "transaction": {
             "messages": [
                 {
-                    "timeStamp": 1661235102770,
+                    "timeStamp": 1661296184571,
                     "msgType": "DataRetrieval",
                     "publicKey": "57072510e8e9c406943c8ffa69a134f2ce1572290056c57e2fe37ca44044faa9",
                     "category": "lion",
                     "accessSignature": "72D44F1D0117225EBFB324E0CBAE784589E09A84F468A7B601F8E9961237BF40DD270A7F6DDE838644271F8CE594CAC01ADB8A3BFEBC7D0D150C54C762E63C02",
-                    "hash": "232a6a549bc9f258efe40ca17bb01a91c23371c11ccce7ba3a339f9ddaecec82",
-                    "signature": "B6C6F0E81BE9DABCC0FA922FDB60D93E9B6E8AC28D77F357A4B6EABE2D1C23355D3916DF9D93F637679FBCC8B2816ABA8215F69019782643202F519E9EB95506",
-                    "isSpent": false
+                    "hash": "39250670522874308cfa34e2ec069085b9e6f1ad16cfbc9f5ebfd59a91540c76",
+                    "signature": "72C3F19D4DF66BB1A324748D3E919733450D73E6E3A9C39F641481FF1C0A81361BA2DFF0601BCE97BBF5A12DF3D3AF509E3DBB29532B0797AC2A7A0F79DE4D03"
                 },
                 {
-                    "timeStamp": 1661235205842,
+                    "timeStamp": 1661296187604,
+                    "msgType": "DataRetrieval",
+                    "publicKey": "5e475e334d90c1accb4da890c8a3c4d22d8e9071f0e8e61ece9b07b2e424647c",
+                    "category": "lion",
+                    "accessSignature": "161D63A43F51DF87BBFFDF5788882318E8A2E03363DC88597EE1300869A7A2D6C51F1BD3B5F053EC89D64C2EDB8949FF60FFCB7E6F8A592134FFE3BB7ECCD10A",
+                    "hash": "4c2dfcc592c9bf35d952a19df27d66341a759775987c4f12dbd66f5bb459b0ca",
+                    "signature": "7F7A16B57167BA8D5CC8A0A2992201BB08A71CDA761EDBD14070376DD0A7C41B0E217BA820C6BAF81E84499ED7DC9A0C144E371D2151F343D831F867A035830B"
+                },
+                {
+                    "timeStamp": 1661296221077,
                     "msgType": "DataSharingRequest",
                     "publicKey": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
                     "category": "tiger",
-                    "query": 8,
-                    "hash": "1306dcb003a2e2c8ebba3f6d8f9c191073032b3cf710f07e535644b9940d27d5",
-                    "signature": "1866D11BF8428A610449AFF104FE2D2FE4FF610994BB1F19CDF8B5964FCED1BDC63D88F2B1397DD338085249D4F20E92B8D792BAA53D02FCC5EC4D85CD5A9102"
+                    "requestCategory": "chicken",
+                    "requestData": 11,
+                    "hash": "1a6fc770a7b37111005d3c5ddd853684e4a59a542efd67b769a823f9b51353ad",
+                    "signature": "BBD875AFA686005BCE07E65F88564BD2A161AFA7D85DB903F60546154FF098F7CC66A3763751FAA80C65EECF1BF434DAC75774F22769332BB008FD1C2DF8A109"
                 },
                 {
-                    "timeStamp": 1661235205883,
+                    "timeStamp": 1661296221088,
                     "msgType": "DataSharingResponse",
-                    "publicKey": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
-                    "category": "tiger",
+                    "publicKey": "5864f1e7d7e37e95882b398c21ca29b314ebfc6ea1286c8dc1201214cc0d0686",
+                    "category": "chicken",
                     "model": {
                         "conten": "empty"
                     },
-                    "MAE": 86.62302204712786,
+                    "MAE": 97.18589011447148,
                     "dataSharingReq": {
-                        "timeStamp": 1661235205842,
+                        "timeStamp": 1661296221077,
                         "msgType": "DataSharingRequest",
                         "publicKey": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
                         "category": "tiger",
-                        "query": 8,
-                        "hash": "1306dcb003a2e2c8ebba3f6d8f9c191073032b3cf710f07e535644b9940d27d5",
-                        "signature": "1866D11BF8428A610449AFF104FE2D2FE4FF610994BB1F19CDF8B5964FCED1BDC63D88F2B1397DD338085249D4F20E92B8D792BAA53D02FCC5EC4D85CD5A9102"
+                        "requestCategory": "chicken",
+                        "requestData": 11,
+                        "hash": "1a6fc770a7b37111005d3c5ddd853684e4a59a542efd67b769a823f9b51353ad",
+                        "signature": "BBD875AFA686005BCE07E65F88564BD2A161AFA7D85DB903F60546154FF098F7CC66A3763751FAA80C65EECF1BF434DAC75774F22769332BB008FD1C2DF8A109"
                     },
-                    "hash": "189e831b0fb1f2a43283007abfd7aa4789b0f6503e6789aa33b4eda97d05c489",
-                    "signature": "05E0916EBA9934A131337835CE7EF59AC7AE62A337E2494D296121CA1331BC251383BE9BCA14D799C161F16B9BE6A0AA03904364CC4CE58F74C5ED8133D8A90A",
-                    "isSpent": false
+                    "hash": "2440795fc830c9791063b4738b0364ca20d39e182671fc57f3ad575dd20c4ff7",
+                    "signature": "5187E451BB102B361A8C5EE73A244B513A49565C7EB9780A13AD0F9533F79C001C0110BBD35E25F0FA18ADCC270B7407EA13E0B4BBE5DBBBEAE599577050180D"
                 }
             ]
         },
         "preHash": "0xDEADBEEF",
         "other": "",
-        "hash": "ec6fa0270c566ac88f72c47ce0389336082532b443265f90e7892c7e0aab859c",
-        "signature": "78ED5562A99EF1B69DC6C40F4D1E70BF67FF60EAFCE1BC44D5C3019DDA04363D2AF425347B25CCA7B4BDEE4CF176DFFA330ACE0184E932E2C85A0D79ECECDE09",
-        "isSpent": false,
+        "hash": "7552d8428701d1d02964f37c0380b683092b82103c7bda9c8ffb1852d8e88944",
+        "signature": "0E1BB67FCFCCB11E46B52C39F7C4E89555C36A296D20DDA06B3FD2053DF6FF0F630DA7E5E4FBDC691DCEADDB34F4B21E435D4C9BBE6D2583CF4FC12EF3748800",
         "committeeSignatures": [
             {
-                "publicKey": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
-                "signature": "78ED5562A99EF1B69DC6C40F4D1E70BF67FF60EAFCE1BC44D5C3019DDA04363D2AF425347B25CCA7B4BDEE4CF176DFFA330ACE0184E932E2C85A0D79ECECDE09"
+                "publicKey": "5864f1e7d7e37e95882b398c21ca29b314ebfc6ea1286c8dc1201214cc0d0686",
+                "signature": "0E1BB67FCFCCB11E46B52C39F7C4E89555C36A296D20DDA06B3FD2053DF6FF0F630DA7E5E4FBDC691DCEADDB34F4B21E435D4C9BBE6D2583CF4FC12EF3748800"
             }
         ]
     },
     {
-        "timeStamp": 1661235271107,
+        "timeStamp": 1661296309077,
         "msgType": "BlockCommit",
-        "category": "tiger",
-        "proposer": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
+        "category": "lion",
+        "proposer": "57072510e8e9c406943c8ffa69a134f2ce1572290056c57e2fe37ca44044faa9",
         "transaction": {
             "messages": [
                 {
-                    "timeStamp": 1661235265998,
-                    "msgType": "DataSharingRequest",
-                    "publicKey": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
+                    "timeStamp": 1661296283145,
+                    "msgType": "DataRetrieval",
+                    "publicKey": "4da98203c8f04e2d18a44ad2a6a59501dbc5b92d2d2ae21b517147d3d058d8f1",
                     "category": "tiger",
-                    "query": 8,
-                    "hash": "128c95912492bb2b56cc43c6cae2b24d352410e557297ba61d0f5067b45aa636",
-                    "signature": "5B49DE66CA3A3A2D7FFB72D0390C733CC14F537161A7FB5270201C9C064AAFB044AFFDFD291767281700C535D22CCD6EFA04566707B533B67FDBD59C79A4D105"
+                    "accessSignature": "13350EA7F333235E19D13A55A2B2B03FBFE0980A2440749288B17927F2B90D564B88647A3A5D9F3BB0526209D2AFB81174F1EC0581171C8DC4F64E0737E48F08",
+                    "hash": "22cd6f8201478c5d5889b87c0933a025f8d1c60eb0c9c8888c1b9d601bb19823",
+                    "signature": "7D73DE8CEB5A10EC8889587FA15F06026FB55BBA441929E0E645378E578A7D89553CF1FD39C54429A4086947927F600C3D4B11AACFAB617998EC6BDF090CF50B"
                 },
                 {
-                    "timeStamp": 1661235266027,
+                    "timeStamp": 1661296300991,
+                    "msgType": "DataSharingRequest",
+                    "publicKey": "5864f1e7d7e37e95882b398c21ca29b314ebfc6ea1286c8dc1201214cc0d0686",
+                    "category": "chicken",
+                    "requestCategory": "lion",
+                    "requestData": 12,
+                    "hash": "2db1288ed5dd684aa0429a8a140c93fae61937cd84861a757e59f5ef8d0d6972",
+                    "signature": "A1E5E3A8C24B04008AA9465B6F6E9F757984B4C41621975E1C090BEEC039972DD322491ECAAC3F74F757B84CAA2CC40A03C8AC69B67D160D91DD79354ADC9D0B"
+                },
+                {
+                    "timeStamp": 1661296301006,
                     "msgType": "DataSharingResponse",
-                    "publicKey": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
-                    "category": "tiger",
+                    "publicKey": "57072510e8e9c406943c8ffa69a134f2ce1572290056c57e2fe37ca44044faa9",
+                    "category": "lion",
                     "model": {
                         "conten": "empty"
                     },
-                    "MAE": 96.00629204321474,
+                    "MAE": 77.71872510436796,
                     "dataSharingReq": {
-                        "timeStamp": 1661235265998,
+                        "timeStamp": 1661296300991,
                         "msgType": "DataSharingRequest",
-                        "publicKey": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
-                        "category": "tiger",
-                        "query": 8,
-                        "hash": "128c95912492bb2b56cc43c6cae2b24d352410e557297ba61d0f5067b45aa636",
-                        "signature": "5B49DE66CA3A3A2D7FFB72D0390C733CC14F537161A7FB5270201C9C064AAFB044AFFDFD291767281700C535D22CCD6EFA04566707B533B67FDBD59C79A4D105"
+                        "publicKey": "5864f1e7d7e37e95882b398c21ca29b314ebfc6ea1286c8dc1201214cc0d0686",
+                        "category": "chicken",
+                        "requestCategory": "lion",
+                        "requestData": 12,
+                        "hash": "2db1288ed5dd684aa0429a8a140c93fae61937cd84861a757e59f5ef8d0d6972",
+                        "signature": "A1E5E3A8C24B04008AA9465B6F6E9F757984B4C41621975E1C090BEEC039972DD322491ECAAC3F74F757B84CAA2CC40A03C8AC69B67D160D91DD79354ADC9D0B"
                     },
-                    "hash": "69df64292df09e3911b1a694b8639f17421bb09746db8519999d0280c34afb8f",
-                    "signature": "40967AD01DB07ED40854D8D5A137B0A9F6FC5FD412E5C21621323C78F6F43CA8376583C49A83AACD01F3DBDC6723B42015149EF0E410FB14447E2F9486A2CA06",
-                    "isSpent": false
+                    "hash": "a42bcb025d44042459d757834e38d6b4550130be1031ead2ebb4524db83fe7a9",
+                    "signature": "C420324FFD6C5D7B4E3A7AFEE5691745E179858767362AEF2739B4ED2AEBDE5ADCB9BD76366F848AABA92CAB2F6A9BF0EE84E4889055F9968319F66A24F93D0F"
+                },
+                {
+                    "timeStamp": 1661296301011,
+                    "msgType": "DataSharingResponse",
+                    "publicKey": "5e475e334d90c1accb4da890c8a3c4d22d8e9071f0e8e61ece9b07b2e424647c",
+                    "category": "lion",
+                    "model": {
+                        "conten": "empty"
+                    },
+                    "MAE": 86.0398330536307,
+                    "dataSharingReq": {
+                        "timeStamp": 1661296300991,
+                        "msgType": "DataSharingRequest",
+                        "publicKey": "5864f1e7d7e37e95882b398c21ca29b314ebfc6ea1286c8dc1201214cc0d0686",
+                        "category": "chicken",
+                        "requestCategory": "lion",
+                        "requestData": 12,
+                        "hash": "2db1288ed5dd684aa0429a8a140c93fae61937cd84861a757e59f5ef8d0d6972",
+                        "signature": "A1E5E3A8C24B04008AA9465B6F6E9F757984B4C41621975E1C090BEEC039972DD322491ECAAC3F74F757B84CAA2CC40A03C8AC69B67D160D91DD79354ADC9D0B"
+                    },
+                    "hash": "98e7a7d64d3ecc9d82206079c9346c9f93e3c8817b2668e797d5995c8598437f",
+                    "signature": "ED6F111F23EF5BC1182F1016D95E6EE02D7782F21AC44A3F454FAD700F70DE55D992BDBED3D5E27DEE9632887B99EA19C58F10AE1F8A3024E3CC285293F1FE0D"
                 }
             ]
         },
-        "preHash": "ec6fa0270c566ac88f72c47ce0389336082532b443265f90e7892c7e0aab859c",
+        "preHash": "7552d8428701d1d02964f37c0380b683092b82103c7bda9c8ffb1852d8e88944",
         "other": "",
-        "hash": "70ba8e35084a6dc4cc431851360022bad9f5a6d07746e741f643e80bc5bd6006",
-        "signature": "5B1BF7F4ABE26F7B55E3E94400E988327B9895CAB1E484C2AEDC1A42EBB66A71935D3657A04464C63124AE87CEECDAA62F2C1638A151B4264D3621AF26062005",
-        "isSpent": false,
+        "hash": "bb5102ec2ff1e088ad3f852609f36d9adf8ac848ecda747608394057168e1a23",
+        "signature": "240EDF1C410EF3C64924EC33DB5A678602DA11F212D64106EAA962DB8154D31545D366CE9A0F9B3B90F5912197CF0C9279C0C32FD781CC17D4D3785EDE0FE004",
         "committeeSignatures": [
             {
-                "publicKey": "276ab32fb62ccc18fcb9c0e792092b9b6911e53b75f951211b232cf84de061bf",
-                "signature": "5B1BF7F4ABE26F7B55E3E94400E988327B9895CAB1E484C2AEDC1A42EBB66A71935D3657A04464C63124AE87CEECDAA62F2C1638A151B4264D3621AF26062005"
+                "publicKey": "57072510e8e9c406943c8ffa69a134f2ce1572290056c57e2fe37ca44044faa9",
+                "signature": "240EDF1C410EF3C64924EC33DB5A678602DA11F212D64106EAA962DB8154D31545D366CE9A0F9B3B90F5912197CF0C9279C0C32FD781CC17D4D3785EDE0FE004"
+            },
+            {
+                "publicKey": "5e475e334d90c1accb4da890c8a3c4d22d8e9071f0e8e61ece9b07b2e424647c",
+                "signature": "19CE10B217B84BAC08748795F80F99EA96069BF4AD83328FA03E778AC40EA7737A31183BE27CA45E867E92EF8E1697450EA9697DE6B591457627449A86D71F05"
             }
         ]
     }

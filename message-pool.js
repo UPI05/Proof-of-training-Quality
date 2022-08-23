@@ -39,19 +39,21 @@ class MessagePool {
     let res = [];
     for (const mess of this.messages) {
       const msg = { ...mess };
-      delete msg["isSpent"];
       if (msg.msgType === MSG_TYPE.dataSharingRes) {
         if (msg.dataSharingReq.hash === dataSharingReq.hash && !msg.isSpent) {
+          delete msg["isSpent"];
           res.push(msg);
         }
       }
       if (msg.msgType === MSG_TYPE.dataRetrieval) {
         if (!msg.isSpent) {
+          delete msg["isSpent"];
           res.push(msg);
         }
       }
       if (msg.msgType === MSG_TYPE.dataSharingReq) {
         if (!msg.isSpent && msg.hash === dataSharingReq.hash) {
+          delete msg["isSpent"];
           res.push(msg);
         }
       }

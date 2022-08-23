@@ -45,12 +45,9 @@ class Blockchain {
 
   verifyChain(chain) {
     for (let i = 1; i < chain.length; i++) {
-      console.info("f1");
       if (chain[i].preHash !== chain[i - 1].hash) return false;
-      console.info("f2");
       if (!Message.verify(chain[i], this)) return false;
     }
-    console.info("ok");
     // Check if the default publicKey and category are valid
     return (
       chain[0].other.registerPublicKey === GENESIS_OTHER.registerPublicKey &&
@@ -76,6 +73,7 @@ class Blockchain {
   }
 
   addBlock(block) {
+    delete block["isSpent"];
     this.chain.push(block);
   }
 

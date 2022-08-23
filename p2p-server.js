@@ -30,7 +30,7 @@ class P2pServer {
       // When a node begins to work, It needs to get a correct chain from network.
       const getChainReq = new Message({}, this.wallet, MSG_TYPE.getChainReq);
       this.broadcastMessage(getChainReq);
-    }, 1000);
+    }, HEARTBEAT_TIMEOUT * 1000);
   }
 
   connectToPeers() {
@@ -173,7 +173,7 @@ class P2pServer {
 
             // Now train a model, valuate the MAE and broadcast that dataSharingRes to all nodes in the committee
 
-            if (msg.category === process.env.CATEGORY) {
+            if (msg.requestCategory === process.env.CATEGORY) {
               // Because we don't implement a federated learning model, we will randomize the MAE and return an empty model
               const MAE = Math.random() * RANDOM_BIAS;
 
@@ -206,7 +206,7 @@ class P2pServer {
             this.messagePool.addMessage(msg);
             this.broadcastMessage(msg);
 
-            if (msg.dataSharingReq.category === process.env.CATEGORY) {
+            if (msg.dataSharingReq.requestCategory === process.env.CATEGORY) {
               const heartBeatReq = new Message(
                 { category: process.env.CATEGORY },
                 this.wallet,
