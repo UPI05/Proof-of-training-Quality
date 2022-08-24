@@ -1,15 +1,15 @@
 # Proof of training Quality implementation
 
-Basically, this is my brief implementation for Proof of training Quality consensus machanism from the article [Blockchain and Federated Learning for Privacy-Preserved Data Sharing in Industrial IoT](https://ieeexplore.ieee.org/abstract/document/8843900?casa_token=3NBPXQV7aBQAAAAA:LVs6iJvMYbrGLmgku4188UUPOv4dND5nHkwvRWjigPeUa1CRQs_DhnSoA0Hene7-IsxSARvJExNcGA).
+Basically, this is my implementation for Proof of training Quality consensus machanism from the article [Blockchain and Federated Learning for Privacy-Preserved Data Sharing in Industrial IoT](https://ieeexplore.ieee.org/abstract/document/8843900).
 
-## How to run?
+[Read more about my implementation (vi)](https://drive.google.com/file/d/1gtTIVZfbCKecUr3n1I867sjUi5PXwVhM/view?usp=sharing)
+
+## Setup:
 
 ```
 npm install
 npm run node1
 npm run node2
-npm run node3
-npm run node4
 ```
 
 or
@@ -18,9 +18,9 @@ or
 npm install
 CATEGORY='chicken' SECRET='NODE1' HTTP_PORT=3000 P2P_PORT=5000 node app.js
 CATEGORY='tiger' SECRET='NODE2' HTTP_PORT=3001 P2P_PORT=5001 PEERS='ws://localhost:5000' node app.js
-CATEGORY='lion' SECRET='NODE3' HTTP_PORT=3002 P2P_PORT=5002 PEERS='ws://localhost:5000,ws://localhost:5001' node app.js
-CATEGORY='lion' SECRET='NODE4' HTTP_PORT=3003 P2P_PORT=5003 PEERS='ws://localhost:5000,ws://localhost:5001,ws://localhost:5002' node app.js
 ```
+
+_Note that you can change CATEGORY and SECRET but you need to modify the config.js, too._
 
 **Then you can use Postman, call REST APIs to interact with the chain at any entry point.**
 
@@ -30,16 +30,33 @@ GET: localhost:3002/blockchain
 
 POST: localhost:3001/request
 {
-    "data": 6,
-    "category": "chicken"
+    "requestData": 15,
+    "requestCategory": "chicken"
 }
 ```
 
-_Note that you can modify the above commands to create more nodes at the beginning, but you will need to add them to genesis block in blockchain.js and .env file._
+## Create a new node
+
+E.g:
+
+```
+CATEGORY='lion' SECRET='your_secret_key' HTTP_PORT=3002 P2P_PORT=5002 PEERS='ws://localhost:5000' node app.js
+```
+
+Now you have to call REST API to register.
+
+```
+POST: localhost:3002/register
+{
+    "signature": "third party signature, denotes that you have permission to access"
+}
+```
+
+_Note that PEERS can't be empty. They are alive p2p servers so you have to set at least 1 value._
 
 ## Future works
 
-Currently, I don't handle longest-chain rule forks.The topology which I'm using is fully connected topology. Also, the participants need to request for chains based on longest-chain rule when they restart the node or propose a new block. Let it be available to register new nodes.
+Currently, I don't handle longest-chain rule forks.The topology which I'm using is fully connected.
 
 ## Simple chain
 
