@@ -41,7 +41,7 @@ app.post("/register", (req, res) => {
     setTimeout(() => {
         // When a node begins to work, It needs to get a correct chain from network.
         const getChainReq = new Message({}, wallet, MSG_TYPE.getChainReq);
-        this.broadcastMessage(getChainReq);
+        p2pServer.broadcastMessage(getChainReq);
     }, HEARTBEAT_TIMEOUT * 1000);
     res.json(dataRetrieval);
 })

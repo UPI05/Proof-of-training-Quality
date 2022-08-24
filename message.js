@@ -216,7 +216,7 @@ class Message {
     return false;
   }
 
-  static verify(msg, blockchain) {
+  static verify(msg, blockchain, blockVerifyReq_reCall = false) {
     // General
     if (
       msg.msgType !== MSG_TYPE.dataRetrieval &&
@@ -297,8 +297,9 @@ class Message {
       for (const m of msg.transaction.messages) {
         if (!this.verify(m, blockchain)) return false;
       }
-      // Big bug
-      if (blockchain.chain[blockchain.chain.length - 1].hash !== msg.preHash)
+      
+      // Without using blockVerifyReq_reCall, blockchain.verifyChain returns false as always.
+      if (!blockVerifyReq_reCall && blockchain.chain[blockchain.chain.length - 1].hash !== msg.preHash)
         return false;
 
       return true;
@@ -310,7 +311,7 @@ class Message {
       const blockVerifyReqOf_msg = { ...msg };
       blockVerifyReqOf_msg.msgType = MSG_TYPE.blockVerifyReq;
 
-      if (!this.verify(blockVerifyReqOf_msg, blockchain)) return false;
+      if (!this.verify(blockVerifyReqOf_msg, blockchain, true)) return false;
       if (!msg.committeeSignature) return false;
       else
         return this.verifyCommitteeSignature(
@@ -327,7 +328,7 @@ class Message {
       const blockVerifyReqOf_msg = { ...msg };
       blockVerifyReqOf_msg.msgType = MSG_TYPE.blockVerifyReq;
 
-      if (!this.verify(blockVerifyReqOf_msg, blockchain)) return false;
+      if (!this.verify(blockVerifyReqOf_msg, blockchain, true)) return false;
 
       // Now verify all committee signatures
       if (!msg.committeeSignatures) return false;
