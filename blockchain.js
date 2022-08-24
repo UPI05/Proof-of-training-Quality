@@ -48,6 +48,7 @@ class Blockchain {
       if (chain[i].preHash !== chain[i - 1].hash) return false;
       if (!Message.verify(chain[i], this)) return false;
     }
+
     // Check if the default publicKey and category are valid
     return (
       chain[0].other.registerPublicKey === GENESIS_OTHER.registerPublicKey &&
@@ -64,7 +65,7 @@ class Blockchain {
         if (
           this.chain[i].transaction.messages[j].msgType ===
             MSG_TYPE.dataRetrieval &&
-            this.chain[i].transaction.messages[j].publicKey === publicKey
+          this.chain[i].transaction.messages[j].publicKey === publicKey
         )
           return this.chain[i].transaction.messages[j].category;
       }

@@ -182,6 +182,7 @@ class Message {
       )
     )
       return false;
+
     // Verify that committee publicKey is registered onchain.
     // And the committee category onchain is the same as proposer category.
     // It means the related data, which they 're handling comes from the same committee.
@@ -292,10 +293,11 @@ class Message {
     // For blockVerifyReq
     if (msg.msgType === MSG_TYPE.blockVerifyReq) {
       // Verify all messages in transaction field
+
       for (const m of msg.transaction.messages) {
         if (!this.verify(m, blockchain)) return false;
       }
-
+      // Big bug
       if (blockchain.chain[blockchain.chain.length - 1].hash !== msg.preHash)
         return false;
 
