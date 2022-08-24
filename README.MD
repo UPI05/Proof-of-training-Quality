@@ -26,7 +26,7 @@ _Note that you can change CATEGORY and SECRET but you need to modify the config.
 
 E.g:
 ```curl
-GET: localhost:3002/blockchain
+GET: localhost:3000/blockchain
 
 POST: localhost:3001/request
 {
