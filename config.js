@@ -2,6 +2,7 @@
 const RANDOM_BIAS = 100;
 const ACCURRACY_RANGE = 100;
 const VALID_EPS = 100;
+const FL_ROUND_THESHOLD = 5;
 
 // Genesis
 const GENESIS_HASH = "0xDEADBEEF";
@@ -37,6 +38,7 @@ const MSG_TYPE = {
   blockVerifyReq: "BlockVerifyRequest",
   blockVerifyRes: "BlockVerifyResponse",
   blockCommit: "BlockCommit",
+  genesisBlock: "GenesisBlock"
 };
 
 // HeartBeat
@@ -58,4 +60,5 @@ module.exports = {
   GENESIS_CATEGORY_NODE1,
   GENESIS_PUBLICKEY_NODE2,
   GENESIS_CATEGORY_NODE2,
+  FL_ROUND_THESHOLD
 };

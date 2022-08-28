@@ -214,6 +214,19 @@ class MessagePool {
     return false;
   }
 
+  isMessageBlockVerifyResDuplicated(message) {
+    for (const msg of this.messages) {
+      if (
+        msg.msgType === MSG_TYPE.blockVerifyRes &&
+        msg.blockVerifyReq.hash === message.blockVerifyReq.hash &&
+        !msg.isSpent &&
+        msg.isProposer === message.isProposer
+      )
+        return true;
+    }
+    return false;
+  }
+
   // For blockCommit
 
   messageExistsWithHashAndMsgType(message) {

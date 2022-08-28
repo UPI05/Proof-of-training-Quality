@@ -2,7 +2,12 @@ const WebSocket = require("ws");
 
 const Message = require("./message");
 
-const { RANDOM_BIAS, MSG_TYPE, HEARTBEAT_TIMEOUT } = require("./config.js");
+const {
+  RANDOM_BIAS,
+  MSG_TYPE,
+  HEARTBEAT_TIMEOUT,
+  FL_ROUND_THESHOLD,
+} = require("./config.js");
 
 const Peers = process.env.PEERS ? process.env.PEERS.split(",") : [];
 const P2P_PORT = process.env.P2P_PORT;
@@ -69,6 +74,8 @@ class P2pServer {
     socket.on("message", (message) => {
       message = JSON.parse(message);
       const msg = message.data;
+
+      console.info(`received: ${msg.msgType}`);
 
       switch (message.type) {
         // Looking for the right chain
@@ -183,13 +190,12 @@ class P2pServer {
                 {
                   ...msg,
                   MAE,
-                  model: { conten: "empty" },
+                  model: { content: "empty" },
                   dataSharingReq: msg,
                 },
                 this.wallet,
                 MSG_TYPE.dataSharingRes
               );
-
               this.broadcastMessage(dataSharingRes);
             }
           }
@@ -208,7 +214,7 @@ class P2pServer {
 
             if (msg.dataSharingReq.requestCategory === process.env.CATEGORY) {
               const heartBeatReq = new Message(
-                { category: process.env.CATEGORY },
+                {},
                 this.wallet,
                 MSG_TYPE.heartBeatReq
               );
@@ -281,13 +287,18 @@ class P2pServer {
             this.broadcastMessage(msg);
 
             if (msg.category === process.env.CATEGORY) {
-              const blockVerifyRes = { ...msg };
-              blockVerifyRes.committeeSignature = {
-                publicKey: this.wallet.getPublicKey(),
-                signature: this.wallet.sign(msg.hash),
-              };
+              const blockVerifyRes = new Message(
+                {
+                  blockVerifyReq: msg,
+                  committeeSignature: {
+                    publicKey: this.wallet.getPublicKey(),
+                    signature: this.wallet.sign(msg.hash),
+                  },
+                },
+                this.wallet,
+                MSG_TYPE.blockVerifyRes
+              );
 
-              blockVerifyRes.msgType = MSG_TYPE.blockVerifyRes;
               this.broadcastMessage(blockVerifyRes);
             }
           }
@@ -299,15 +310,16 @@ class P2pServer {
             this.messagePool.verifyMessage(msg, this.blockchain) &&
             !this.messagePool.messageExistsWithHashMsgTypeAndCommitteePublicKey(
               msg
-            )
+            ) &&
+            !this.messagePool.isMessageBlockVerifyResDuplicated(msg)
           ) {
             msg.isSpent = false;
             this.messagePool.addMessage(msg);
             this.broadcastMessage(msg);
 
-            if (msg.proposer === this.wallet.getPublicKey()) {
+            if (msg.blockVerifyReq.publicKey === this.wallet.getPublicKey()) {
               const heartBeatReq = new Message(
-                { category: process.env.CATEGORY },
+                {},
                 this.wallet,
                 MSG_TYPE.heartBeatReq
               );
@@ -327,11 +339,16 @@ class P2pServer {
                     allBlockVerifyResCommitteeSignatures
                   )
                 ) {
-                  const blockCommit = { ...msg };
-                  delete blockCommit["committeeSignature"];
-                  blockCommit.committeeSignatures =
-                    allBlockVerifyResCommitteeSignatures;
-                  blockCommit.msgType = MSG_TYPE.blockCommit;
+                  const blockCommit = new Message(
+                    {
+                      timeStamp: msg.blockVerifyReq.timeStamp,
+                      preHash: msg.blockVerifyReq.preHash,
+                      messages: msg.blockVerifyReq.transaction.messages,
+                      committeeSignatures: allBlockVerifyResCommitteeSignatures,
+                    },
+                    this.wallet,
+                    MSG_TYPE.blockCommit
+                  );
 
                   this.broadcastMessage(blockCommit);
                 }
@@ -368,10 +385,31 @@ class P2pServer {
                   }
                 }
             }
+
+            const { flRound, requester, requestCategory } =
+              Message.getDataSharingReqInfoFromBlockCommitMsg(msg);
+            if (requester === this.wallet.getPublicKey()) {
+              // Then check FL_ROUND_THRESHOLD to create a dataSharingReq message with new round
+              if (flRound < FL_ROUND_THESHOLD) {
+                const dataSharingReqMsg = new Message(
+                  {
+                    requestCategory,
+                    requestModel: "unavailable",
+                    flRound: flRound + 1,
+                  },
+                  this.wallet,
+                  MSG_TYPE.dataSharingReq
+                );
+                this.broadcastMessage(dataSharingReqMsg);
+              } else {
+                // Threshold reached
+                console.info("dataSharingReq done!");
+              }
+            }
           }
           break;
         default:
-          console.info("oops");
+          console.info("oops!");
       }
     });
   }

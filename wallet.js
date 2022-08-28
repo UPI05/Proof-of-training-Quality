@@ -19,7 +19,7 @@ class Wallet {
   // Wallet can only handle the dataSharingReq and dataRetrieval
 
   createDataSharingReqMsg(query) {
-    return new Message(query, this, MSG_TYPE.dataSharingReq);
+    return new Message({ ...query, flRound: 1 }, this, MSG_TYPE.dataSharingReq);
   }
 
   createDataRetrievalMsg(query) {

@@ -15,31 +15,39 @@ class Message {
   constructor(materials, wallet, msgType) {
     // General
 
-    this.timeStamp =
-      GENESIS_HASH === materials.hash ? GENESIS_TIMESTAMP : Date.now();
+    this.timeStamp = materials.timeStamp || Date.now();
     this.msgType = msgType || "";
     this.publicKey = wallet.getPublicKey() || "";
     this.category = process.env.CATEGORY || "";
+
+    const hashInpStr =
+      this.timeStamp + this.msgType + this.publicKey + this.category;
+
+    // For genesisBlock
+
+    if (msgType === MSG_TYPE.genesisBlock) {
+      this.timeStamp = GENESIS_TIMESTAMP;
+      this.publicKey = GENESIS_PROPOSER;
+      delete this.category;
+      this.other = GENESIS_OTHER;
+      this.transaction =
+        {
+          messages: materials.messages,
+        } || {};
+      this.hash = GENESIS_HASH;
+    }
 
     // For dataRetrieval
 
     if (msgType === MSG_TYPE.dataRetrieval) {
       this.accessSignature = materials.signature || "";
-      this.hash = utils.hash(
-        this.timeStamp +
-          this.msgType +
-          this.category +
-          this.publicKey +
-          this.accessSignature
-      );
+      this.hash = utils.hash(hashInpStr + this.accessSignature);
     }
 
     // For getChainReq
 
     if (msgType === MSG_TYPE.getChainReq) {
-      this.hash = utils.hash(
-        this.timeStamp + this.msgType + this.category + this.publicKey
-      );
+      this.hash = utils.hash(hashInpStr);
     }
 
     // For getChainRes
@@ -47,54 +55,33 @@ class Message {
     if (msgType === MSG_TYPE.getChainRes) {
       this.chain = materials.chain || {};
       // We shouldn't hash all the chain. This is temporary.
-      this.hash = utils.hash(
-        this.timeStamp +
-          this.msgType +
-          this.category +
-          this.publicKey +
-          this.chain
-      );
+      this.hash = utils.hash(hashInpStr + JSON.stringify(this.chain));
     }
 
     // For heartBeatReq
 
     if (msgType === MSG_TYPE.heartBeatReq) {
-      this.data = materials.data || "";
-      this.hash = utils.hash(
-        this.timeStamp +
-          this.msgType +
-          this.category +
-          this.publicKey +
-          this.data
-      );
+      this.hash = utils.hash(hashInpStr);
     }
 
     // For heartBeatRes
 
     if (msgType === MSG_TYPE.heartBeatRes) {
-      this.data = materials.data || "";
       this.heartBeatReq = materials.heartBeatReq || {};
-      this.hash = utils.hash(
-        this.timeStamp +
-          this.msgType +
-          this.category +
-          this.publicKey +
-          this.data +
-          this.heartBeatReq
-      );
+      this.hash = utils.hash(hashInpStr + this.heartBeatReq);
     }
 
     // For dataSharingReq
 
     if (msgType === MSG_TYPE.dataSharingReq) {
       this.requestCategory = materials.requestCategory || "";
-      this.requestData = materials.requestData || -1;
+      this.requestModel = materials.requestModel || -1;
+      this.flRound = materials.flRound || -1;
       this.hash = utils.hash(
-        this.timeStamp +
-          this.msgType +
-          this.publicKey +
+        hashInpStr +
           this.requestCategory +
-          this.requestData
+          JSON.stringify(this.requestModel) +
+          this.flRound
       );
     }
 
@@ -105,62 +92,83 @@ class Message {
       this.MAE = materials.MAE || -1;
       this.dataSharingReq = materials.dataSharingReq || {};
       this.hash = utils.hash(
-        this.timeStamp +
-          this.msgType +
-          this.category +
-          this.publicKey +
-          this.model +
+        hashInpStr +
+          JSON.stringify(this.model) +
           this.MAE +
-          this.dataSharingReq
+          JSON.stringify(this.dataSharingReq)
       );
     }
 
     // For blockVerifyReq
 
     if (msgType === MSG_TYPE.blockVerifyReq) {
-      delete this.publicKey;
-      this.proposer =
-        (GENESIS_HASH === materials.hash
-          ? GENESIS_PROPOSER
-          : wallet.getPublicKey()) || "";
       this.transaction =
         {
           messages: materials.messages,
         } || {};
       this.preHash = materials.preHash || "";
-      this.other =
-        (GENESIS_HASH === materials.hash ? GENESIS_OTHER : materials.other) ||
-        "";
-      this.hash =
-        GENESIS_HASH === materials.hash
-          ? GENESIS_HASH
-          : utils.hash(
-              this.timeStamp +
-                this.msgType +
-                this.category +
-                this.proposer +
-                this.transaction +
-                this.preHash +
-                this.other
-            );
+      this.hash = utils.hash(
+        hashInpStr + JSON.stringify(this.transaction) + this.preHash
+      );
     }
 
     // For blockVerifyRes
-    // Just modify the blockVerifyReq: edit msgType and add committeeSignature property.
-    // We don't need to create a new Message with a new hash.
-    // The validators just need to sign the blockVerifyReq.
+
+    if (msgType === MSG_TYPE.blockVerifyRes) {
+      this.blockVerifyReq = materials.blockVerifyReq || {};
+      this.committeeSignature = materials.committeeSignature || {};
+      this.hash = utils.hash(
+        hashInpStr +
+          JSON.stringify(this.blockVerifyReq) +
+          JSON.stringify(this.committeeSignature)
+      );
+    }
 
     // For blockCommit
-    // The same for blockCommit. Utilize the blockVerifyReq, edit msgType and add committeeSignatures property.
+
+    if (msgType === MSG_TYPE.blockCommit) {
+      this.transaction =
+        {
+          messages: materials.messages,
+        } || {};
+      this.preHash = materials.preHash || "";
+      this.committeeSignatures = materials.committeeSignatures || [];
+      this.hash = utils.hash(
+        hashInpStr +
+          JSON.stringify(this.transaction) +
+          this.preHash +
+          JSON.stringify(this.committeeSignatures)
+      );
+    }
 
     // Signature
     this.signature =
-      this.hash === GENESIS_HASH ? GENESIS_SIGNATURE : wallet.sign(this.hash);
+      msgType === MSG_TYPE.genesisBlock
+        ? GENESIS_SIGNATURE
+        : wallet.sign(this.hash);
+  }
+
+  // For blockCommit
+  static getDataSharingReqInfoFromBlockCommitMsg(message) {
+    for (const msg of message.transaction.messages) {
+      if (msg.msgType === MSG_TYPE.dataSharingReq) {
+        return {
+          flRound: msg.flRound,
+          requester: msg.publicKey,
+          requestCategory: msg.requestCategory
+        };
+      }
+    }
+    return {
+      flRound: -1,
+      requester: -1,
+      requestCategory: ""
+    };
   }
 
   // For dataSharingReq
   static isDataQueryValid(msg) {
-    if (msg.requestData < 0) return false;
+    if (msg.requestModel < 0) return false;
 
     return (
       msg.requestCategory.length >= CATEGORY_MIN_LENGTH &&
@@ -195,19 +203,85 @@ class Message {
     return false;
   }
 
+  // Verify message integrity
+  static verifyMsgIntergrity(msg) {
+    const hashInpStr =
+      msg.timeStamp + msg.msgType + msg.publicKey + msg.category;
+    switch (msg.msgType) {
+      case MSG_TYPE.dataSharingReq:
+        return (
+          utils.hash(
+            hashInpStr +
+              msg.requestCategory +
+              JSON.stringify(msg.requestModel) +
+              msg.flRound
+          ) === msg.hash
+        );
+      case MSG_TYPE.dataSharingRes:
+        return (
+          utils.hash(
+            hashInpStr +
+              JSON.stringify(msg.model) +
+              msg.MAE +
+              JSON.stringify(msg.dataSharingReq)
+          ) === msg.hash
+        );
+      case MSG_TYPE.blockVerifyReq:
+        return (
+          utils.hash(
+            hashInpStr + JSON.stringify(msg.transaction) + msg.preHash
+          ) === msg.hash
+        );
+      case MSG_TYPE.blockVerifyRes:
+        return (
+          utils.hash(
+            hashInpStr +
+              JSON.stringify(msg.blockVerifyReq) +
+              JSON.stringify(msg.committeeSignature)
+          ) === msg.hash
+        );
+      case MSG_TYPE.blockCommit:
+        return (
+          utils.hash(
+            hashInpStr +
+              JSON.stringify(msg.transaction) +
+              msg.preHash +
+              JSON.stringify(msg.committeeSignatures)
+          ) === msg.hash
+        );
+      case MSG_TYPE.heartBeatReq:
+        return utils.hash(hashInpStr + msg.data) === msg.hash;
+      case MSG_TYPE.heartBeatRes:
+        return utils.hash(hashInpStr + msg.heartBeatReq) === msg.hash;
+      case MSG_TYPE.getChainReq:
+        return utils.hash(hashInpStr) === msg.hash;
+      case MSG_TYPE.getChainRes:
+        return utils.hash(hashInpStr + JSON.stringify(msg.chain)) === msg.hash;
+      case MSG_TYPE.dataRetrieval:
+        return utils.hash(hashInpStr + msg.accessSignature) === msg.hash;
+      default:
+        console.info("oops");
+        return false;
+    }
+  }
   static verifySenderAndMsgIntegrity(msg, blockchain) {
-    // Need to verify message integrity
+    // Verify message integrity
+    if (!this.verifyMsgIntergrity(msg)) return false;
+
+    // Verify signature
     if (
       !utils.verifySignature(
-        msg.publicKey || msg.proposer,
-        msg.signature,
-        msg.hash
+        msg.publicKey || "",
+        msg.signature || "",
+        msg.hash || ""
       )
     )
       return false;
 
+    if (msg.msgType === MSG_TYPE.dataRetrieval) return true;
+
     // The sender (publicKey, category) must be registered onchain.
-    const publicKey = msg.proposer || msg.publicKey;
+    const publicKey = msg.publicKey || "";
     if (
       blockchain.getCategoryFromPublicKey(publicKey) === msg.category &&
       msg.category
@@ -216,21 +290,16 @@ class Message {
     return false;
   }
 
-  static verify(msg, blockchain, blockVerifyReq_reCall = false) {
+  // getChain is used for preHash blockVerify.
+  // getChain = false means preHash is based on our chain.
+  static verify(msg, blockchain, getChain = false) {
+    console.info(`verified: ${msg.msgType}`);
     // General
-    if (
-      msg.msgType !== MSG_TYPE.dataRetrieval &&
-      !this.verifySenderAndMsgIntegrity(msg, blockchain)
-    )
-      return false;
+    if (!this.verifySenderAndMsgIntegrity(msg, blockchain)) return false;
 
     // For dataRetrieval
 
     if (msg.msgType === MSG_TYPE.dataRetrieval) {
-      // We have to isolate this kind of message because the (publicKey, category) hasn't been registered onchain yet.
-      // We need to verify the integrity
-      if (!utils.verifySignature(msg.publicKey, msg.signature, msg.hash))
-        return false;
       // requestCategory length
       if (
         !(
@@ -297,9 +366,11 @@ class Message {
       for (const m of msg.transaction.messages) {
         if (!this.verify(m, blockchain)) return false;
       }
-      
-      // Without using blockVerifyReq_reCall, blockchain.verifyChain returns false as always.
-      if (!blockVerifyReq_reCall && blockchain.chain[blockchain.chain.length - 1].hash !== msg.preHash)
+
+      if (
+        !getChain &&
+        blockchain.chain[blockchain.chain.length - 1].hash !== msg.preHash
+      )
         return false;
 
       return true;
@@ -307,16 +378,12 @@ class Message {
 
     // For blockVerifyRes
     if (msg.msgType === MSG_TYPE.blockVerifyRes) {
-      // Copy the message and change msgType
-      const blockVerifyReqOf_msg = { ...msg };
-      blockVerifyReqOf_msg.msgType = MSG_TYPE.blockVerifyReq;
-
-      if (!this.verify(blockVerifyReqOf_msg, blockchain, true)) return false;
+      if (!this.verify(msg.blockVerifyReq, blockchain, false)) return false;
       if (!msg.committeeSignature) return false;
       else
         return this.verifyCommitteeSignature(
           msg.committeeSignature,
-          msg.hash,
+          msg.blockVerifyReq.hash,
           blockchain,
           msg.category
         );
@@ -324,19 +391,31 @@ class Message {
 
     // For blockCommit
     if (msg.msgType === MSG_TYPE.blockCommit) {
-      // Copy and edit the message for blockVerifyReq verification.
-      const blockVerifyReqOf_msg = { ...msg };
-      blockVerifyReqOf_msg.msgType = MSG_TYPE.blockVerifyReq;
-
-      if (!this.verify(blockVerifyReqOf_msg, blockchain, true)) return false;
-
+      for (const m of msg.transaction.messages) {
+        if (!this.verify(m, blockchain)) return false;
+      }
       // Now verify all committee signatures
       if (!msg.committeeSignatures) return false;
       for (const committeeSignature of msg.committeeSignatures) {
+        console.info(utils.hash(
+          msg.timeStamp +
+            msg.msgType +
+            msg.publicKey +
+            msg.category +
+            JSON.stringify(msg.transaction) +
+            msg.preHash
+        ))
         if (
           !this.verifyCommitteeSignature(
             committeeSignature,
-            msg.hash,
+            utils.hash(
+              msg.timeStamp +
+                MSG_TYPE.blockVerifyReq +
+                msg.publicKey +
+                msg.category +
+                JSON.stringify(msg.transaction) +
+                msg.preHash
+            ),
             blockchain,
             msg.category
           )

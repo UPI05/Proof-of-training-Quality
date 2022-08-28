@@ -31,11 +31,10 @@ class Blockchain {
       },
     ];
     const genesisBlock = new Message(
-      { messages, hash: GENESIS_HASH },
+      { messages },
       this.wallet,
-      MSG_TYPE.blockVerifyReq
+      MSG_TYPE.genesisBlock
     );
-    genesisBlock.msgType = MSG_TYPE.blockCommit;
     return genesisBlock;
   }
 
