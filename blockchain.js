@@ -45,7 +45,7 @@ class Blockchain {
   verifyChain(chain) {
     for (let i = 1; i < chain.length; i++) {
       if (chain[i].preHash !== chain[i - 1].hash) return false;
-      if (!Message.verify(chain[i], this)) return false;
+      if (!Message.verify(chain[i], this, true)) return false;
     }
 
     // Check if the default publicKey and category are valid

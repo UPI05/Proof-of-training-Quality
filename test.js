@@ -1,4 +1,4 @@
-const Message = require("./message");
+/*const Message = require("./message");
 const { MSG_TYPE } = require("./config");
 const Wallet = require("./wallet");
 const utils = require("./utils");
@@ -10,3 +10,8 @@ console.info(
     "d61078b94bc44f3fd9224dbe2fc750ad7cb6556bfd450f66d09c1a2a25ffb3c7"
   )
 );
+*/
+const dotenv = require("dotenv").config();
+const WebSocket = require("ws");
+const ip = require("ip");
+console.info(ip.address());

@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  node1:
+    build: .
+    image: poq:1.0
+    networks:
+      poq-net:
+        ipv4_address: 172.20.128.1
+    environment:
+      - CATEGORY=chicken
+      - SECRET=NODE1
+      - HTTP_PORT=3000
+      - P2P_PORT=5000
+    command: "node app.js"
+  node2:
+    image: poq:1.0
+    networks:
+      poq-net:
+        ipv4_address: 172.20.128.2
+    environment:
+      - CATEGORY=tiger
+      - SECRET=NODE2
+      - HTTP_PORT=3000
+      - P2P_PORT=5000
+      - PEERS=ws://172.20.128.1:5000
+    command: "node app.js"
+networks:
+  poq-net:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

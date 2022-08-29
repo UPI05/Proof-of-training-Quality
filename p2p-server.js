@@ -246,7 +246,8 @@ class P2pServer {
                       MSG_TYPE.getChainReq
                     );
                     this.broadcastMessage(getChainReq);
-
+                    // Model aggregation
+                    const aggregatedModel = {};
                     setTimeout(() => {
                       const blockVerifyReq = new Message(
                         {
@@ -257,6 +258,7 @@ class P2pServer {
                           messages: this.messagePool.getAllRelatedMessages(
                             msg.dataSharingReq
                           ),
+                          aggregatedModel,
                         },
                         this.wallet,
                         MSG_TYPE.blockVerifyReq
@@ -344,6 +346,7 @@ class P2pServer {
                       timeStamp: msg.blockVerifyReq.timeStamp,
                       preHash: msg.blockVerifyReq.preHash,
                       messages: msg.blockVerifyReq.transaction.messages,
+                      aggregatedModel: msg.blockVerifyReq.aggregatedModel,
                       committeeSignatures: allBlockVerifyResCommitteeSignatures,
                     },
                     this.wallet,
@@ -394,7 +397,7 @@ class P2pServer {
                 const dataSharingReqMsg = new Message(
                   {
                     requestCategory,
-                    requestModel: "unavailable",
+                    requestModel: msg.aggregatedModel,
                     flRound: flRound + 1,
                   },
                   this.wallet,

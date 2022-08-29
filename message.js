@@ -107,8 +107,12 @@ class Message {
           messages: materials.messages,
         } || {};
       this.preHash = materials.preHash || "";
+      this.aggregatedModel = materials.aggregatedModel || {};
       this.hash = utils.hash(
-        hashInpStr + JSON.stringify(this.transaction) + this.preHash
+        hashInpStr +
+          JSON.stringify(this.transaction) +
+          this.preHash +
+          JSON.stringify(this.aggregatedModel)
       );
     }
 
@@ -132,11 +136,13 @@ class Message {
           messages: materials.messages,
         } || {};
       this.preHash = materials.preHash || "";
+      this.aggregatedModel = materials.aggregatedModel || {};
       this.committeeSignatures = materials.committeeSignatures || [];
       this.hash = utils.hash(
         hashInpStr +
           JSON.stringify(this.transaction) +
           this.preHash +
+          JSON.stringify(this.aggregatedModel) +
           JSON.stringify(this.committeeSignatures)
       );
     }
@@ -155,14 +161,14 @@ class Message {
         return {
           flRound: msg.flRound,
           requester: msg.publicKey,
-          requestCategory: msg.requestCategory
+          requestCategory: msg.requestCategory,
         };
       }
     }
     return {
       flRound: -1,
       requester: -1,
-      requestCategory: ""
+      requestCategory: "",
     };
   }
 
@@ -229,7 +235,10 @@ class Message {
       case MSG_TYPE.blockVerifyReq:
         return (
           utils.hash(
-            hashInpStr + JSON.stringify(msg.transaction) + msg.preHash
+            hashInpStr +
+              JSON.stringify(msg.transaction) +
+              msg.preHash +
+              JSON.stringify(msg.aggregatedModel)
           ) === msg.hash
         );
       case MSG_TYPE.blockVerifyRes:
@@ -246,6 +255,7 @@ class Message {
             hashInpStr +
               JSON.stringify(msg.transaction) +
               msg.preHash +
+              JSON.stringify(msg.aggregatedModel) +
               JSON.stringify(msg.committeeSignatures)
           ) === msg.hash
         );
@@ -378,7 +388,7 @@ class Message {
 
     // For blockVerifyRes
     if (msg.msgType === MSG_TYPE.blockVerifyRes) {
-      if (!this.verify(msg.blockVerifyReq, blockchain, false)) return false;
+      if (!this.verify(msg.blockVerifyReq, blockchain)) return false;
       if (!msg.committeeSignature) return false;
       else
         return this.verifyCommitteeSignature(
@@ -397,14 +407,16 @@ class Message {
       // Now verify all committee signatures
       if (!msg.committeeSignatures) return false;
       for (const committeeSignature of msg.committeeSignatures) {
-        console.info(utils.hash(
-          msg.timeStamp +
-            msg.msgType +
-            msg.publicKey +
-            msg.category +
-            JSON.stringify(msg.transaction) +
-            msg.preHash
-        ))
+        console.info(
+          utils.hash(
+            msg.timeStamp +
+              msg.msgType +
+              msg.publicKey +
+              msg.category +
+              JSON.stringify(msg.transaction) +
+              msg.preHash
+          )
+        );
         if (
           !this.verifyCommitteeSignature(
             committeeSignature,
@@ -414,7 +426,8 @@ class Message {
                 msg.publicKey +
                 msg.category +
                 JSON.stringify(msg.transaction) +
-                msg.preHash
+                msg.preHash +
+                JSON.stringify(msg.aggregatedModel)
             ),
             blockchain,
             msg.category
