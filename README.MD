@@ -2,7 +2,7 @@
 
 Basically, this is my implementation for Proof of training Quality consensus machanism from the article [Blockchain and Federated Learning for Privacy-Preserved Data Sharing in Industrial IoT](https://ieeexplore.ieee.org/abstract/document/8843900).
 
-[Read more about my implementation (vi)](https://drive.google.com/file/d/1gtTIVZfbCKecUr3n1I867sjUi5PXwVhM/view?usp=sharing)
+[Read more about my implementation (vi)](https://drive.google.com/file/d/1Tfr5CaDJVdPyxyJhRmF8zqhEdjdT7l_B/view?usp=sharing)
 
 # Development
 
@@ -40,7 +40,7 @@ GET: localhost:3000/blockchain
 
 POST: localhost:3001/request
 {
-    "requestData": 15,
+    "requestModel": 15,
     "requestCategory": "chicken"
 }
 ```
@@ -62,7 +62,7 @@ POST: localhost:3002/register
 }
 ```
 
-_Note that PEERS can't be empty. They are alive p2p servers so you have to set at least 1 value._
+_Note that PEERS can't be empty. They are alive p2p servers so you have to set at least $1$ value._
 
 
 # Production
@@ -106,7 +106,7 @@ _Make sure network is the same as docker-compose by running:_
 docker network ls
 ```
 
-_--ip $172.20.128.3$ means we set a static ip. Note that network subnet is $172.20.0.0/16$, you can check docker-compose.yaml for more details._
+_--ip 172.20.128.3 means we set a static ip. Note that network subnet is 172.20.0.0/16, you can check docker-compose.yaml for more details._
 
 Then:
 ```
@@ -115,7 +115,7 @@ CATEGORY='lion' SECRET='NODE3' HTTP_PORT=3000 P2P_PORT=5000 PEERS='ws://172.20.1
 
 ## Future works
 
-[Read more about my implementation (vi)](https://drive.google.com/file/d/1gtTIVZfbCKecUr3n1I867sjUi5PXwVhM/view?usp=sharing)
+[Read more about my implementation (vi)](https://drive.google.com/file/d/1Tfr5CaDJVdPyxyJhRmF8zqhEdjdT7l_B/view?usp=sharing)
 
 ## Simple chain
 
