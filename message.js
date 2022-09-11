@@ -9,6 +9,7 @@ const {
   CATEGORY_MIN_LENGTH,
   CATEGORY_MAX_LENGTH,
   HEARTBEAT_TIMEOUT,
+  DEBUG
 } = require("./config");
 
 class Message {
@@ -260,7 +261,7 @@ class Message {
           ) === msg.hash
         );
       case MSG_TYPE.heartBeatReq:
-        return utils.hash(hashInpStr + msg.data) === msg.hash;
+        return utils.hash(hashInpStr) === msg.hash;
       case MSG_TYPE.heartBeatRes:
         return utils.hash(hashInpStr + msg.heartBeatReq) === msg.hash;
       case MSG_TYPE.getChainReq:
@@ -303,7 +304,7 @@ class Message {
   // getChain is used for preHash blockVerify.
   // getChain = false means preHash is based on our chain.
   static verify(msg, blockchain, getChain = false) {
-    console.info(`verified: ${msg.msgType}`);
+    if(DEBUG) console.info(`verified: ${msg.msgType}`);
     // General
     if (!this.verifySenderAndMsgIntegrity(msg, blockchain)) return false;
 
@@ -407,16 +408,6 @@ class Message {
       // Now verify all committee signatures
       if (!msg.committeeSignatures) return false;
       for (const committeeSignature of msg.committeeSignatures) {
-        console.info(
-          utils.hash(
-            msg.timeStamp +
-              msg.msgType +
-              msg.publicKey +
-              msg.category +
-              JSON.stringify(msg.transaction) +
-              msg.preHash
-          )
-        );
         if (
           !this.verifyCommitteeSignature(
             committeeSignature,
@@ -435,6 +426,12 @@ class Message {
         )
           return false;
       }
+
+      if (
+        !getChain &&
+        blockchain.chain[blockchain.chain.length - 1].hash !== msg.preHash
+      )
+        return false;
 
       return true;
     }

@@ -1,5 +1,6 @@
 const Message = require("./message");
 const { MSG_TYPE } = require("./config");
+const math = require("mathjs");
 
 class MessagePool {
   constructor() {
@@ -80,7 +81,7 @@ class MessagePool {
   getAllHeartBeatRes(message) {
     let res = [];
     for (const msg of this.messages) {
-      if (msg.hash === message.hash && !msg.isSpent) res.push(msg);
+      if (msg.msgType === MSG_TYPE.heartBeatRes && msg.heartBeatReq.hash === message.hash && !msg.isSpent) res.push(msg);
     }
     return res;
   }
@@ -126,6 +127,21 @@ class MessagePool {
     return res;
   }
 
+  getValidMAERange(hash, epsilon) {
+    let res = [];
+    for (const msg of this.messages) {
+      if (
+        msg.msgType === MSG_TYPE.dataSharingRes &&
+        msg.dataSharingReq.hash === hash &&
+        !msg.isSpent
+      )
+        res.push(msg.MAE);
+    }
+    const mean = math.mean(res);
+    const std = math.std(res);
+    return [mean - std - epsilon, mean + std + epsilon];
+  }
+
   enoughDataSharingRes(allHeartBeatRes, allDataSharingRes) {
     for (const heartBeatRes of allHeartBeatRes) {
       let found = false;
@@ -146,6 +162,7 @@ class MessagePool {
     for (const msg of allDataSharingRes) {
       minMAE = Math.min(minMAE, msg.MAE);
     }
+    
     for (const msg of allDataSharingRes) {
       if (msg.MAE === minMAE && msg.publicKey === wallet.getPublicKey()) {
         return true;
@@ -174,7 +191,7 @@ class MessagePool {
     for (const msg of this.messages) {
       if (
         msg.msgType === MSG_TYPE.blockVerifyRes &&
-        msg.hash === hash &&
+        msg.blockVerifyReq.hash === hash &&
         !msg.isSpent
       ) {
         res.push(msg.committeeSignature);
@@ -200,27 +217,13 @@ class MessagePool {
     return true;
   }
 
-  messageExistsWithHashMsgTypeAndCommitteePublicKey(message) {
-    for (const msg of this.messages) {
-      if (
-        msg.msgType === MSG_TYPE.blockVerifyRes &&
-        msg.hash === message.hash &&
-        msg.committeeSignature.publicKey ===
-          message.committeeSignature.publicKey &&
-        !msg.isSpent
-      )
-        return true;
-    }
-    return false;
-  }
-
   isMessageBlockVerifyResDuplicated(message) {
     for (const msg of this.messages) {
       if (
         msg.msgType === MSG_TYPE.blockVerifyRes &&
         msg.blockVerifyReq.hash === message.blockVerifyReq.hash &&
         !msg.isSpent &&
-        msg.isProposer === message.isProposer
+        msg.publicKey === message.publicKey
       )
         return true;
     }

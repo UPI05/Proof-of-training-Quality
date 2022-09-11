@@ -1,8 +1,8 @@
 // Model
-const RANDOM_BIAS = 100;
+const RANDOM_BIAS = 10;
 const ACCURRACY_RANGE = 100;
-const VALID_EPS = 100;
-const FL_ROUND_THESHOLD = 5;
+const MAE_EPSILON = 1;
+const FL_ROUND_THESHOLD = 2;
 
 // Genesis
 const GENESIS_HASH = "0xDEADBEEF";
@@ -44,6 +44,9 @@ const MSG_TYPE = {
 // HeartBeat
 const HEARTBEAT_TIMEOUT = 4; // In second
 
+// 
+const DEBUG = false;
+
 module.exports = {
   GENESIS_TIMESTAMP,
   GENESIS_OTHER,
@@ -60,5 +63,7 @@ module.exports = {
   GENESIS_CATEGORY_NODE1,
   GENESIS_PUBLICKEY_NODE2,
   GENESIS_CATEGORY_NODE2,
-  FL_ROUND_THESHOLD
+  FL_ROUND_THESHOLD,
+  MAE_EPSILON,
+  DEBUG
 };

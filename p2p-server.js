@@ -7,6 +7,8 @@ const {
   MSG_TYPE,
   HEARTBEAT_TIMEOUT,
   FL_ROUND_THESHOLD,
+  MAE_EPSILON,
+  DEBUG,
 } = require("./config.js");
 
 const Peers = process.env.PEERS ? process.env.PEERS.split(",") : [];
@@ -75,7 +77,7 @@ class P2pServer {
       message = JSON.parse(message);
       const msg = message.data;
 
-      console.info(`received: ${msg.msgType}`);
+      if (DEBUG) console.info(`received: ${msg.msgType}`);
 
       switch (message.type) {
         // Looking for the right chain
@@ -246,7 +248,15 @@ class P2pServer {
                       MSG_TYPE.getChainReq
                     );
                     this.broadcastMessage(getChainReq);
-                    // Model aggregation
+
+                    const [minValidMAE, maxValidMAE] =
+                      this.messagePool.getValidMAERange(
+                        msg.dataSharingReq.hash,
+                        MAE_EPSILON
+                      );
+                    console.info(`${minValidMAE} ${maxValidMAE}`);
+
+                    // Model aggregation based on min/maxValidMAE
                     const aggregatedModel = {};
                     setTimeout(() => {
                       const blockVerifyReq = new Message(
@@ -282,7 +292,7 @@ class P2pServer {
             MSG_TYPE.getChainReq
           );
           this.broadcastMessage(getChainReq);
-          //
+          // Need to wait for getChainRes
           if (this.messagePool.verifyMessage(msg, this.blockchain)) {
             msg.isSpent = false;
             this.messagePool.addMessage(msg);
@@ -310,9 +320,7 @@ class P2pServer {
         case MSG_TYPE.blockVerifyRes:
           if (
             this.messagePool.verifyMessage(msg, this.blockchain) &&
-            !this.messagePool.messageExistsWithHashMsgTypeAndCommitteePublicKey(
-              msg
-            ) &&
+            !this.messagePool.messageExistsWithHash(msg) &&
             !this.messagePool.isMessageBlockVerifyResDuplicated(msg)
           ) {
             msg.isSpent = false;
@@ -333,7 +341,7 @@ class P2pServer {
                   this.messagePool.getAllHeartBeatRes(heartBeatReq);
                 const allBlockVerifyResCommitteeSignatures =
                   this.messagePool.getAllCommitteeSignaturesFromBlockVerifyRes(
-                    msg.hash
+                    msg.blockVerifyReq.hash
                   );
                 if (
                   this.messagePool.enoughBlockVerifyRes(
@@ -364,7 +372,7 @@ class P2pServer {
         case MSG_TYPE.blockCommit:
           if (
             this.messagePool.verifyMessage(msg, this.blockchain) &&
-            !this.messagePool.messageExistsWithHashAndMsgType(msg)
+            !this.messagePool.messageExistsWithHash(msg)
           ) {
             this.blockchain.addBlock(msg);
             this.messagePool.addMessage(msg);
@@ -406,7 +414,7 @@ class P2pServer {
                 this.broadcastMessage(dataSharingReqMsg);
               } else {
                 // Threshold reached
-                console.info("dataSharingReq done!");
+                if (DEBUG) console.info("Final round reached!");
               }
             }
           }
