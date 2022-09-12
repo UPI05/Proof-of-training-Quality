@@ -258,23 +258,21 @@ class P2pServer {
 
                     // Model aggregation based on min/maxValidMAE
                     const aggregatedModel = {};
-                    setTimeout(() => {
-                      const blockVerifyReq = new Message(
-                        {
-                          preHash:
-                            this.blockchain.chain[
-                              this.blockchain.chain.length - 1
-                            ].hash,
-                          messages: this.messagePool.getAllRelatedMessages(
-                            msg.dataSharingReq
-                          ),
-                          aggregatedModel,
-                        },
-                        this.wallet,
-                        MSG_TYPE.blockVerifyReq
-                      );
-                      this.broadcastMessage(blockVerifyReq);
-                    }, HEARTBEAT_TIMEOUT * 1000);
+                    const blockVerifyReq = new Message(
+                      {
+                        preHash:
+                          this.blockchain.chain[
+                            this.blockchain.chain.length - 1
+                          ].hash,
+                        messages: this.messagePool.getAllRelatedMessages(
+                          msg.dataSharingReq
+                        ),
+                        aggregatedModel,
+                      },
+                      this.wallet,
+                      MSG_TYPE.blockVerifyReq
+                    );
+                    this.broadcastMessage(blockVerifyReq);
                   }
                 }
               }, HEARTBEAT_TIMEOUT * 1000);
@@ -293,28 +291,30 @@ class P2pServer {
           );
           this.broadcastMessage(getChainReq);
           // Need to wait for getChainRes
-          if (this.messagePool.verifyMessage(msg, this.blockchain)) {
-            msg.isSpent = false;
-            this.messagePool.addMessage(msg);
-            this.broadcastMessage(msg);
-
-            if (msg.category === process.env.CATEGORY) {
-              const blockVerifyRes = new Message(
-                {
-                  blockVerifyReq: msg,
-                  committeeSignature: {
-                    publicKey: this.wallet.getPublicKey(),
-                    signature: this.wallet.sign(msg.hash),
+          setTimeout(() => {
+            if (this.messagePool.verifyMessage(msg, this.blockchain)) {
+              msg.isSpent = false;
+              this.messagePool.addMessage(msg);
+              this.broadcastMessage(msg);
+  
+              if (msg.category === process.env.CATEGORY) {
+                const blockVerifyRes = new Message(
+                  {
+                    blockVerifyReq: msg,
+                    committeeSignature: {
+                      publicKey: this.wallet.getPublicKey(),
+                      signature: this.wallet.sign(msg.hash),
+                    },
                   },
-                },
-                this.wallet,
-                MSG_TYPE.blockVerifyRes
-              );
-
-              this.broadcastMessage(blockVerifyRes);
+                  this.wallet,
+                  MSG_TYPE.blockVerifyRes
+                );
+  
+                this.broadcastMessage(blockVerifyRes);
+              }
             }
-          }
-
+          }, HEARTBEAT_TIMEOUT * 1000);
+          
           break;
 
         case MSG_TYPE.blockVerifyRes:

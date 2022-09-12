@@ -24,6 +24,8 @@ services:
       - P2P_PORT=5000
       - PEERS=ws://172.20.128.1:5000
     command: "node app.js"
+    depends_on:
+      - node1
 networks:
   poq-net:
     ipam:
