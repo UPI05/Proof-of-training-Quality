@@ -373,6 +373,7 @@ class P2pServer {
             !this.messagePool.messageExistsWithHash(msg)
           ) {
             this.blockchain.addBlock(msg);
+            msg.isSpent = false;
             this.messagePool.addMessage(msg);
             this.broadcastMessage(msg);
 
