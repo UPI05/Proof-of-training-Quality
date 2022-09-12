@@ -45,7 +45,7 @@ const MSG_TYPE = {
 const HEARTBEAT_TIMEOUT = 4; // In second
 
 // 
-const DEBUG = false;
+const DEBUG = true;
 
 module.exports = {
   GENESIS_TIMESTAMP,

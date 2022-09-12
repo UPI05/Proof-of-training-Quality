@@ -1,4 +1,5 @@
 const utils = require("./utils");
+const math = require("mathjs");
 const {
   MSG_TYPE,
   GENESIS_HASH,
@@ -9,7 +10,8 @@ const {
   CATEGORY_MIN_LENGTH,
   CATEGORY_MAX_LENGTH,
   HEARTBEAT_TIMEOUT,
-  DEBUG
+  DEBUG,
+  MAE_EPSILON,
 } = require("./config");
 
 class Message {
@@ -153,6 +155,20 @@ class Message {
       msgType === MSG_TYPE.genesisBlock
         ? GENESIS_SIGNATURE
         : wallet.sign(this.hash);
+  }
+
+  static isProposer(messages, publicKey, epsilon) {
+    let res = [];
+    let proposerMAE;
+    for (const msg of messages) {
+      if (msg.msgType === MSG_TYPE.dataSharingRes) {
+        if (msg.publicKey === publicKey) proposerMAE = msg.MAE;
+        res.push(msg.MAE);
+      }
+    }
+    const mean = math.mean(res);
+    const std = math.std(res);
+    return (mean - std - epsilon <= proposerMAE && proposerMAE <= mean + std + epsilon);
   }
 
   // For blockCommit
@@ -304,7 +320,7 @@ class Message {
   // getChain is used for preHash blockVerify.
   // getChain = false means preHash is based on our chain.
   static verify(msg, blockchain, getChain = false) {
-    if(DEBUG) console.info(`verified: ${msg.msgType}`);
+    if (DEBUG) console.info(`verified: ${msg.msgType}`);
     // General
     if (!this.verifySenderAndMsgIntegrity(msg, blockchain)) return false;
 
@@ -357,7 +373,7 @@ class Message {
 
       // Verify the MAE (model) with testset data
 
-      if (!(msg.MAE >= 0 && msg.MAE <= 100)) return false; // Because I don't use Federated learning.
+      if (!(msg.MAE >= 0 && msg.MAE <= 10)) return false; // Because I don't use Federated learning.
 
       // End verify the MAE
 
@@ -377,6 +393,15 @@ class Message {
       for (const m of msg.transaction.messages) {
         if (!this.verify(m, blockchain)) return false;
       }
+
+      // Verify proposer
+
+      if (
+        !this.isProposer(msg.transaction.messages, msg.publicKey, MAE_EPSILON)
+      )
+        return false;
+
+      //
 
       if (
         !getChain &&
@@ -426,6 +451,15 @@ class Message {
         )
           return false;
       }
+
+      // Verify proposer
+
+      if (
+        !this.isProposer(msg.transaction.messages, msg.publicKey, MAE_EPSILON)
+      )
+        return false;
+
+      //
 
       if (
         !getChain &&

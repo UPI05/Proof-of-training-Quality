@@ -238,8 +238,13 @@ class P2pServer {
                     allDataSharingRes
                   )
                 ) {
+                  const [minValidMAE, maxValidMAE] =
+                    this.messagePool.getValidMAERange(
+                      msg.dataSharingReq.hash,
+                      MAE_EPSILON
+                    );
                   if (
-                    this.messagePool.isProposer(this.wallet, allDataSharingRes)
+                    this.messagePool.isProposer(this.wallet, allDataSharingRes, minValidMAE, maxValidMAE)
                   ) {
                     // Get the right chain from network before creating a new block
                     const getChainReq = new Message(
@@ -248,13 +253,6 @@ class P2pServer {
                       MSG_TYPE.getChainReq
                     );
                     this.broadcastMessage(getChainReq);
-
-                    const [minValidMAE, maxValidMAE] =
-                      this.messagePool.getValidMAERange(
-                        msg.dataSharingReq.hash,
-                        MAE_EPSILON
-                      );
-                    console.info(`${minValidMAE} ${maxValidMAE}`);
 
                     // Model aggregation based on min/maxValidMAE
                     const aggregatedModel = {};
@@ -296,7 +294,7 @@ class P2pServer {
               msg.isSpent = false;
               this.messagePool.addMessage(msg);
               this.broadcastMessage(msg);
-  
+
               if (msg.category === process.env.CATEGORY) {
                 const blockVerifyRes = new Message(
                   {
@@ -309,12 +307,12 @@ class P2pServer {
                   this.wallet,
                   MSG_TYPE.blockVerifyRes
                 );
-  
+
                 this.broadcastMessage(blockVerifyRes);
               }
             }
           }, HEARTBEAT_TIMEOUT * 1000);
-          
+
           break;
 
         case MSG_TYPE.blockVerifyRes:

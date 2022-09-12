@@ -81,7 +81,12 @@ class MessagePool {
   getAllHeartBeatRes(message) {
     let res = [];
     for (const msg of this.messages) {
-      if (msg.msgType === MSG_TYPE.heartBeatRes && msg.heartBeatReq.hash === message.hash && !msg.isSpent) res.push(msg);
+      if (
+        msg.msgType === MSG_TYPE.heartBeatRes &&
+        msg.heartBeatReq.hash === message.hash &&
+        !msg.isSpent
+      )
+        res.push(msg);
     }
     return res;
   }
@@ -157,14 +162,15 @@ class MessagePool {
     return true;
   }
 
-  isProposer(wallet, allDataSharingRes) {
+  isProposer(wallet, allDataSharingRes, minValidMAE, maxValidMAE) {
     let minMAE = 1000000009;
     for (const msg of allDataSharingRes) {
-      minMAE = Math.min(minMAE, msg.MAE);
+      if (msg.MAE >= minValidMAE && msg.MAE <= maxValidMAE)
+        minMAE = Math.min(minMAE, msg.MAE);
     }
-    
+
     for (const msg of allDataSharingRes) {
-      if (msg.MAE === minMAE && msg.publicKey === wallet.getPublicKey()) {
+      if (msg.MAE === minMAE && msg.publicKey === wallet.getPublicKey() && minMAE !== 1000000009) {
         return true;
       }
     }
@@ -224,20 +230,6 @@ class MessagePool {
         msg.blockVerifyReq.hash === message.blockVerifyReq.hash &&
         !msg.isSpent &&
         msg.publicKey === message.publicKey
-      )
-        return true;
-    }
-    return false;
-  }
-
-  // For blockCommit
-
-  messageExistsWithHashAndMsgType(message) {
-    for (const msg of this.messages) {
-      if (
-        msg.msgType === MSG_TYPE.blockCommit &&
-        msg.hash === message.hash &&
-        !msg.isSpent
       )
         return true;
     }
