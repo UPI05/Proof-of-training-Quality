@@ -372,11 +372,11 @@ class P2pServer {
             this.messagePool.verifyMessage(msg, this.blockchain) &&
             !this.messagePool.messageExistsWithHash(msg)
           ) {
-            this.blockchain.addBlock(msg);
             msg.isSpent = false;
             this.messagePool.addMessage(msg);
             this.broadcastMessage(msg);
-
+            delete msg["isSpent"];
+            this.blockchain.addBlock(msg);
             // Now mark all related messages in messagePool as spent
             for (let i = 0; i < this.messagePool.messages.length; i++) {
               if (
