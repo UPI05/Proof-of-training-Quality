@@ -117,6 +117,10 @@ CATEGORY='lion' SECRET='NODE3' HTTP_PORT=3000 P2P_PORT=5000 PEERS='ws://172.20.1
 
 [Read more about my implementation (vi)](https://drive.google.com/file/d/1Tfr5CaDJVdPyxyJhRmF8zqhEdjdT7l_B/view?usp=sharing)
 
+## Metrics
+
+![image](Metrics/result.png)
+
 ## Simple chain
 
 ```JSON
