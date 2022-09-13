@@ -2,7 +2,7 @@
 
 Basically, this is my implementation for Proof of training Quality consensus machanism from the article [Blockchain and Federated Learning for Privacy-Preserved Data Sharing in Industrial IoT](https://ieeexplore.ieee.org/abstract/document/8843900).
 
-[Read more about my implementation (vi)](https://drive.google.com/file/d/1Tfr5CaDJVdPyxyJhRmF8zqhEdjdT7l_B/view?usp=sharing)
+[Read more about my implementation (vi)](./PoQ.pdf)
 
 # Development
 
@@ -115,7 +115,7 @@ CATEGORY='lion' SECRET='NODE3' HTTP_PORT=3000 P2P_PORT=5000 PEERS='ws://172.20.1
 
 ## Future works
 
-[Read more about my implementation (vi)](https://drive.google.com/file/d/1Tfr5CaDJVdPyxyJhRmF8zqhEdjdT7l_B/view?usp=sharing)
+[Read more about my implementation (vi)](./PoQ.pdf)
 
 ## Metrics
 
