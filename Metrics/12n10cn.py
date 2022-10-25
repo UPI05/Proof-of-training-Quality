@@ -20,15 +20,15 @@ ypoints = []
 for i in range(len(xpoints)):
     ypoints.append(round((ypoints1[i] + ypoints2[i] + ypoints3[i]) / 3, 2))
 
-plt.plot(xpoints, ypoints1)
-plt.plot(xpoints, ypoints2)
-plt.plot(xpoints, ypoints3)
-plt.plot(xpoints, ypoints, '-ro')
+plt.plot(xpoints, ypoints1, label='1st')
+plt.plot(xpoints, ypoints2, label='2nd')
+plt.plot(xpoints, ypoints3, label='3rd')
+plt.plot(xpoints, ypoints, '-ro', label='Mean')
 
 plt.title("NUM_OF_NODE = 12, NUM_OF_COMMITTEE_NODE = 10");
 plt.xlabel("HEARTBEAT_TIMEOUT (s)")
 plt.ylabel("Block_generation (ms)")
-
+plt.legend()
 plt.show()
 
 #Two  lines to make our compiler able to draw:
