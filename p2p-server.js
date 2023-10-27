@@ -30,6 +30,7 @@ class P2pServer {
       console.info("New connection");
       this.handleConnection(socket);
     });
+
     this.connectToPeers();
 
     // Wait for sockets connection
@@ -162,7 +163,7 @@ class P2pServer {
           if (
             this.messagePool.verifyMessage(msg, this.blockchain) &&
             !this.messagePool.messageExistsWithHash(msg) &&
-            !this.messagePool.messageDataRetrievalExistsWithPublicKey(msg)
+            !this.messagePool.messageDataRetrievalExistsWithPublicKey(msg) // Need to check onchain because nodes may be shut down
           ) {
             msg.isSpent = false;
             this.messagePool.addMessage(msg);
@@ -208,7 +209,7 @@ class P2pServer {
           if (
             this.messagePool.verifyMessage(msg, this.blockchain) &&
             !this.messagePool.messageExistsWithHash(msg) &&
-            !this.messagePool.isMessageDataSharingResDuplicated(msg) // It means there is a node sent 2 responses for 1 dataSharingReq.
+            !this.messagePool.isMessageDataSharingResDuplicated(msg) // It means there is a node, who sent 2 responses for 1 dataSharingReq.
           ) {
             msg.isSpent = false;
             this.messagePool.addMessage(msg);
@@ -231,7 +232,8 @@ class P2pServer {
                 const allDataSharingRes = this.messagePool.getAllDataSharingRes(
                   msg.dataSharingReq.hash
                 );
-                // Now check if all dataSharingRes messages come from heartBeatRes - alive committee nodes.
+                // Alive nodes must send DataSharingRes 
+                // Currently 100%, but we can reduce this rate
                 if (
                   this.messagePool.enoughDataSharingRes(
                     allHeartBeatRes,
@@ -296,6 +298,9 @@ class P2pServer {
               this.broadcastMessage(msg);
 
               if (msg.category === process.env.CATEGORY) {
+                // Need to wait for the blockVerifyReq, which has dataSharingRes as much as possible to avoid attack
+                // So need to wait for HEARTBEAT_TIMEOUT second(s) and get the best one
+                // But I don't do it here
                 const blockVerifyRes = new Message(
                   {
                     blockVerifyReq: msg,
@@ -368,6 +373,7 @@ class P2pServer {
           break;
 
         case MSG_TYPE.blockCommit:
+          // To verify, nodes on network need to collect num of alive nodes and compare it with num of dataSharingRes with a valid rate (ex. 80%)
           if (
             this.messagePool.verifyMessage(msg, this.blockchain) &&
             !this.messagePool.messageExistsWithHash(msg)
