@@ -28,7 +28,7 @@ app.post("/request", (req, res) => {
 app.get("/message", (req, res) => {
     res.json(messagePool.getAll());
 })
-
+    
 app.get("/blockchain", (req, res) => {
     res.json(blockchain.getAll());
 })

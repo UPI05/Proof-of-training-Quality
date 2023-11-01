@@ -1,0 +1,104 @@
+{
+    "apps": [
+      {
+        "name": "node1",
+        "script": "npm run node1"
+      },
+      {
+        "name": "node2",
+        "script": "npm run node2",
+        "delay": 100
+      },
+      {
+        "name": "node3",
+        "script": "npm run node3",
+        "delay": 200
+      },
+      {
+        "name": "node4",
+        "script": "npm run node4",
+        "delay": 300
+      },
+      {
+        "name": "node5",
+        "script": "npm run node5",
+        "delay": 400
+      },
+      {
+        "name": "node6",
+        "script": "npm run node6",
+        "delay": 500
+      },
+      {
+        "name": "node7",
+        "script": "npm run node7",
+        "delay": 600
+      },
+      {
+        "name": "node8",
+        "script": "npm run node8",
+        "delay": 700
+      },
+      {
+        "name": "node9",
+        "script": "npm run node9",
+        "delay": 800
+      },
+      {
+        "name": "node10",
+        "script": "npm run node10",
+        "delay": 900
+      }
+    //   {
+    //     "name": "node11",
+    //     "script": "npm run node11",
+    //     "delay": 1000
+    //   },
+    //   {
+    //     "name": "node12",
+    //     "script": "npm run node12",
+    //     "delay": 1100
+    //   },
+    //   {
+    //     "name": "node13",
+    //     "script": "npm run node13",
+    //     "delay": 1200
+    //   },
+    //   {
+    //     "name": "node14",
+    //     "script": "npm run node14",
+    //     "delay": 1300
+    //   },
+    //   {
+    //     "name": "node15",
+    //     "script": "npm run node15",
+    //     "delay": 1400
+    //   },
+    //   {
+    //     "name": "node16",
+    //     "script": "npm run node16",
+    //     "delay": 1500
+    //   },
+    //   {
+    //     "name": "node17",
+    //     "script": "npm run node17",
+    //     "delay": 1600
+    //   },
+    //   {
+    //     "name": "node18",
+    //     "script": "npm run node18",
+    //     "delay": 1700
+    //   },
+    //   {
+    //     "name": "node19",
+    //     "script": "npm run node19",
+    //     "delay": 1800
+    //   },
+    //   {
+    //     "name": "node20",
+    //     "script": "npm run node20",
+    //     "delay": 1900
+    //   }
+    ]
+  }
+  

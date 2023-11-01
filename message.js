@@ -227,6 +227,7 @@ class Message {
   }
 
   // Verify message integrity
+  // Also, need to avoid replay attack
   static verifyMsgIntergrity(msg) {
     const hashInpStr =
       msg.timeStamp + msg.msgType + msg.publicKey + msg.category;

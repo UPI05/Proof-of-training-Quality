@@ -9,6 +9,7 @@ const {
   FL_ROUND_THESHOLD,
   MAE_EPSILON,
   DEBUG,
+  GOSSIP_BIAS
 } = require("./config.js");
 
 const Peers = process.env.PEERS ? process.env.PEERS.split(",") : [];
@@ -57,9 +58,22 @@ class P2pServer {
   // Broadcast messages
 
   broadcastMessage(msg) {
+    
+    /*
     this.sockets.forEach((socket) => {
       this.sendMessage(msg, socket);
     });
+    */
+    
+   
+    // Gossip instead of Broadcast
+
+    this.sockets.sort(() => Math.random() - 0.5); // shuffle sockets to choose first k sockets
+    for (let i = 0; i < Math.min(GOSSIP_BIAS, this.sockets.length); i++) {
+      this.sendMessage(msg, this.sockets[i]);
+    }
+    
+    
   }
 
   sendMessage(msg, socket) {
