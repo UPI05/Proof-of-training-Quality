@@ -6,6 +6,7 @@ const {
   RANDOM_BIAS,
   MSG_TYPE,
   HEARTBEAT_TIMEOUT,
+  NODE_STARTUP_TIMEOUT,
   FL_ROUND_THESHOLD,
   MAE_EPSILON,
   DEBUG,
@@ -34,12 +35,14 @@ class P2pServer {
 
     this.connectToPeers();
 
+    /* 
     // Wait for sockets connection
     setTimeout(() => {
       // When a node begins to work, It needs to get a correct chain from network.
       const getChainReq = new Message({}, this.wallet, MSG_TYPE.getChainReq);
       this.broadcastMessage(getChainReq);
-    }, HEARTBEAT_TIMEOUT * 1000);
+    }, NODE_STARTUP_TIMEOUT * 1000);
+    */
   }
 
   connectToPeers() {
@@ -58,22 +61,23 @@ class P2pServer {
   // Broadcast messages
 
   broadcastMessage(msg) {
+    let gossip = false;
     
-    /*
-    this.sockets.forEach((socket) => {
-      this.sendMessage(msg, socket);
-    });
-    */
-    
-   
-    // Gossip instead of Broadcast
+    if (!gossip) {
+      // Broadcast
 
-    this.sockets.sort(() => Math.random() - 0.5); // shuffle sockets to choose first k sockets
-    for (let i = 0; i < Math.min(GOSSIP_BIAS, this.sockets.length); i++) {
-      this.sendMessage(msg, this.sockets[i]);
+      this.sockets.forEach((socket) => {
+        this.sendMessage(msg, socket);
+      });
+      
+    } else {
+      // Gossip instead of Broadcast
+
+      this.sockets.sort(() => Math.random() - 0.5); // shuffle sockets to choose first k sockets
+      for (let i = 0; i < Math.min(GOSSIP_BIAS, this.sockets.length); i++) {
+        this.sendMessage(msg, this.sockets[i]);
+      }
     }
-    
-    
   }
 
   sendMessage(msg, socket) {

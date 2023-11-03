@@ -1,5 +1,5 @@
 const Message = require("./message");
-const { MSG_TYPE } = require("./config");
+const { MSG_TYPE, RANDOM_BIAS } = require("./config");
 const math = require("mathjs");
 
 class MessagePool {
@@ -133,6 +133,8 @@ class MessagePool {
   }
 
   getValidMAERange(hash, epsilon) {
+    return [0, RANDOM_BIAS];
+    //
     let res = [];
     for (const msg of this.messages) {
       if (

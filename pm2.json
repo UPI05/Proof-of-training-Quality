@@ -23,32 +23,32 @@
         "name": "node5",
         "script": "npm run node5",
         "delay": 400
-      },
-      {
-        "name": "node6",
-        "script": "npm run node6",
-        "delay": 500
-      },
-      {
-        "name": "node7",
-        "script": "npm run node7",
-        "delay": 600
-      },
-      {
-        "name": "node8",
-        "script": "npm run node8",
-        "delay": 700
-      },
-      {
-        "name": "node9",
-        "script": "npm run node9",
-        "delay": 800
-      },
-      {
-        "name": "node10",
-        "script": "npm run node10",
-        "delay": 900
       }
+      // {
+      //   "name": "node6",
+      //   "script": "npm run node6",
+      //   "delay": 500
+      // },
+      // {
+      //   "name": "node7",
+      //   "script": "npm run node7",
+      //   "delay": 600
+      // },
+      // {
+      //   "name": "node8",
+      //   "script": "npm run node8",
+      //   "delay": 700
+      // },
+      // {
+      //   "name": "node9",
+      //   "script": "npm run node9",
+      //   "delay": 800
+      // },
+      // {
+      //   "name": "node10",
+      //   "script": "npm run node10",
+      //   "delay": 900
+      // },
     //   {
     //     "name": "node11",
     //     "script": "npm run node11",
