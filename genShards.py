@@ -1,7 +1,7 @@
 import random
 
-numOfNode = 20
-numOfShard = 3
+numOfNode = 5
+numOfShard = 2
 
 vals = [i +1 for i in range(numOfNode)]
 

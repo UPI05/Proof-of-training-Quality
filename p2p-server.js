@@ -1,5 +1,7 @@
 const WebSocket = require("ws");
 
+const Wallet = require("./wallet");
+
 const Message = require("./message");
 
 const {
@@ -22,11 +24,41 @@ class P2pServer {
     this.blockchain = blockchain;
     this.wallet = wallet;
     this.messagePool = messagePool;
+    this.shardConfig = {};
   }
 
   // WebSocket Connection
 
   listen() {
+
+    // Shards config
+    const fs = require('fs');
+    const Wallet = require('./wallet');
+
+    const configFile = fs.readFileSync('shards.config', 'utf8');
+
+    const configLines = configFile.split('\n');
+
+    const configLinesWithoutEmptyLines = configLines.filter(line => line.trim() !== '');
+
+    const n = configLinesWithoutEmptyLines[0];
+    const m = configLinesWithoutEmptyLines[1];
+
+    const shards = new Array(m);
+
+    for (let i = 1; i <= m; i++) {
+      let shardNodes = configLinesWithoutEmptyLines[i + 1].split(', ').slice(0, -1);
+      for (let j = 0; j < shardNodes.length; j++) {
+        const wallet = new Wallet('NODE' + shardNodes[j]);
+        shardNodes[j] = wallet.getPublicKey();
+      }
+      shards[i] = shardNodes;
+    }
+    
+    this.numShard = m;
+    this.numNode = n;
+    this.shardsList = shards;
+
     const server = new WebSocket.Server({ port: P2P_PORT });
     server.on("connection", (socket) => {
       console.info("New connection");
@@ -35,14 +67,23 @@ class P2pServer {
 
     this.connectToPeers();
 
-    /* 
+    /*
     // Wait for sockets connection
     setTimeout(() => {
       // When a node begins to work, It needs to get a correct chain from network.
       const getChainReq = new Message({}, this.wallet, MSG_TYPE.getChainReq);
       this.broadcastMessage(getChainReq);
     }, NODE_STARTUP_TIMEOUT * 1000);
-    */
+    */    
+
+
+  }
+
+  checkSameShard(publicKeyA, publicKeyB) {
+    for (let i = 1; i <= this.numShard; i++) {
+      if (this.shardsList[i].indexOf(publicKeyA) !== -1 && this.shardsList[i].indexOf(publicKeyB) !== -1) return true;
+    }
+    return false;
   }
 
   connectToPeers() {
@@ -109,12 +150,15 @@ class P2pServer {
             this.messagePool.addMessage(msg);
             this.broadcastMessage(msg);
 
-            const getChainRes = new Message(
-              { chain: this.blockchain.chain },
-              this.wallet,
-              MSG_TYPE.getChainRes
-            );
-            this.broadcastMessage(getChainRes);
+            if (this.checkSameShard(msg.publicKey, this.wallet.getPublicKey())) {
+
+              const getChainRes = new Message(
+                { chain: this.blockchain.chain },
+                this.wallet,
+                MSG_TYPE.getChainRes
+              );
+              this.broadcastMessage(getChainRes);
+            }
           }
           break;
 
@@ -131,7 +175,8 @@ class P2pServer {
             // Verify the chain and add to blockchain
             if (
               msg.chain.length > this.blockchain.chain.length &&
-              this.blockchain.verifyChain(msg.chain)
+              this.blockchain.verifyChain(msg.chain) &&
+              this.checkSameShard(msg.publicKey, this.wallet.getPublicKey())
             ) {
               this.blockchain.chain = msg.chain;
             }
@@ -139,7 +184,7 @@ class P2pServer {
 
           break;
 
-        // Looking for alive nodes
+        // Looking for alive nodes in committee
         case MSG_TYPE.heartBeatReq:
           if (
             !this.messagePool.messageExistsWithHash(msg) &&
@@ -149,16 +194,26 @@ class P2pServer {
             this.messagePool.addMessage(msg);
             this.broadcastMessage(msg);
 
-            if (msg.category === process.env.CATEGORY) {
-              const resMsg = new Message(
-                {
-                  heartBeatReq: msg,
-                },
-                this.wallet,
-                MSG_TYPE.heartBeatRes
-              );
-              this.broadcastMessage(resMsg);
+            const resMsg = new Message(
+              {
+                heartBeatReq: msg,
+              },
+              this.wallet,
+              MSG_TYPE.heartBeatRes
+            );
+
+            if (!msg.reqCata) {
+              if (msg.category === process.env.CATEGORY) {
+              
+                this.broadcastMessage(resMsg);
+              }
+            } else {
+              if (msg.reqCata === process.env.CATEGORY) {
+              
+                this.broadcastMessage(resMsg);
+              }
             }
+            
           }
 
           break;
@@ -168,6 +223,43 @@ class P2pServer {
             !this.messagePool.messageExistsWithHash(msg) &&
             this.messagePool.verifyMessage(msg, this.blockchain) &&
             !this.messagePool.isMessageHeartBeatResDuplicated(msg)
+          ) {
+            msg.isSpent = false;
+            this.messagePool.addMessage(msg);
+            this.broadcastMessage(msg);
+          }
+
+          break;
+
+        // Looking for alive nodes in shard
+        case MSG_TYPE.shardHeartBeatReq:
+          if (
+            !this.messagePool.messageExistsWithHash(msg) &&
+            this.messagePool.verifyMessage(msg, this.blockchain)
+          ) {
+            msg.isSpent = false;
+            this.messagePool.addMessage(msg);
+            this.broadcastMessage(msg);
+
+            if (this.checkSameShard(msg.publicKey, this.wallet.getPublicKey())) {
+              const resMsg = new Message(
+                {
+                  shardHeartBeatReq: msg,
+                },
+                this.wallet,
+                MSG_TYPE.shardHeartBeatRes
+              );
+              this.broadcastMessage(resMsg);
+            }
+          }
+
+          break;
+
+        case MSG_TYPE.shardHeartBeatRes:
+          if (
+            !this.messagePool.messageExistsWithHash(msg) &&
+            this.messagePool.verifyMessage(msg, this.blockchain) &&
+            !this.messagePool.isMessageShardHeartBeatResDuplicated(msg)
           ) {
             msg.isSpent = false;
             this.messagePool.addMessage(msg);
@@ -250,10 +342,8 @@ class P2pServer {
                 const allDataSharingRes = this.messagePool.getAllDataSharingRes(
                   msg.dataSharingReq.hash
                 );
-                // Alive nodes must send DataSharingRes 
-                // Currently 100%, but we can reduce this rate
                 if (
-                  this.messagePool.enoughDataSharingRes(
+                  this.messagePool.enoughResponseCompareToAliveNodes(
                     allHeartBeatRes,
                     allDataSharingRes
                   )
@@ -291,6 +381,7 @@ class P2pServer {
                       MSG_TYPE.blockVerifyReq
                     );
                     this.broadcastMessage(blockVerifyReq);
+                    console.log(msg.hash);
                   }
                 }
               }, HEARTBEAT_TIMEOUT * 1000);
@@ -300,41 +391,63 @@ class P2pServer {
           break;
 
         case MSG_TYPE.blockVerifyReq:
-          if (this.messagePool.messageExistsWithHash(msg)) break;
-          // Get the right chain from network before validating a new block
-          const getChainReq = new Message(
-            {},
-            this.wallet,
-            MSG_TYPE.getChainReq
-          );
-          this.broadcastMessage(getChainReq);
-          // Need to wait for getChainRes
-          setTimeout(() => {
-            if (this.messagePool.verifyMessage(msg, this.blockchain)) {
-              msg.isSpent = false;
-              this.messagePool.addMessage(msg);
-              this.broadcastMessage(msg);
+          if (this.messagePool.messageExistsWithHash(msg) || this.messagePool.isMessageBlockVerifyReqDuplicated(msg)) break;
+            //Get the right chain from network before validating a new block
+          if (this.messagePool.verifyMessage(msg, this.blockchain)) {
+            msg.isSpent = false;
+            this.messagePool.addMessage(msg);
+            this.broadcastMessage(msg);
+            const getChainReq = new Message(
+              {},
+              this.wallet,
+              MSG_TYPE.getChainReq
+            );
+            this.broadcastMessage(getChainReq);
 
-              if (msg.category === process.env.CATEGORY) {
-                // Need to wait for the blockVerifyReq, which has dataSharingRes as much as possible to avoid attack
-                // So need to wait for HEARTBEAT_TIMEOUT second(s) and get the best one
-                // But I don't do it here
-                const blockVerifyRes = new Message(
-                  {
-                    blockVerifyReq: msg,
-                    committeeSignature: {
-                      publicKey: this.wallet.getPublicKey(),
-                      signature: this.wallet.sign(msg.hash),
-                    },
-                  },
+            //Need to wait for getChainRes
+            setTimeout(() => {
+              
+              if (this.checkSameShard(msg.publicKey, this.wallet.getPublicKey())) {
+                
+                const heartBeatReq = new Message(
+                  {reqCata: this.messagePool.getRequestedCatagoryFromBlockVerifyReq(msg.transaction.messages)},
                   this.wallet,
-                  MSG_TYPE.blockVerifyRes
+                  MSG_TYPE.heartBeatReq
                 );
+  
+                this.broadcastMessage(heartBeatReq);
 
-                this.broadcastMessage(blockVerifyRes);
+                setTimeout(() => {
+                  const allHeartBeatRes = this.messagePool.getAllHeartBeatRes(heartBeatReq);
+                  const allDataSharingResInABlockVerifyReq = this.messagePool.getAllDataSharingResInABlockVerifyReq(msg.transaction.messages);
+                  
+                  if (
+                    this.messagePool.enoughResponseCompareToAliveNodes(
+                      allHeartBeatRes,
+                      allDataSharingResInABlockVerifyReq
+                    )
+                  ) {
+                    
+                    const blockVerifyRes = new Message(
+                      {
+                        blockVerifyReq: msg,
+                        committeeSignature: {
+                          publicKey: this.wallet.getPublicKey(),
+                          signature: this.wallet.sign(msg.hash),
+                        },
+                      },
+                      this.wallet,
+                      MSG_TYPE.blockVerifyRes
+                    );
+  
+                    this.broadcastMessage(blockVerifyRes);
+                  }
+                }, HEARTBEAT_TIMEOUT * 1000);
+                
+
               }
-            }
-          }, HEARTBEAT_TIMEOUT * 1000);
+            }, HEARTBEAT_TIMEOUT * 1000);
+          }
 
           break;
 
@@ -349,24 +462,23 @@ class P2pServer {
             this.broadcastMessage(msg);
 
             if (msg.blockVerifyReq.publicKey === this.wallet.getPublicKey()) {
-              const heartBeatReq = new Message(
+              const shardHeartBeatReq = new Message(
                 {},
                 this.wallet,
-                MSG_TYPE.heartBeatReq
+                MSG_TYPE.shardHeartBeatReq
               );
 
-              this.broadcastMessage(heartBeatReq);
+              this.broadcastMessage(shardHeartBeatReq);
 
               setTimeout(() => {
-                const allHeartBeatRes =
-                  this.messagePool.getAllHeartBeatRes(heartBeatReq);
+                const allShardHeartBeatRes = this.messagePool.getAllShardHeartBeatRes(shardHeartBeatReq);
                 const allBlockVerifyResCommitteeSignatures =
                   this.messagePool.getAllCommitteeSignaturesFromBlockVerifyRes(
                     msg.blockVerifyReq.hash
                   );
                 if (
-                  this.messagePool.enoughBlockVerifyRes(
-                    allHeartBeatRes,
+                  this.messagePool.enoughResponseCompareToAliveNodes(
+                    allShardHeartBeatRes,
                     allBlockVerifyResCommitteeSignatures
                   )
                 ) {
@@ -396,49 +508,70 @@ class P2pServer {
             this.messagePool.verifyMessage(msg, this.blockchain) &&
             !this.messagePool.messageExistsWithHash(msg)
           ) {
+
             msg.isSpent = false;
             this.messagePool.addMessage(msg);
             this.broadcastMessage(msg);
-            delete msg["isSpent"];
-            this.blockchain.addBlock(msg);
-            // Now mark all related messages in messagePool as spent
-            for (let i = 0; i < this.messagePool.messages.length; i++) {
-              if (
-                this.messagePool.messages[i].msgType ===
-                  MSG_TYPE.dataRetrieval ||
-                this.messagePool.messages[i].msgType ===
-                  MSG_TYPE.dataSharingReq ||
-                this.messagePool.messages[i].msgType === MSG_TYPE.dataSharingRes
-              )
-                for (let j = 0; j < msg.transaction.messages.length; j++) {
-                  if (
-                    this.messagePool.messages[i].hash ===
-                    msg.transaction.messages[j].hash
-                  ) {
-                    this.messagePool.messages[i].isSpent = true;
+
+            if (this.checkSameShard(msg.publicKey, this.wallet.getPublicKey())) {
+              
+              const shardHeartBeatReq = new Message(
+                {},
+                this.wallet,
+                MSG_TYPE.shardHeartBeatReq
+              );
+
+              this.broadcastMessage(shardHeartBeatReq);
+
+              setTimeout(() => {
+                const allShardHeartBeatRes = this.messagePool.getAllShardHeartBeatRes(shardHeartBeatReq);
+                const allBlockVerifyResCommitteeSignatures = msg.committeeSignatures;
+                if (
+                    allShardHeartBeatRes.length === allBlockVerifyResCommitteeSignatures.length
+                ) {
+                  delete msg["isSpent"];
+                  this.blockchain.addBlock(msg);
+                  // Now mark all related messages in messagePool as spent
+                  for (let i = 0; i < this.messagePool.messages.length; i++) {
+                    if (
+                      this.messagePool.messages[i].msgType ===
+                        MSG_TYPE.dataRetrieval ||
+                      this.messagePool.messages[i].msgType ===
+                        MSG_TYPE.dataSharingReq ||
+                      this.messagePool.messages[i].msgType === MSG_TYPE.dataSharingRes
+                    )
+                      for (let j = 0; j < msg.transaction.messages.length; j++) {
+                        if (
+                          this.messagePool.messages[i].hash ===
+                          msg.transaction.messages[j].hash
+                        ) {
+                          this.messagePool.messages[i].isSpent = true;
+                        }
+                      }
+                  }
+
+                  const { flRound, requester, requestCategory } =
+                    Message.getDataSharingReqInfoFromBlockCommitMsg(msg);
+                  if (requester === this.wallet.getPublicKey()) {
+                    // Then check FL_ROUND_THRESHOLD to create a dataSharingReq message with new round
+                    if (flRound < FL_ROUND_THESHOLD) {
+                      const dataSharingReqMsg = new Message(
+                        {
+                          requestCategory,
+                          requestModel: msg.aggregatedModel,
+                          flRound: flRound + 1,
+                        },
+                        this.wallet,
+                        MSG_TYPE.dataSharingReq
+                      );
+                      this.broadcastMessage(dataSharingReqMsg);
+                    } else {
+                      // Threshold reached
+                      if (DEBUG) console.info("Final round reached!");
+                    }
                   }
                 }
-            }
-
-            const { flRound, requester, requestCategory } =
-              Message.getDataSharingReqInfoFromBlockCommitMsg(msg);
-            if (requester === this.wallet.getPublicKey()) {
-              // Then check FL_ROUND_THRESHOLD to create a dataSharingReq message with new round
-              if (flRound < FL_ROUND_THESHOLD) {
-                const dataSharingReqMsg = new Message(
-                  {
-                    requestCategory,
-                    requestModel: msg.aggregatedModel,
-                    flRound: flRound + 1,
-                  },
-                  this.wallet,
-                  MSG_TYPE.dataSharingReq
-                );
-                this.broadcastMessage(dataSharingReqMsg);
-              } else {
-                // Threshold reached
-                if (DEBUG) console.info("Final round reached!");
-              }
+              }, HEARTBEAT_TIMEOUT * 1000);
             }
           }
           break;

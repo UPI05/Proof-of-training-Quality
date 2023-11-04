@@ -86,8 +86,10 @@ const CATEGORY_MAX_LENGTH = 20;
 const MSG_TYPE = {
   getChainReq: "GetChainRequest",
   getChainRes: "GetChainResponse",
-  heartBeatReq: "HeartBeatRequest", // Looking for alive nodes
+  heartBeatReq: "HeartBeatRequest", // Looking for alive nodes in committee
   heartBeatRes: "HeartBeatResponse",
+  shardHeartBeatReq: "ShardHeartBeatRequest", // in shard
+  shardHeartBeatRes: "ShardHeartBeatResponse",
   dataRetrieval: "DataRetrieval",
   dataSharingReq: "DataSharingRequest",
   dataSharingRes: "DataSharingResponse",
@@ -102,7 +104,7 @@ const HEARTBEAT_TIMEOUT = 30; // second
 const NODE_STARTUP_TIMEOUT = 5; 
 
 // 
-const DEBUG = true;
+const DEBUG = false;
 const GOSSIP_BIAS = 3;
 
 module.exports = {

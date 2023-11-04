@@ -91,11 +91,37 @@ class MessagePool {
     return res;
   }
 
+  getAllShardHeartBeatRes(message) {
+    let res = [];
+    for (const msg of this.messages) {
+      if (
+        msg.msgType === MSG_TYPE.shardHeartBeatRes &&
+        msg.shardHeartBeatReq.hash === message.hash &&
+        !msg.isSpent
+      )
+        res.push(msg);
+    }
+    return res;
+  }
+
   isMessageHeartBeatResDuplicated(message) {
     for (const msg of this.messages) {
       if (
         msg.msgType === MSG_TYPE.heartBeatRes &&
         msg.heartBeatReq.hash === message.heartBeatReq.hash &&
+        !msg.isSpent &&
+        msg.publicKey === message.publicKey
+      )
+        return true;
+    }
+    return false;
+  }
+
+  isMessageShardHeartBeatResDuplicated(message) {
+    for (const msg of this.messages) {
+      if (
+        msg.msgType === MSG_TYPE.shardHeartBeatRes &&
+        msg.shardHeartBeatReq.hash === message.shardHeartBeatReq.hash &&
         !msg.isSpent &&
         msg.publicKey === message.publicKey
       )
@@ -149,11 +175,11 @@ class MessagePool {
     return [mean - std - epsilon, mean + std + epsilon];
   }
 
-  enoughDataSharingRes(allHeartBeatRes, allDataSharingRes) {
+  enoughResponseCompareToAliveNodes(allHeartBeatRes, allResponse) {
     for (const heartBeatRes of allHeartBeatRes) {
       let found = false;
-      for (const dataSharingRes of allDataSharingRes) {
-        if (heartBeatRes.publicKey === dataSharingRes.publicKey) {
+      for (const response of allResponse) {
+        if (heartBeatRes.publicKey === response.publicKey) {
           found = true;
           break;
         }
@@ -177,6 +203,50 @@ class MessagePool {
       }
     }
     return false;
+  }
+  
+  // For blockVerifyReq
+
+  isMessageBlockVerifyReqDuplicated(message) {
+
+    let dataSharingReqHashInMsg = "";
+
+    for (const m of message.transaction.messages) {
+      if (m.msgType === MSG_TYPE.dataSharingReq) dataSharingReqHashInMsg = m.hash;
+    }
+
+    for (const msg of this.messages) {
+      if (
+        msg.msgType === MSG_TYPE.blockVerifyReq &&
+        !msg.isSpent &&
+        msg.publicKey === message.publicKey
+      ) {
+
+        for (const m of msg.transaction.messages) {
+          if (m.msgType === MSG_TYPE.dataSharingReq && m.hash === dataSharingReqHashInMsg) return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  getAllDataSharingResInABlockVerifyReq(messages) {
+    let res = [];
+    for (const msg of messages) {
+      if (msg.msgType === MSG_TYPE.dataSharingRes) {
+        res.push(msg);
+      }
+    }
+    return res;
+  }
+
+  getRequestedCatagoryFromBlockVerifyReq(messages) {
+    for (const msg of messages) {
+      if (msg.msgType === MSG_TYPE.dataSharingReq) {
+        return msg.requestCategory;
+      }
+    }
+    return "";
   }
 
   // For blockVerifyRes
@@ -206,23 +276,6 @@ class MessagePool {
       }
     }
     return res;
-  }
-
-  enoughBlockVerifyRes(allHeartBeatRes, allBlockVerifyResCommitteeSignatures) {
-    for (const heartBeatRes of allHeartBeatRes) {
-      let found = false;
-      for (const blockVerifyResCommitteeSignature of allBlockVerifyResCommitteeSignatures) {
-        if (
-          heartBeatRes.publicKey === blockVerifyResCommitteeSignature.publicKey
-        ) {
-          found = true;
-          break;
-        }
-      }
-      if (!found) return false;
-    }
-
-    return true;
   }
 
   isMessageBlockVerifyResDuplicated(message) {

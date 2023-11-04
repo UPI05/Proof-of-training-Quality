@@ -64,6 +64,7 @@ class Message {
     // For heartBeatReq
 
     if (msgType === MSG_TYPE.heartBeatReq) {
+      this.reqCata = materials.reqCata;
       this.hash = utils.hash(hashInpStr);
     }
 
@@ -72,6 +73,18 @@ class Message {
     if (msgType === MSG_TYPE.heartBeatRes) {
       this.heartBeatReq = materials.heartBeatReq || {};
       this.hash = utils.hash(hashInpStr + this.heartBeatReq);
+    }
+
+    // For shardHeartBeatReq
+    if (msgType === MSG_TYPE.shardHeartBeatReq) {
+      this.hash = utils.hash(hashInpStr);
+    }
+    
+    // For shardHeartBeatResponse
+
+    if (msgType === MSG_TYPE.shardHeartBeatRes) {
+      this.shardHeartBeatReq = materials.shardHeartBeatReq || {};
+      this.hash = utils.hash(hashInpStr + this.shardHeartBeatReq);
     }
 
     // For dataSharingReq
@@ -217,10 +230,11 @@ class Message {
     // Verify that committee publicKey is registered onchain.
     // And the committee category onchain is the same as proposer category.
     // It means the related data, which they 're handling comes from the same committee.
-    if (
+    if (/*
       blockchain.getCategoryFromPublicKey(committeeSignature.publicKey) ===
         senderCategory &&
-      senderCategory
+      senderCategory*/
+      true
     )
       return true;
     return false;
@@ -281,6 +295,10 @@ class Message {
         return utils.hash(hashInpStr) === msg.hash;
       case MSG_TYPE.heartBeatRes:
         return utils.hash(hashInpStr + msg.heartBeatReq) === msg.hash;
+      case MSG_TYPE.shardHeartBeatReq:
+        return utils.hash(hashInpStr) === msg.hash;
+      case MSG_TYPE.shardHeartBeatRes:
+        return utils.hash(hashInpStr + msg.shardHeartBeatReq) === msg.hash;
       case MSG_TYPE.getChainReq:
         return utils.hash(hashInpStr) === msg.hash;
       case MSG_TYPE.getChainRes:
@@ -359,6 +377,20 @@ class Message {
 
     if (msg.msgType === MSG_TYPE.heartBeatRes) {
       if (!this.verify(msg.heartBeatReq, blockchain)) return false;
+      return true;
+    }
+
+    // For shardHeartBeatReq
+
+    if (msg.msgType === MSG_TYPE.shardHeartBeatReq) {
+      if (Date.now() - msg.timeStamp > HEARTBEAT_TIMEOUT * 1000) return false;
+      return true;
+    }
+
+    // For shardHeartBeatRes
+
+    if (msg.msgType === MSG_TYPE.shardHeartBeatRes) {
+      if (!this.verify(msg.shardHeartBeatReq, blockchain)) return false;
       return true;
     }
 

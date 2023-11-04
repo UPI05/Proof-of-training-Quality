@@ -7,22 +7,22 @@
       {
         "name": "node2",
         "script": "npm run node2",
-        "delay": 100
+        "delay": 1000
       },
       {
         "name": "node3",
         "script": "npm run node3",
-        "delay": 200
+        "delay": 2000
       },
       {
         "name": "node4",
         "script": "npm run node4",
-        "delay": 300
+        "delay": 3000
       },
       {
         "name": "node5",
         "script": "npm run node5",
-        "delay": 400
+        "delay": 4000
       }
       // {
       //   "name": "node6",
