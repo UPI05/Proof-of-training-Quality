@@ -3,9 +3,15 @@ const {
   GENESIS_HASH,
   MSG_TYPE,
   GENESIS_PUBLICKEY_NODE1,
-  GENESIS_PUBLICKEY_NODE2,
   GENESIS_CATEGORY_NODE1,
+  GENESIS_PUBLICKEY_NODE2,
   GENESIS_CATEGORY_NODE2,
+  GENESIS_PUBLICKEY_NODE3,
+  GENESIS_CATEGORY_NODE3,
+  GENESIS_PUBLICKEY_NODE4,
+  GENESIS_CATEGORY_NODE4,
+  GENESIS_PUBLICKEY_NODE5,
+  GENESIS_CATEGORY_NODE5,
   GENESIS_OTHER,
 } = require("./config");
 
@@ -27,6 +33,18 @@ class Blockchain {
       {
         publicKey: GENESIS_PUBLICKEY_NODE2,
         category: GENESIS_CATEGORY_NODE2,
+        msgType: MSG_TYPE.dataRetrieval,
+      },{
+        publicKey: GENESIS_PUBLICKEY_NODE3,
+        category: GENESIS_CATEGORY_NODE3,
+        msgType: MSG_TYPE.dataRetrieval,
+      },{
+        publicKey: GENESIS_PUBLICKEY_NODE4,
+        category: GENESIS_CATEGORY_NODE4,
+        msgType: MSG_TYPE.dataRetrieval,
+      },{
+        publicKey: GENESIS_PUBLICKEY_NODE5,
+        category: GENESIS_CATEGORY_NODE5,
         msgType: MSG_TYPE.dataRetrieval,
       },
     ];

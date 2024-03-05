@@ -49,9 +49,14 @@ class P2pServer {
   }
 
   handleConnection(socket) {
-    this.sockets.push(socket);
-    console.info("Socket connected");
-    this.handleMessage(socket);
+    // Kiểm tra xem socket đã tồn tại trong mảng chưa
+    if (!this.sockets.includes(socket)) {
+      this.sockets.push(socket);
+      console.info("Socket connected");
+      this.handleMessage(socket);
+    } else {
+      console.info("Socket already exists in the array");
+    }
   }
 
   // Broadcast messages
@@ -246,7 +251,7 @@ class P2pServer {
                       MAE_EPSILON
                     );
                   if (
-                    this.messagePool.isProposer(this.wallet, allDataSharingRes, minValidMAE, maxValidMAE)
+                    this.messagePool.isProposer(this.wallet, allDataSharingRes, 0, 10)
                   ) {
                     // Get the right chain from network before creating a new block
                     const getChainReq = new Message(

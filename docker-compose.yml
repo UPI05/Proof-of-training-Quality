@@ -5,29 +5,81 @@ services:
     image: poq:1.0
     networks:
       poq-net:
-        ipv4_address: 172.20.128.1
+        ipv4_address: 10.45.128.1
     environment:
-      - CATEGORY=chicken
+      - CATEGORY=tiger
       - SECRET=NODE1
       - HTTP_PORT=3000
       - P2P_PORT=5000
+    ports:
+      - "3001:3000"  # Chuyển tiếp port HTTP
     command: "node app.js"
   node2:
     image: poq:1.0
     networks:
       poq-net:
-        ipv4_address: 172.20.128.2
+        ipv4_address: 10.45.128.2
     environment:
       - CATEGORY=tiger
       - SECRET=NODE2
       - HTTP_PORT=3000
       - P2P_PORT=5000
-      - PEERS=ws://172.20.128.1:5000
+      - PEERS=ws://10.45.128.1:5000
+    ports:
+      - "3002:3000"  # Chuyển tiếp port HTTP
     command: "node app.js"
     depends_on:
       - node1
+  node3:
+    image: poq:1.0
+    networks:
+      poq-net:
+        ipv4_address: 10.45.128.3
+    environment:
+      - CATEGORY=tiger
+      - SECRET=NODE3
+      - HTTP_PORT=3000
+      - P2P_PORT=5000
+      - PEERS=ws://10.45.128.1:5000,ws://10.45.128.2:5000
+    ports:
+      - "3003:3000"  # Chuyển tiếp port HTTP
+    command: "node app.js"
+    depends_on:
+      - node2
+  node4:
+    image: poq:1.0
+    networks:
+      poq-net:
+        ipv4_address: 10.45.128.4
+    environment:
+      - CATEGORY=tiger
+      - SECRET=NODE4
+      - HTTP_PORT=3000
+      - P2P_PORT=5000
+      - PEERS=ws://10.45.128.1:5000,ws://10.45.128.2:5000,ws://10.45.128.3:5000
+    ports:
+      - "3004:3000"  # Chuyển tiếp port HTTP
+    command: "node app.js"
+    depends_on:
+      - node3
+  node5:
+    image: poq:1.0
+    networks:
+      poq-net:
+        ipv4_address: 10.45.128.5
+    environment:
+      - CATEGORY=tiger
+      - SECRET=NODE5
+      - HTTP_PORT=3000
+      - P2P_PORT=5000
+      - PEERS=ws://10.45.128.1:5000,ws://10.45.128.2:5000,ws://10.45.128.3:5000,ws://10.45.128.4:5000
+    ports:
+      - "3005:3000"  # Chuyển tiếp port HTTP
+    command: "node app.js"
+    depends_on:
+      - node4
 networks:
   poq-net:
     ipam:
       config:
-        - subnet: 172.20.0.0/16
+        - subnet: 10.45.0.0/16
