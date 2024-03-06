@@ -21,6 +21,7 @@ app.use(bodyParser.json());
 
 app.post("/request", (req, res) => {
     const dataSharingReq = wallet.createDataSharingReqMsg(req.body); // Actually, It's a transaction.
+    p2pServer.setInitialTimestamp();
     p2pServer.broadcastMessage(dataSharingReq);
     res.json(dataSharingReq);
 })

@@ -1,0 +1,81 @@
+
+  node6:
+    image: poq:1.0
+    networks:
+      poq-net:
+        ipv4_address: 10.45.128.6
+    environment:
+      - CATEGORY=tiger
+      - SECRET=NODE6
+      - HTTP_PORT=3000
+      - P2P_PORT=5000
+      - PEERS=ws://10.45.128.1:5000,ws://10.45.128.2:5000,ws://10.45.128.3:5000,ws://10.45.128.4:5000,ws://10.45.128.5:5000
+    ports:
+      - "3006:3000"  # Chuyển tiếp port HTTP
+    command: "node app.js"
+    depends_on:
+      - node5
+  node7:
+    image: poq:1.0
+    networks:
+      poq-net:
+        ipv4_address: 10.45.128.7
+    environment:
+      - CATEGORY=tiger
+      - SECRET=NODE7
+      - HTTP_PORT=3000
+      - P2P_PORT=5000
+      - PEERS=ws://10.45.128.1:5000,ws://10.45.128.2:5000,ws://10.45.128.3:5000,ws://10.45.128.4:5000,ws://10.45.128.5:5000,ws://10.45.128.6:5000
+    ports:
+      - "3007:3000"  # Chuyển tiếp port HTTP
+    command: "node app.js"
+    depends_on:
+      - node6
+  node8:
+    image: poq:1.0
+    networks:
+      poq-net:
+        ipv4_address: 10.45.128.8
+    environment:
+      - CATEGORY=tiger
+      - SECRET=NODE8
+      - HTTP_PORT=3000
+      - P2P_PORT=5000
+      - PEERS=ws://10.45.128.1:5000,ws://10.45.128.2:5000,ws://10.45.128.3:5000,ws://10.45.128.4:5000,ws://10.45.128.5:5000,ws://10.45.128.6:5000,ws://10.45.128.7:5000
+    ports:
+      - "3008:3000"  # Chuyển tiếp port HTTP
+    command: "node app.js"
+    depends_on:
+      - node7
+  node9:
+    image: poq:1.0
+    networks:
+      poq-net:
+        ipv4_address: 10.45.128.9
+    environment:
+      - CATEGORY=tiger
+      - SECRET=NODE9
+      - HTTP_PORT=3000
+      - P2P_PORT=5000
+      - PEERS=ws://10.45.128.1:5000,ws://10.45.128.2:5000,ws://10.45.128.3:5000,ws://10.45.128.4:5000,ws://10.45.128.5:5000,ws://10.45.128.6:5000,ws://10.45.128.7:5000,ws://10.45.128.8:5000
+    ports:
+      - "3009:3000"  # Chuyển tiếp port HTTP
+    command: "node app.js"
+    depends_on:
+      - node8
+  node10:
+    image: poq:1.0
+    networks:
+      poq-net:
+        ipv4_address: 10.45.128.10
+    environment:
+      - CATEGORY=tiger
+      - SECRET=NODE10
+      - HTTP_PORT=3000
+      - P2P_PORT=5000
+      - PEERS=ws://10.45.128.1:5000,ws://10.45.128.2:5000,ws://10.45.128.3:5000,ws://10.45.128.4:5000,ws://10.45.128.5:5000,ws://10.45.128.6:5000,ws://10.45.128.7:5000,ws://10.45.128.8:5000,ws://10.45.128.9:5000
+    ports:
+      - "3010:3000"  # Chuyển tiếp port HTTP
+    command: "node app.js"
+    depends_on:
+      - node9

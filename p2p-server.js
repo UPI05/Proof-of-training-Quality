@@ -59,6 +59,10 @@ class P2pServer {
     }
   }
 
+  setInitialTimestamp() {
+    this.initialTimestamp = Date.now(); // for evaluating
+  }
+
   // Broadcast messages
 
   broadcastMessage(msg) {
@@ -243,23 +247,25 @@ class P2pServer {
                   this.messagePool.enoughDataSharingRes(
                     allHeartBeatRes,
                     allDataSharingRes
-                  )
+                  ) && allHeartBeatRes.length == 5 // Notice!
                 ) {
                   const [minValidMAE, maxValidMAE] =
                     this.messagePool.getValidMAERange(
                       msg.dataSharingReq.hash,
                       MAE_EPSILON
                     );
+                      console.log('checkP');
                   if (
                     this.messagePool.isProposer(this.wallet, allDataSharingRes, 0, 10)
                   ) {
+                    console.log("proposer")
                     // Get the right chain from network before creating a new block
                     const getChainReq = new Message(
                       {},
                       this.wallet,
                       MSG_TYPE.getChainReq
                     );
-                    this.broadcastMessage(getChainReq);
+                    //this.broadcastMessage(getChainReq);
 
                     // Model aggregation based on min/maxValidMAE
                     const aggregatedModel = {};
@@ -297,7 +303,9 @@ class P2pServer {
           this.broadcastMessage(getChainReq);
           // Need to wait for getChainRes
           setTimeout(() => {
+            console.log('x');
             if (this.messagePool.verifyMessage(msg, this.blockchain)) {
+              console.log('y');
               msg.isSpent = false;
               this.messagePool.addMessage(msg);
               this.broadcastMessage(msg);
@@ -388,6 +396,9 @@ class P2pServer {
             this.broadcastMessage(msg);
             delete msg["isSpent"];
             this.blockchain.addBlock(msg);
+            // Evaluating excution time
+            console.log("Excution time: ")
+            console.log((Date.now() - this.initialTimestamp) / 1000)
             // Now mark all related messages in messagePool as spent
             for (let i = 0; i < this.messagePool.messages.length; i++) {
               if (

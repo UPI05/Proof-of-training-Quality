@@ -1,0 +1,546 @@
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   0.00%     77.98MiB / 7.702GiB   0.99%     2.85kB / 1.13kB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   0.00%     76.98MiB / 7.702GiB   0.98%     2.43kB / 1.29kB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   0.00%     80.67MiB / 7.702GiB   1.02%     2.13kB / 1.46kB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   0.00%     79.02MiB / 7.702GiB   1.00%     1.81kB / 1.62kB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   0.00%     41.35MiB / 7.702GiB   0.52%     266B / 0B         0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   0.00%     77.98MiB / 7.702GiB   0.99%     2.85kB / 1.13kB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   0.00%     76.98MiB / 7.702GiB   0.98%     2.43kB / 1.29kB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   0.00%     80.67MiB / 7.702GiB   1.02%     2.13kB / 1.46kB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   0.00%     79.02MiB / 7.702GiB   1.00%     1.81kB / 1.62kB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   0.00%     41.35MiB / 7.702GiB   0.52%     266B / 0B         0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   0.11%     78MiB / 7.702GiB      0.99%     3.52kB / 1.51kB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   0.12%     76.99MiB / 7.702GiB   0.98%     3.09kB / 1.67kB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   0.12%     80.69MiB / 7.702GiB   1.02%     2.79kB / 1.83kB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   1.64%     79.08MiB / 7.702GiB   1.00%     2.56kB / 1.99kB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   127.30%   76.01MiB / 7.702GiB   0.96%     2.1kB / 2.16kB    0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   0.11%     78MiB / 7.702GiB      0.99%     3.52kB / 1.51kB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   0.12%     76.99MiB / 7.702GiB   0.98%     3.09kB / 1.67kB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   0.12%     80.69MiB / 7.702GiB   1.02%     2.79kB / 1.83kB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   1.64%     79.08MiB / 7.702GiB   1.00%     2.56kB / 1.99kB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   127.30%   76.01MiB / 7.702GiB   0.96%     2.1kB / 2.16kB    0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   35.96%    81.52MiB / 7.702GiB   1.03%     48.7kB / 47.6kB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   31.59%    81.9MiB / 7.702GiB    1.04%     48kB / 36.8kB     0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   31.39%    84.25MiB / 7.702GiB   1.07%     47.3kB / 45.4kB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   36.85%    82.52MiB / 7.702GiB   1.05%     44.3kB / 47.1kB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   36.17%    79.67MiB / 7.702GiB   1.01%     43.9kB / 46.3kB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   35.96%    81.52MiB / 7.702GiB   1.03%     48.7kB / 47.6kB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   31.59%    81.9MiB / 7.702GiB    1.04%     48kB / 36.8kB     0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   31.39%    84.25MiB / 7.702GiB   1.07%     47.3kB / 45.4kB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   36.85%    82.52MiB / 7.702GiB   1.05%     44.3kB / 47.1kB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   36.17%    79.67MiB / 7.702GiB   1.01%     43.9kB / 46.3kB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   13.85%    82.94MiB / 7.702GiB   1.05%     108kB / 107kB     0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   31.59%    81.9MiB / 7.702GiB    1.04%     48kB / 36.8kB     0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   31.39%    84.25MiB / 7.702GiB   1.07%     47.3kB / 45.4kB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   36.85%    82.52MiB / 7.702GiB   1.05%     44.3kB / 47.1kB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   36.17%    79.67MiB / 7.702GiB   1.01%     43.9kB / 46.3kB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   13.85%    82.94MiB / 7.702GiB   1.05%     108kB / 107kB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   19.97%    83.76MiB / 7.702GiB   1.06%     107kB / 105kB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   17.62%    83.88MiB / 7.702GiB   1.06%     107kB / 105kB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   15.23%    84.03MiB / 7.702GiB   1.07%     106kB / 106kB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   17.12%    81.65MiB / 7.702GiB   1.04%     106kB / 105kB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   14.22%    83.01MiB / 7.702GiB   1.05%     210kB / 208kB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   12.75%    83.85MiB / 7.702GiB   1.06%     209kB / 206kB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   12.45%    84.05MiB / 7.702GiB   1.07%     208kB / 208kB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   11.71%    84.16MiB / 7.702GiB   1.07%     207kB / 209kB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   13.65%    81.74MiB / 7.702GiB   1.04%     208kB / 206kB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   14.22%    83.01MiB / 7.702GiB   1.05%     210kB / 208kB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   12.75%    83.85MiB / 7.702GiB   1.06%     209kB / 206kB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   12.45%    84.05MiB / 7.702GiB   1.07%     208kB / 208kB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   11.71%    84.16MiB / 7.702GiB   1.07%     207kB / 209kB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   13.65%    81.74MiB / 7.702GiB   1.04%     208kB / 206kB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   0.01%     83.01MiB / 7.702GiB   1.05%     210kB / 208kB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   0.00%     83.85MiB / 7.702GiB   1.06%     209kB / 206kB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   0.00%     84.05MiB / 7.702GiB   1.07%     208kB / 208kB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   0.00%     84.16MiB / 7.702GiB   1.07%     207kB / 209kB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   0.00%     81.74MiB / 7.702GiB   1.04%     208kB / 206kB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   0.01%     83.01MiB / 7.702GiB   1.05%     210kB / 208kB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   0.00%     83.85MiB / 7.702GiB   1.06%     209kB / 206kB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   0.00%     84.05MiB / 7.702GiB   1.07%     208kB / 208kB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   0.00%     84.16MiB / 7.702GiB   1.07%     207kB / 209kB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   0.00%     81.74MiB / 7.702GiB   1.04%     208kB / 206kB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   13.21%    83.06MiB / 7.702GiB   1.05%     261kB / 259kB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   14.01%    83.93MiB / 7.702GiB   1.06%     260kB / 257kB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   10.05%    84.09MiB / 7.702GiB   1.07%     259kB / 259kB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   15.46%    84.21MiB / 7.702GiB   1.07%     258kB / 260kB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   15.81%    81.8MiB / 7.702GiB    1.04%     259kB / 258kB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   13.21%    83.06MiB / 7.702GiB   1.05%     261kB / 259kB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   14.01%    83.93MiB / 7.702GiB   1.06%     260kB / 257kB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   10.05%    84.09MiB / 7.702GiB   1.07%     259kB / 259kB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   15.46%    84.21MiB / 7.702GiB   1.07%     258kB / 260kB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   15.81%    81.8MiB / 7.702GiB    1.04%     259kB / 258kB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   32.79%    83.8MiB / 7.702GiB    1.06%     303kB / 320kB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   14.97%    83.98MiB / 7.702GiB   1.06%     311kB / 288kB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   16.57%    84.27MiB / 7.702GiB   1.07%     310kB / 290kB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   30.27%    84.31MiB / 7.702GiB   1.07%     302kB / 316kB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   30.08%    81.88MiB / 7.702GiB   1.04%     303kB / 311kB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   32.79%    83.8MiB / 7.702GiB    1.06%     303kB / 320kB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   14.97%    83.98MiB / 7.702GiB   1.06%     311kB / 288kB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   16.57%    84.27MiB / 7.702GiB   1.07%     310kB / 290kB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   30.27%    84.31MiB / 7.702GiB   1.07%     302kB / 316kB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   30.08%    81.88MiB / 7.702GiB   1.04%     303kB / 311kB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   80.48%    83.86MiB / 7.702GiB   1.06%     476kB / 482kB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   73.11%    84.18MiB / 7.702GiB   1.07%     488kB / 425kB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   79.34%    84.71MiB / 7.702GiB   1.07%     475kB / 462kB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   86.69%    84.5MiB / 7.702GiB    1.07%     467kB / 497kB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   91.05%    82.12MiB / 7.702GiB   1.04%     468kB / 504kB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   80.48%    83.86MiB / 7.702GiB   1.06%     476kB / 482kB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   73.11%    84.18MiB / 7.702GiB   1.07%     488kB / 425kB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   79.34%    84.71MiB / 7.702GiB   1.07%     475kB / 462kB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   86.69%    84.5MiB / 7.702GiB    1.07%     467kB / 497kB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   91.05%    82.12MiB / 7.702GiB   1.04%     468kB / 504kB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   89.29%    84.11MiB / 7.702GiB   1.07%     695kB / 730kB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   71.52%    84.46MiB / 7.702GiB   1.07%     717kB / 630kB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   76.89%    84.75MiB / 7.702GiB   1.07%     701kB / 692kB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   80.21%    84.96MiB / 7.702GiB   1.08%     690kB / 730kB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   74.44%    82.26MiB / 7.702GiB   1.04%     695kB / 712kB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   89.29%    84.11MiB / 7.702GiB   1.07%     695kB / 730kB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   71.52%    84.46MiB / 7.702GiB   1.07%     717kB / 630kB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   76.89%    84.75MiB / 7.702GiB   1.07%     701kB / 692kB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   80.21%    84.96MiB / 7.702GiB   1.08%     690kB / 730kB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   74.44%    82.26MiB / 7.702GiB   1.04%     695kB / 712kB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   89.29%    84.11MiB / 7.702GiB   1.07%     695kB / 730kB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   74.69%    84.68MiB / 7.702GiB   1.07%     889kB / 884kB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   76.89%    84.75MiB / 7.702GiB   1.07%     701kB / 692kB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   46.80%    85.18MiB / 7.702GiB   1.08%     885kB / 887kB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   74.44%    82.26MiB / 7.702GiB   1.04%     695kB / 712kB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   46.49%    84.29MiB / 7.702GiB   1.07%     890kB / 888kB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   74.69%    84.68MiB / 7.702GiB   1.07%     889kB / 884kB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   55.83%    84.93MiB / 7.702GiB   1.08%     887kB / 887kB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   46.80%    85.18MiB / 7.702GiB   1.08%     885kB / 887kB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   50.37%    82.43MiB / 7.702GiB   1.05%     887kB / 886kB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   46.49%    84.29MiB / 7.702GiB   1.07%     890kB / 888kB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   74.69%    84.68MiB / 7.702GiB   1.07%     889kB / 884kB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   55.83%    84.93MiB / 7.702GiB   1.08%     887kB / 887kB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   46.80%    85.18MiB / 7.702GiB   1.08%     885kB / 887kB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   50.37%    82.43MiB / 7.702GiB   1.05%     887kB / 886kB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   0.00%     84.29MiB / 7.702GiB   1.07%     890kB / 888kB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   0.00%     84.68MiB / 7.702GiB   1.07%     889kB / 884kB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   0.00%     84.93MiB / 7.702GiB   1.08%     887kB / 887kB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   0.00%     85.18MiB / 7.702GiB   1.08%     885kB / 887kB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   0.00%     82.43MiB / 7.702GiB   1.05%     887kB / 886kB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   0.00%     84.29MiB / 7.702GiB   1.07%     890kB / 888kB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   0.00%     84.68MiB / 7.702GiB   1.07%     889kB / 884kB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   0.00%     84.93MiB / 7.702GiB   1.08%     887kB / 887kB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   0.00%     85.18MiB / 7.702GiB   1.08%     885kB / 887kB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   0.00%     82.43MiB / 7.702GiB   1.05%     887kB / 886kB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   26.63%    84.52MiB / 7.702GiB   1.07%     1.25MB / 1.24MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   24.64%    84.91MiB / 7.702GiB   1.08%     1.27MB / 1.15MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   37.31%    85.41MiB / 7.702GiB   1.08%     1.24MB / 1.31MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   32.05%    85.68MiB / 7.702GiB   1.09%     1.24MB / 1.24MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   34.59%    82.84MiB / 7.702GiB   1.05%     1.24MB / 1.29MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   26.63%    84.52MiB / 7.702GiB   1.07%     1.25MB / 1.24MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   24.64%    84.91MiB / 7.702GiB   1.08%     1.27MB / 1.15MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   37.31%    85.41MiB / 7.702GiB   1.08%     1.24MB / 1.31MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   32.05%    85.68MiB / 7.702GiB   1.09%     1.24MB / 1.24MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   34.59%    82.84MiB / 7.702GiB   1.05%     1.24MB / 1.29MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   63.26%    85.53MiB / 7.702GiB   1.08%     1.93MB / 2.02MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   66.56%    85.98MiB / 7.702GiB   1.09%     1.95MB / 1.92MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   54.95%    86.19MiB / 7.702GiB   1.09%     1.95MB / 1.93MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   55.97%    86.54MiB / 7.702GiB   1.10%     1.95MB / 1.93MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   54.97%    83.7MiB / 7.702GiB    1.06%     1.95MB / 1.93MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   63.26%    85.53MiB / 7.702GiB   1.08%     1.93MB / 2.02MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   66.56%    85.98MiB / 7.702GiB   1.09%     1.95MB / 1.92MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   54.95%    86.19MiB / 7.702GiB   1.09%     1.95MB / 1.93MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   55.97%    86.54MiB / 7.702GiB   1.10%     1.95MB / 1.93MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   54.97%    83.7MiB / 7.702GiB    1.06%     1.95MB / 1.93MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   0.00%     85.53MiB / 7.702GiB   1.08%     1.93MB / 2.02MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   0.01%     85.98MiB / 7.702GiB   1.09%     1.95MB / 1.92MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   0.00%     86.19MiB / 7.702GiB   1.09%     1.95MB / 1.93MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   0.00%     86.54MiB / 7.702GiB   1.10%     1.95MB / 1.93MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   0.00%     83.7MiB / 7.702GiB    1.06%     1.95MB / 1.93MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   0.00%     85.53MiB / 7.702GiB   1.08%     1.93MB / 2.02MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   0.01%     85.98MiB / 7.702GiB   1.09%     1.95MB / 1.92MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   0.00%     86.19MiB / 7.702GiB   1.09%     1.95MB / 1.93MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   0.00%     86.54MiB / 7.702GiB   1.10%     1.95MB / 1.93MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   0.00%     83.7MiB / 7.702GiB    1.06%     1.95MB / 1.93MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   0.00%     85.53MiB / 7.702GiB   1.08%     1.93MB / 2.02MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   0.00%     85.98MiB / 7.702GiB   1.09%     1.95MB / 1.92MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   0.01%     86.19MiB / 7.702GiB   1.09%     1.95MB / 1.93MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   0.00%     86.54MiB / 7.702GiB   1.10%     1.95MB / 1.93MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   0.00%     83.7MiB / 7.702GiB    1.06%     1.95MB / 1.93MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   0.00%     85.53MiB / 7.702GiB   1.08%     1.93MB / 2.02MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   0.00%     85.98MiB / 7.702GiB   1.09%     1.95MB / 1.92MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   0.01%     86.19MiB / 7.702GiB   1.09%     1.95MB / 1.93MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   0.00%     86.54MiB / 7.702GiB   1.10%     1.95MB / 1.93MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   0.00%     83.7MiB / 7.702GiB    1.06%     1.95MB / 1.93MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   0.00%     85.53MiB / 7.702GiB   1.08%     1.93MB / 2.02MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   0.00%     85.98MiB / 7.702GiB   1.09%     1.95MB / 1.92MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   0.00%     86.19MiB / 7.702GiB   1.09%     1.95MB / 1.93MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   0.00%     86.54MiB / 7.702GiB   1.10%     1.95MB / 1.93MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   0.00%     83.7MiB / 7.702GiB    1.06%     1.95MB / 1.93MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   0.00%     85.53MiB / 7.702GiB   1.08%     1.93MB / 2.02MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   0.00%     85.98MiB / 7.702GiB   1.09%     1.95MB / 1.92MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   0.00%     86.19MiB / 7.702GiB   1.09%     1.95MB / 1.93MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   0.00%     86.54MiB / 7.702GiB   1.10%     1.95MB / 1.93MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   0.00%     83.7MiB / 7.702GiB    1.06%     1.95MB / 1.93MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   30.15%    85.73MiB / 7.702GiB   1.09%     2.11MB / 2.16MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   33.46%    86.14MiB / 7.702GiB   1.09%     2.13MB / 2.07MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   36.00%    86.38MiB / 7.702GiB   1.10%     2.12MB / 2.11MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   39.04%    86.84MiB / 7.702GiB   1.10%     2.11MB / 2.12MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   37.93%    83.84MiB / 7.702GiB   1.06%     2.12MB / 2.11MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   30.15%    85.73MiB / 7.702GiB   1.09%     2.11MB / 2.16MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   33.46%    86.14MiB / 7.702GiB   1.09%     2.13MB / 2.07MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   36.00%    86.38MiB / 7.702GiB   1.10%     2.12MB / 2.11MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   39.04%    86.84MiB / 7.702GiB   1.10%     2.11MB / 2.12MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   37.93%    83.84MiB / 7.702GiB   1.06%     2.12MB / 2.11MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   89.05%    86.04MiB / 7.702GiB   1.09%     2.28MB / 2.29MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   77.10%    86.43MiB / 7.702GiB   1.10%     2.28MB / 2.25MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   67.54%    86.55MiB / 7.702GiB   1.10%     2.29MB / 2.2MB    0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   71.60%    87.05MiB / 7.702GiB   1.10%     2.27MB / 2.28MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   91.09%    84.06MiB / 7.702GiB   1.07%     2.26MB / 2.35MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   89.05%    86.04MiB / 7.702GiB   1.09%     2.28MB / 2.29MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   77.10%    86.43MiB / 7.702GiB   1.10%     2.28MB / 2.25MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   67.54%    86.55MiB / 7.702GiB   1.10%     2.29MB / 2.2MB    0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   71.60%    87.05MiB / 7.702GiB   1.10%     2.27MB / 2.28MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   91.09%    84.06MiB / 7.702GiB   1.07%     2.26MB / 2.35MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   76.23%    86.27MiB / 7.702GiB   1.09%     2.35MB / 2.32MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   76.68%    86.55MiB / 7.702GiB   1.10%     2.33MB / 2.41MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   79.11%    84.48MiB / 7.702GiB   1.07%     2.36MB / 2.26MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   70.16%    87.14MiB / 7.702GiB   1.10%     2.34MB / 2.33MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   94.91%    84.19MiB / 7.702GiB   1.07%     2.33MB / 2.38MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   76.23%    86.27MiB / 7.702GiB   1.09%     2.35MB / 2.32MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   76.68%    86.55MiB / 7.702GiB   1.10%     2.33MB / 2.41MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   79.11%    84.48MiB / 7.702GiB   1.07%     2.36MB / 2.26MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   70.16%    87.14MiB / 7.702GiB   1.10%     2.34MB / 2.33MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   94.91%    84.19MiB / 7.702GiB   1.07%     2.33MB / 2.38MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   62.36%    86.62MiB / 7.702GiB   1.10%     2.54MB / 2.55MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   65.27%    86.95MiB / 7.702GiB   1.10%     2.53MB / 2.57MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   51.87%    84.66MiB / 7.702GiB   1.07%     2.55MB / 2.51MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   46.93%    87.35MiB / 7.702GiB   1.11%     2.56MB / 2.42MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   69.72%    84.51MiB / 7.702GiB   1.07%     2.51MB / 2.64MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   62.36%    86.62MiB / 7.702GiB   1.10%     2.54MB / 2.55MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   65.27%    86.95MiB / 7.702GiB   1.10%     2.53MB / 2.57MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   51.87%    84.66MiB / 7.702GiB   1.07%     2.55MB / 2.51MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   46.93%    87.35MiB / 7.702GiB   1.11%     2.56MB / 2.42MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   69.72%    84.51MiB / 7.702GiB   1.07%     2.51MB / 2.64MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   76.60%    87.04MiB / 7.702GiB   1.10%     2.65MB / 2.7MB    0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   64.93%    87.16MiB / 7.702GiB   1.11%     2.66MB / 2.73MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   52.97%    84.83MiB / 7.702GiB   1.08%     2.68MB / 2.62MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   63.00%    87.55MiB / 7.702GiB   1.11%     2.68MB / 2.6MB    0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   48.59%    84.71MiB / 7.702GiB   1.07%     2.66MB / 2.69MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   76.60%    87.04MiB / 7.702GiB   1.10%     2.65MB / 2.7MB    0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   64.93%    87.16MiB / 7.702GiB   1.11%     2.66MB / 2.73MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   52.97%    84.83MiB / 7.702GiB   1.08%     2.68MB / 2.62MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   63.00%    87.55MiB / 7.702GiB   1.11%     2.68MB / 2.6MB    0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   48.59%    84.71MiB / 7.702GiB   1.07%     2.66MB / 2.69MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   68.96%    87.28MiB / 7.702GiB   1.11%     2.81MB / 2.79MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   55.19%    87.31MiB / 7.702GiB   1.11%     2.81MB / 2.77MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   54.43%    85.71MiB / 7.702GiB   1.09%     2.81MB / 2.78MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   62.34%    87.79MiB / 7.702GiB   1.11%     2.8MB / 2.85MB    0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   45.19%    84.84MiB / 7.702GiB   1.08%     2.8MB / 2.84MB    0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   68.96%    87.28MiB / 7.702GiB   1.11%     2.81MB / 2.79MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   55.19%    87.31MiB / 7.702GiB   1.11%     2.81MB / 2.77MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   54.43%    85.71MiB / 7.702GiB   1.09%     2.81MB / 2.78MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   62.34%    87.79MiB / 7.702GiB   1.11%     2.8MB / 2.85MB    0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   45.19%    84.84MiB / 7.702GiB   1.08%     2.8MB / 2.84MB    0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   61.27%    87.54MiB / 7.702GiB   1.11%     2.98MB / 2.84MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   54.76%    87.63MiB / 7.702GiB   1.11%     2.95MB / 2.96MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   56.03%    86.09MiB / 7.702GiB   1.09%     2.93MB / 3MB      0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   54.84%    88.09MiB / 7.702GiB   1.12%     2.94MB / 2.95MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   69.12%    85.13MiB / 7.702GiB   1.08%     2.94MB / 2.98MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   61.27%    87.54MiB / 7.702GiB   1.11%     2.98MB / 2.84MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   54.76%    87.63MiB / 7.702GiB   1.11%     2.95MB / 2.96MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   56.03%    86.09MiB / 7.702GiB   1.09%     2.93MB / 3MB      0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   54.84%    88.09MiB / 7.702GiB   1.12%     2.94MB / 2.95MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   69.12%    85.13MiB / 7.702GiB   1.08%     2.94MB / 2.98MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   58.46%    87.82MiB / 7.702GiB   1.11%     3.18MB / 3.21MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   51.62%    87.84MiB / 7.702GiB   1.11%     3.15MB / 3.3MB    0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   61.82%    86.28MiB / 7.702GiB   1.09%     3.22MB / 3.01MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   50.08%    88.19MiB / 7.702GiB   1.12%     3.17MB / 3.18MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   63.59%    85.36MiB / 7.702GiB   1.08%     3.17MB / 3.19MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   58.46%    87.82MiB / 7.702GiB   1.11%     3.18MB / 3.21MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   51.62%    87.84MiB / 7.702GiB   1.11%     3.15MB / 3.3MB    0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   61.82%    86.28MiB / 7.702GiB   1.09%     3.22MB / 3.01MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   50.08%    88.19MiB / 7.702GiB   1.12%     3.17MB / 3.18MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   63.59%    85.36MiB / 7.702GiB   1.08%     3.17MB / 3.19MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   54.69%    88.08MiB / 7.702GiB   1.12%     3.26MB / 3.5MB    0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   77.95%    88.12MiB / 7.702GiB   1.12%     3.31MB / 3.32MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   51.67%    86.46MiB / 7.702GiB   1.10%     3.36MB / 3.09MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   53.31%    88.41MiB / 7.702GiB   1.12%     3.3MB / 3.32MB    0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   54.15%    85.59MiB / 7.702GiB   1.09%     3.3MB / 3.3MB     0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   54.69%    88.08MiB / 7.702GiB   1.12%     3.26MB / 3.5MB    0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   77.95%    88.12MiB / 7.702GiB   1.12%     3.31MB / 3.32MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   51.67%    86.46MiB / 7.702GiB   1.10%     3.36MB / 3.09MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   53.31%    88.41MiB / 7.702GiB   1.12%     3.3MB / 3.32MB    0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   54.15%    85.59MiB / 7.702GiB   1.09%     3.3MB / 3.3MB     0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   54.27%    88.4MiB / 7.702GiB    1.12%     3.43MB / 3.62MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   63.48%    88.41MiB / 7.702GiB   1.12%     3.48MB / 3.43MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   43.42%    86.77MiB / 7.702GiB   1.10%     3.5MB / 3.35MB    0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   60.78%    88.83MiB / 7.702GiB   1.13%     3.48MB / 3.41MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   66.13%    85.94MiB / 7.702GiB   1.09%     3.45MB / 3.52MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   54.27%    88.4MiB / 7.702GiB    1.12%     3.43MB / 3.62MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   63.48%    88.41MiB / 7.702GiB   1.12%     3.48MB / 3.43MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   43.42%    86.77MiB / 7.702GiB   1.10%     3.5MB / 3.35MB    0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   60.78%    88.83MiB / 7.702GiB   1.13%     3.48MB / 3.41MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   66.13%    85.94MiB / 7.702GiB   1.09%     3.45MB / 3.52MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   48.06%    88.62MiB / 7.702GiB   1.12%     3.52MB / 3.79MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   67.49%    88.73MiB / 7.702GiB   1.13%     3.56MB / 3.64MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   67.36%    87.08MiB / 7.702GiB   1.10%     3.61MB / 3.43MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   49.14%    88.96MiB / 7.702GiB   1.13%     3.61MB / 3.42MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   62.06%    86.16MiB / 7.702GiB   1.09%     3.57MB / 3.57MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   48.06%    88.62MiB / 7.702GiB   1.12%     3.52MB / 3.79MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   67.49%    88.73MiB / 7.702GiB   1.13%     3.56MB / 3.64MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   67.36%    87.08MiB / 7.702GiB   1.10%     3.61MB / 3.43MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   49.14%    88.96MiB / 7.702GiB   1.13%     3.61MB / 3.42MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   62.06%    86.16MiB / 7.702GiB   1.09%     3.57MB / 3.57MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   62.65%    88.88MiB / 7.702GiB   1.13%     3.56MB / 3.9MB    0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   54.56%    88.95MiB / 7.702GiB   1.13%     3.63MB / 3.64MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   75.67%    87.55MiB / 7.702GiB   1.11%     3.66MB / 3.48MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   50.66%    89.02MiB / 7.702GiB   1.13%     3.67MB / 3.45MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   44.70%    86.38MiB / 7.702GiB   1.10%     3.62MB / 3.65MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   62.65%    88.88MiB / 7.702GiB   1.13%     3.56MB / 3.9MB    0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   54.56%    88.95MiB / 7.702GiB   1.13%     3.63MB / 3.64MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   75.67%    87.55MiB / 7.702GiB   1.11%     3.66MB / 3.48MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   50.66%    89.02MiB / 7.702GiB   1.13%     3.67MB / 3.45MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   44.70%    86.38MiB / 7.702GiB   1.10%     3.62MB / 3.65MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   69.99%    89.23MiB / 7.702GiB   1.13%     3.67MB / 3.94MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   63.83%    89.23MiB / 7.702GiB   1.13%     3.72MB / 3.73MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   65.19%    88.52MiB / 7.702GiB   1.12%     3.75MB / 3.6MB    0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   44.67%    89.36MiB / 7.702GiB   1.13%     3.75MB / 3.58MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   53.98%    86.68MiB / 7.702GiB   1.10%     3.71MB / 3.73MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   69.99%    89.23MiB / 7.702GiB   1.13%     3.67MB / 3.94MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   63.83%    89.23MiB / 7.702GiB   1.13%     3.72MB / 3.73MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   65.19%    88.52MiB / 7.702GiB   1.12%     3.75MB / 3.6MB    0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   44.67%    89.36MiB / 7.702GiB   1.13%     3.75MB / 3.58MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   53.98%    86.68MiB / 7.702GiB   1.10%     3.71MB / 3.73MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   68.85%    89.64MiB / 7.702GiB   1.14%     3.75MB / 4.12MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   53.36%    89.52MiB / 7.702GiB   1.14%     3.84MB / 3.74MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   63.71%    89.27MiB / 7.702GiB   1.13%     3.84MB / 3.74MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   44.67%    89.36MiB / 7.702GiB   1.13%     3.75MB / 3.58MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   53.98%    86.68MiB / 7.702GiB   1.10%     3.71MB / 3.73MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   68.85%    89.64MiB / 7.702GiB   1.14%     3.75MB / 4.12MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   53.36%    89.52MiB / 7.702GiB   1.14%     3.84MB / 3.74MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   63.71%    89.27MiB / 7.702GiB   1.13%     3.84MB / 3.74MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   58.73%    89.62MiB / 7.702GiB   1.14%     3.84MB / 3.73MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   49.48%    86.91MiB / 7.702GiB   1.10%     3.83MB / 3.77MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   68.85%    89.64MiB / 7.702GiB   1.14%     3.75MB / 4.12MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   53.36%    89.52MiB / 7.702GiB   1.14%     3.84MB / 3.74MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   63.71%    89.27MiB / 7.702GiB   1.13%     3.84MB / 3.74MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   58.73%    89.62MiB / 7.702GiB   1.14%     3.84MB / 3.73MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   49.48%    86.91MiB / 7.702GiB   1.10%     3.83MB / 3.77MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   49.49%    89.86MiB / 7.702GiB   1.14%     3.84MB / 4.12MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   57.00%    89.72MiB / 7.702GiB   1.14%     3.88MB / 3.96MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   63.08%    89.38MiB / 7.702GiB   1.13%     3.93MB / 3.74MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   52.86%    89.88MiB / 7.702GiB   1.14%     3.93MB / 3.74MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   65.78%    87.14MiB / 7.702GiB   1.10%     3.89MB / 3.89MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   49.49%    89.86MiB / 7.702GiB   1.14%     3.84MB / 4.12MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   57.00%    89.72MiB / 7.702GiB   1.14%     3.88MB / 3.96MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   63.08%    89.38MiB / 7.702GiB   1.13%     3.93MB / 3.74MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   52.86%    89.88MiB / 7.702GiB   1.14%     3.93MB / 3.74MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   65.78%    87.14MiB / 7.702GiB   1.10%     3.89MB / 3.89MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   52.65%    90.12MiB / 7.702GiB   1.14%     3.86MB / 4.27MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   55.04%    89.89MiB / 7.702GiB   1.14%     3.93MB / 3.99MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   73.62%    89.63MiB / 7.702GiB   1.14%     3.97MB / 3.78MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   56.54%    90.14MiB / 7.702GiB   1.14%     3.98MB / 3.74MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   63.82%    87.32MiB / 7.702GiB   1.11%     3.94MB / 3.9MB    0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   52.65%    90.12MiB / 7.702GiB   1.14%     3.86MB / 4.27MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   55.04%    89.89MiB / 7.702GiB   1.14%     3.93MB / 3.99MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   73.62%    89.63MiB / 7.702GiB   1.14%     3.97MB / 3.78MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   56.54%    90.14MiB / 7.702GiB   1.14%     3.98MB / 3.74MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   63.82%    87.32MiB / 7.702GiB   1.11%     3.94MB / 3.9MB    0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   39.91%    90.26MiB / 7.702GiB   1.14%     3.91MB / 4.27MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   55.42%    90.13MiB / 7.702GiB   1.14%     4MB / 4MB         0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   53.59%    89.84MiB / 7.702GiB   1.14%     4.02MB / 3.9MB    0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   46.78%    90.32MiB / 7.702GiB   1.15%     4.03MB / 3.84MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   52.52%    87.62MiB / 7.702GiB   1.11%     4MB / 3.97MB      0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   39.91%    90.26MiB / 7.702GiB   1.14%     3.91MB / 4.27MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   55.42%    90.13MiB / 7.702GiB   1.14%     4MB / 4MB         0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   53.59%    89.84MiB / 7.702GiB   1.14%     4.02MB / 3.9MB    0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   46.78%    90.32MiB / 7.702GiB   1.15%     4.03MB / 3.84MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   52.52%    87.62MiB / 7.702GiB   1.11%     4MB / 3.97MB      0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   66.80%    90.58MiB / 7.702GiB   1.15%     4.13MB / 4.72MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   52.66%    90.2MiB / 7.702GiB    1.14%     4.3MB / 4.01MB    0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   39.61%    89.93MiB / 7.702GiB   1.14%     4.28MB / 4.09MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   47.31%    90.62MiB / 7.702GiB   1.15%     4.29MB / 4.04MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   43.86%    87.72MiB / 7.702GiB   1.11%     4.21MB / 4.36MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   66.80%    90.58MiB / 7.702GiB   1.15%     4.13MB / 4.72MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   52.66%    90.2MiB / 7.702GiB    1.14%     4.3MB / 4.01MB    0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   39.61%    89.93MiB / 7.702GiB   1.14%     4.28MB / 4.09MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   47.31%    90.62MiB / 7.702GiB   1.15%     4.29MB / 4.04MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   43.86%    87.72MiB / 7.702GiB   1.11%     4.21MB / 4.36MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   40.61%    90.66MiB / 7.702GiB   1.15%     4.23MB / 4.8MB    0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   38.50%    90.47MiB / 7.702GiB   1.15%     4.35MB / 4.29MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   37.31%    90.17MiB / 7.702GiB   1.14%     4.4MB / 4.09MB    0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   51.33%    90.54MiB / 7.702GiB   1.15%     4.41MB / 4.04MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   53.20%    87.99MiB / 7.702GiB   1.12%     4.3MB / 4.47MB    0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   40.61%    90.66MiB / 7.702GiB   1.15%     4.23MB / 4.8MB    0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   38.50%    90.47MiB / 7.702GiB   1.15%     4.35MB / 4.29MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   37.31%    90.17MiB / 7.702GiB   1.14%     4.4MB / 4.09MB    0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   51.33%    90.54MiB / 7.702GiB   1.15%     4.41MB / 4.04MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   53.20%    87.99MiB / 7.702GiB   1.12%     4.3MB / 4.47MB    0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   37.84%    90.84MiB / 7.702GiB   1.15%     4.33MB / 4.93MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   35.35%    90.52MiB / 7.702GiB   1.15%     4.48MB / 4.29MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   40.70%    90.48MiB / 7.702GiB   1.15%     4.47MB / 4.32MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   48.86%    90.61MiB / 7.702GiB   1.15%     4.53MB / 4.04MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   36.39%    88.2MiB / 7.702GiB    1.12%     4.39MB / 4.61MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   37.84%    90.84MiB / 7.702GiB   1.15%     4.33MB / 4.93MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   35.35%    90.52MiB / 7.702GiB   1.15%     4.48MB / 4.29MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   40.70%    90.48MiB / 7.702GiB   1.15%     4.47MB / 4.32MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   48.86%    90.61MiB / 7.702GiB   1.15%     4.53MB / 4.04MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   36.39%    88.2MiB / 7.702GiB    1.12%     4.39MB / 4.61MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   39.47%    90.97MiB / 7.702GiB   1.15%     4.54MB / 5.03MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   49.73%    91.18MiB / 7.702GiB   1.16%     4.64MB / 4.62MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   48.91%    90.54MiB / 7.702GiB   1.15%     4.67MB / 4.49MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   50.42%    90.96MiB / 7.702GiB   1.15%     4.68MB / 4.41MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   36.31%    88.36MiB / 7.702GiB   1.12%     4.63MB / 4.61MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   39.47%    90.97MiB / 7.702GiB   1.15%     4.54MB / 5.03MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   49.73%    91.18MiB / 7.702GiB   1.16%     4.64MB / 4.62MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   48.91%    90.54MiB / 7.702GiB   1.15%     4.67MB / 4.49MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   50.42%    90.96MiB / 7.702GiB   1.15%     4.68MB / 4.41MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   36.31%    88.36MiB / 7.702GiB   1.12%     4.63MB / 4.61MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   39.65%    91.62MiB / 7.702GiB   1.16%     4.64MB / 5.42MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   46.16%    91.02MiB / 7.702GiB   1.15%     4.83MB / 4.62MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   42.26%    91.03MiB / 7.702GiB   1.15%     4.82MB / 4.66MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   42.50%    91.14MiB / 7.702GiB   1.16%     4.82MB / 4.61MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   38.88%    88.45MiB / 7.702GiB   1.12%     4.82MB / 4.61MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   39.65%    91.62MiB / 7.702GiB   1.16%     4.64MB / 5.42MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   46.16%    91.02MiB / 7.702GiB   1.15%     4.83MB / 4.62MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   42.26%    91.03MiB / 7.702GiB   1.15%     4.82MB / 4.66MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   42.50%    91.14MiB / 7.702GiB   1.16%     4.82MB / 4.61MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   38.88%    88.45MiB / 7.702GiB   1.12%     4.82MB / 4.61MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   6.92%     91.63MiB / 7.702GiB   1.16%     4.64MB / 5.42MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   68.84%    91.09MiB / 7.702GiB   1.15%     4.83MB / 4.62MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   53.70%    91.09MiB / 7.702GiB   1.16%     4.82MB / 4.66MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   60.97%    91.58MiB / 7.702GiB   1.16%     4.82MB / 4.61MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   53.08%    88.53MiB / 7.702GiB   1.12%     4.82MB / 4.61MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   6.92%     91.63MiB / 7.702GiB   1.16%     4.64MB / 5.42MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   68.84%    91.09MiB / 7.702GiB   1.15%     4.83MB / 4.62MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   53.70%    91.09MiB / 7.702GiB   1.16%     4.82MB / 4.66MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   60.97%    91.58MiB / 7.702GiB   1.16%     4.82MB / 4.61MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   53.08%    88.53MiB / 7.702GiB   1.12%     4.82MB / 4.61MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   0.00%     91.63MiB / 7.702GiB   1.16%     4.64MB / 5.42MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   43.96%    91.16MiB / 7.702GiB   1.16%     4.83MB / 4.62MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   31.52%    91.27MiB / 7.702GiB   1.16%     4.82MB / 4.66MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   58.76%    91.61MiB / 7.702GiB   1.16%     4.82MB / 4.61MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   33.34%    88.68MiB / 7.702GiB   1.12%     4.82MB / 4.61MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   0.00%     91.63MiB / 7.702GiB   1.16%     4.64MB / 5.42MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   43.96%    91.16MiB / 7.702GiB   1.16%     4.83MB / 4.62MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   31.52%    91.27MiB / 7.702GiB   1.16%     4.82MB / 4.66MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   58.76%    91.61MiB / 7.702GiB   1.16%     4.82MB / 4.61MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   33.34%    88.68MiB / 7.702GiB   1.12%     4.82MB / 4.61MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   0.44%     91.67MiB / 7.702GiB   1.16%     4.69MB / 5.42MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   49.45%    91.79MiB / 7.702GiB   1.16%     4.85MB / 4.72MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   41.64%    91.2MiB / 7.702GiB    1.16%     4.87MB / 4.66MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   57.28%    91.66MiB / 7.702GiB   1.16%     4.87MB / 4.61MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   50.84%    88.64MiB / 7.702GiB   1.12%     4.85MB / 4.71MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   0.44%     91.67MiB / 7.702GiB   1.16%     4.69MB / 5.42MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   49.45%    91.79MiB / 7.702GiB   1.16%     4.85MB / 4.72MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   41.64%    91.2MiB / 7.702GiB    1.16%     4.87MB / 4.66MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   57.28%    91.66MiB / 7.702GiB   1.16%     4.87MB / 4.61MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   50.84%    88.64MiB / 7.702GiB   1.12%     4.85MB / 4.71MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   0.00%     91.67MiB / 7.702GiB   1.16%     4.69MB / 5.42MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   0.00%     91.79MiB / 7.702GiB   1.16%     4.85MB / 4.72MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   34.32%    91.38MiB / 7.702GiB   1.16%     4.87MB / 4.66MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   88.52%    91.75MiB / 7.702GiB   1.16%     4.87MB / 4.61MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   3.86%     89.01MiB / 7.702GiB   1.13%     4.85MB / 4.71MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   0.00%     91.67MiB / 7.702GiB   1.16%     4.69MB / 5.42MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   0.00%     91.79MiB / 7.702GiB   1.16%     4.85MB / 4.72MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   34.32%    91.38MiB / 7.702GiB   1.16%     4.87MB / 4.66MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   88.52%    91.75MiB / 7.702GiB   1.16%     4.87MB / 4.61MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   3.86%     89.01MiB / 7.702GiB   1.13%     4.85MB / 4.71MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   0.00%     91.67MiB / 7.702GiB   1.16%     4.69MB / 5.42MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   0.00%     91.79MiB / 7.702GiB   1.16%     4.85MB / 4.72MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   0.00%     91.38MiB / 7.702GiB   1.16%     4.87MB / 4.66MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   13.50%    92MiB / 7.702GiB      1.17%     4.87MB / 4.61MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   0.00%     89.01MiB / 7.702GiB   1.13%     4.85MB / 4.71MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   0.00%     91.67MiB / 7.702GiB   1.16%     4.69MB / 5.42MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   0.00%     91.79MiB / 7.702GiB   1.16%     4.85MB / 4.72MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   0.00%     91.38MiB / 7.702GiB   1.16%     4.87MB / 4.66MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   13.50%    92MiB / 7.702GiB      1.17%     4.87MB / 4.61MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   0.00%     89.01MiB / 7.702GiB   1.13%     4.85MB / 4.71MB   0B / 0B     7
+[2J[HCONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+1f570e816446   proof-of-training-quality-node1-1   0.00%     91.67MiB / 7.702GiB   1.16%     4.69MB / 5.42MB   0B / 0B     7
+a31d48e6d466   proof-of-training-quality-node2-1   0.00%     91.79MiB / 7.702GiB   1.16%     4.85MB / 4.72MB   0B / 0B     7
+ccbf92ab2293   proof-of-training-quality-node3-1   0.00%     91.38MiB / 7.702GiB   1.16%     4.87MB / 4.66MB   0B / 0B     7
+195e8fb45674   proof-of-training-quality-node4-1   0.00%     92MiB / 7.702GiB      1.17%     4.87MB / 4.61MB   0B / 0B     7
+4787b7d12367   proof-of-training-quality-node5-1   0.00%     89.01MiB / 7.702GiB   1.13%     4.85MB / 4.71MB   0B / 0B     7
